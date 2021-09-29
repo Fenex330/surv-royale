@@ -1,0 +1,49 @@
+1) header files order:
+
+   include guard
+   std headers
+   system installed libraries
+   locally installed libraries
+   other custom created headers
+   definition of corresponding class implementation
+
+2) constant & macro = SCREAMING_SNAKE_CASE
+   variable = snake_case
+   function = camelCase
+   class = PascalCase
+   namespace = flatcase
+
+3) C files should have extentions .c and .h
+   C++ files should have extentions .cpp and .hpp
+
+4) curly bracket openings should be placed on the next line to it's statement
+
+5) a class should be declared in a header file and defined in a source
+   file where the name of the files match the name of the class
+
+6) 4 spaces should be used instead of tabs
+
+7) global variables should always be referred to using :: operator (::global_foo)
+
+8) iterator variables should be called i, j, k etc.
+
+9) prefix "is" should be used for boolean variables and methods
+
+10) every header file must contain an include guard ("#pragma once" prefered)
+
+11) variables should be initialized and used as close as possible to where they are declared
+    and have smallest possible scope;
+
+12) use of global variables should be minimized
+
+13) a use of constants is prefered over magic numbers
+
+14) math and logical operators should have spaces in between (a * b instead of a*b)
+
+15) all comments and code should be written in english
+
+16) UTF-8 encoding should be used
+
+17) an empty line should be put at the end of the file
+
+18) any violation to this guide is allowed only if it enhances readability
