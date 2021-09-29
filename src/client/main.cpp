@@ -62,5 +62,5 @@ int main()
     }
 
     delete[] entry;
-    return EXIT_SUCCESS;
+    return 0;
 }
