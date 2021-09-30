@@ -1,6 +1,0 @@
-[submodule "SFML"]
-	path = SFML
-	url = https://github.com/SFML/SFML.git
-[submodule "zipper"]
-	path = zipper
-	url = https://github.com/sebastiandev/zipper.git
