@@ -7,9 +7,8 @@ c++ -std=c++17 -pedantic-errors -O3 -Izipper -Lzipper -pthread src/client/*.cpp 
 
 c++ -std=c++17 -pedantic-errors -O3 -pthread src/server/*.cpp -o build/surv-royale-server -lsfml-network -lsfml-system
 
-7za a GameData.zip GameData
+7za a GameData.zip build/GameData
 
-cp GameData.zip build
 cp server.conf build
 cp LICENSE.txt build
 cp CHANGELOG.txt build
