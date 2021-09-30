@@ -18,20 +18,14 @@ At the moment, only Linux and Windows platforms are fully supported, MacOS suppo
 
 ### Building
 
-1. Install: latest version of Cmake, corresponding build tool, compiler with C++17 support, 7zip
+1. Dependencies: compiler with C++17 support, 7zip, SFML, zlib
 
 2. Clone the repository:
 ```
-        git clone --recurse-submodules https://github.com/Fenex330/surv-royale.git
+        git clone https://github.com/Fenex330/surv-royale.git
 ```
 
-3. Execute prebuild.sh script (or prebuild.bat if you are on Windows)
-
-4. Configure and build the project:
-```
-        cd surv-royale/build/
-        cmake .. && cmake --build .
-```
+3. Execute build-linux.sh or build-windows.bat, according to your platform
 
 
 
