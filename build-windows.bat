@@ -1,6 +1,5 @@
 mkdir build
 del /s /q build\*
-mkdir build
 
 c++ -std=c++17 -pedantic-errors -O3 -pthread src\client\*.cpp -o build\surv-royale-client -Izipper -Iwin\include -Lwin\lib \
 -lsfml-graphics-2 -lsfml-window-2 -lsfml-audio-2 -lsfml-network-2 -lsfml-system-2 -lZipper -lz # -Wall -Wextra
