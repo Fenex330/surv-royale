@@ -2,6 +2,7 @@
 
 * [About](#About)
 * [Building](#Building)
+* [Notice](#Notice)
 * [Mirrors](#Mirrors)
 * [License](#License)
 * [Contacts](#Contacts)
@@ -18,7 +19,7 @@ At the moment, only Linux and Windows platforms are officially supported, MacOS 
 
 ### Building
 
-1. Dependencies: C++17 capable compiler, 7zip, SFML, zlib, Zipper
+1. Dependencies: git, C++17 capable compiler, 7zip, SFML, zlib, Zipper
 
 2. Clone the repository:
 ```
@@ -26,6 +27,14 @@ At the moment, only Linux and Windows platforms are officially supported, MacOS 
 ```
 
 3. Execute build-linux.sh or build-windows.bat, according to your platform
+
+
+
+### Notice
+
+On Windows, SFML, zlib and Zipper are bundled locally with the project. On Linux however, only Zipper is bundled,
+while other dependencies are assumed to be installed globally and system-wide. On Windows, the only compiler supported is
+"mingw x86_64 seh 8.1.0" and is assumed that directories for compiler and 7zip executables exist in PATH variable.
 
 
 
