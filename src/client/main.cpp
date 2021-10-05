@@ -1,5 +1,6 @@
+#include <cstdlib>
 #include <SFML/Graphics.hpp>
-#include <zipper/unzipper.h>
+#include "../dxTarRead.h"
 #include "../Global.hpp"
 
 #ifdef _WIN32
@@ -16,30 +17,24 @@
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
 
-    /*// Set Window Icon
-    sf::Image icon;
-    icon.loadFromFile ("GameData/graphics/logo/logo-surviv.png");
-    window.setIcon (icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());*/
+    long file_size;
+    FILE *f = fopen("GameData.tar", "rb");
 
-    std::vector<unsigned char> unzipped_entry;
-    zipper::Unzipper unzipper ("GameData.zip");
-    unzipper.extractEntryToMemory("GameData/graphics/custom/character.png", unzipped_entry);
-    unzipper.close();
+    fseek(f, 0, SEEK_END);
+    long tar_size = ftell(f);
+    fseek(f, 0, SEEK_SET);
 
-    unsigned char *entry = new unsigned char [unzipped_entry.size()];
-
-    for (size_t i = 0; i < unzipped_entry.size(); i++)
-    {
-        entry[i] = unzipped_entry.at(i);
-    }
+    unsigned char *tarFile = (unsigned char *)malloc(tar_size + 1);
+    fread(tarFile, 1, tar_size, f);
+    fclose(f);
 
     sf::Texture texture;
     sf::Sprite sprite;
     
-    if (!texture.loadFromMemory((void*)entry, unzipped_entry.size()))
+    if (!texture.loadFromMemory((void*)dxTarRead(tarFile, tar_size, "GameData/graphics/custom/character.png", &file_size), tar_size))
     {
         LOG("unable to load game resourses");
-        delete[] entry;
+        free(tarFile);
         exit(1);
     }
 
@@ -68,6 +63,6 @@
         window.display();
     }
 
-    delete[] entry;
+    free(tarFile);
     return 0;
 }
