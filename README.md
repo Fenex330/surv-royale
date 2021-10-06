@@ -35,6 +35,7 @@ At the moment (because I do not have a Mac), only Linux and Windows platforms ar
 On Windows, SFML is bundled locally with the project. On Linux however, nothing is bundled,
 the dependencies are assumed to be installed globally and system-wide. On Windows, the only compiler supported is
 "mingw x86_64 seh 8.1.0" and is assumed that directories for compiler and 7zip executables exist inside PATH variable.
+On MacOS you should link statically with the following libs: sfml, flac, Ogg, Vorbis, freetype, openal.
 
 
 

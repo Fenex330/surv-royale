@@ -2,10 +2,8 @@ mkdir -p build
 rm -rf build
 mkdir build
 
-cp -R SFML.framework build
-
-clang++ -std=c++17 -pedantic-errors -O3 -pthread src/client/*.cpp -o build/surv-royale-client -I build/SFML.framework/Headers -F build -rpath @executable_path -framework SFML
-clang++ -std=c++17 -pedantic-errors -O3 -pthread src/server/*.cpp -o build/surv-royale-server -I build/SFML.framework/Headers -F build -rpath @executable_path -framework SFML
+clang++ -std=c++17 -pedantic-errors -O3 -pthread src/client/*.cpp -o build/surv-royale-client -I macos/include -L macos/lib -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
+clang++ -std=c++17 -pedantic-errors -O3 -pthread src/server/*.cpp -o build/surv-royale-server -I macos/include -L macos/lib -lsfml-network -lsfml-system
 
 tar -cf build/GameData.tar GameData
 
