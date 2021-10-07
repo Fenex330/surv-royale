@@ -3,14 +3,7 @@
 #include "../dxTarRead.h"
 #include "../Global.hpp"
 
-#ifdef _WIN32
-    // Windows entry point needed to hide attached console on game launch
-    #include <windows.h>
-    int WINAPI WinMain(HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpszArgument, int nCmdShow)
-#else
-    int main()
-#endif
-
+int main()
 {
     sf::RenderWindow window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu");
 
