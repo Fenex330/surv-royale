@@ -35,6 +35,8 @@ At the moment, only Linux and Windows platforms are officially supported.
 On Windows, SFML is bundled locally with the project. On Linux and MacOS however, nothing is bundled,
 the dependencies are assumed to be installed globally and system-wide. On Windows, the only compiler supported is
 "mingw x86_64 seh 8.1.0" and is assumed that directories for compiler and 7zip executables exist inside PATH variable.
+In the future, only Windows builds will be provided for download in "Releases" section as a self-contained zip archive,
+while Linux builds can typically be installed via package managers. For MacOS users the only option is to build the game from source.
 
 
 
