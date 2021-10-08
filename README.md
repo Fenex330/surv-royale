@@ -32,10 +32,9 @@ At the moment, only Linux and Windows platforms are officially supported.
 
 ### Notice
 
-On Windows, SFML is bundled locally with the project. On Linux however, nothing is bundled,
+On Windows, SFML is bundled locally with the project. On Linux and MacOS however, nothing is bundled,
 the dependencies are assumed to be installed globally and system-wide. On Windows, the only compiler supported is
 "mingw x86_64 seh 8.1.0" and is assumed that directories for compiler and 7zip executables exist inside PATH variable.
-On MacOS, only server can be built and should be linked statically with sfml-network and sfml-system, installed either globally or locally.
 
 
 
