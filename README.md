@@ -26,7 +26,7 @@ At the moment, only Linux and Windows platforms are officially supported.
         git clone --depth 1 https://github.com/Fenex330/surv-royale.git
 ```
 
-3. Execute build-linux.sh, build-macos.sh or build-windows.bat, according to your platform
+3. Execute build-windows.bat for Windows OR build-unix.sh for Linux & MacOS
 
 
 
