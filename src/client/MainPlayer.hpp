@@ -9,7 +9,7 @@ class MainPlayer
         sf::Sprite sprite;
         sf::Texture texture;
 
-        MainPlayer();
+        void init();
         void move();
         void rotate(sf::RenderWindow &window);
 };

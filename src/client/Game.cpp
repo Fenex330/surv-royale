@@ -59,9 +59,6 @@ void Game::loadResources()
         exit(1);
     }
 
-    main_player.texture.setSmooth (true);
-    main_player.texture.setRepeated (false);
-    main_player.sprite.setTexture(main_player.texture);
-
+    main_player.init();
     free(tarFile);
 }

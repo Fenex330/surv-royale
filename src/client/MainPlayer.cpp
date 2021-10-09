@@ -3,12 +3,15 @@
 #include "../Global.hpp"
 #include "MainPlayer.hpp"
 
-MainPlayer::MainPlayer()
+void MainPlayer::init()
 {
+    texture.setSmooth (true);
+    texture.setRepeated (false);
+    sprite.setTexture(texture);
+
     sprite.setOrigin((float)sprite.getLocalBounds().width * 0.5, (float)sprite.getLocalBounds().height * 0.5);
     sprite.setPosition(surv::VIEW_DIM_X * 0.5, surv::VIEW_DIM_Y * 0.5);
     sprite.setScale(0.4, 0.4);
-    LOG(sprite.getOrigin().x);
 }
 
 void MainPlayer::move()
