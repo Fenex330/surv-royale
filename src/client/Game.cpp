@@ -17,7 +17,7 @@ void Game::run()
     while (window.isOpen())  // main game loop
     {
         sf::Event event;
-        while (window.pollEvent (event)) // event handler loop
+        while (window.pollEvent(event)) // event handler loop
         {
             switch (event.type)
             {
@@ -31,8 +31,11 @@ void Game::run()
         }
 
         window.clear();
-        window.draw(sprite);
+        window.draw(main_player.sprite);
         window.display();
+
+        main_player.move();
+        main_player.rotate(window);
     }
 }
 
@@ -47,19 +50,17 @@ void Game::loadResources()
 
     unsigned char *tarFile = (unsigned char *)malloc(tar_size + 1);
     fread(tarFile, 1, tar_size, f);
+    fclose(f);
     
-    if (!texture.loadFromMemory((void*)dxTarRead(tarFile, tar_size, "GameData/graphics/custom/character.png", &file_size), tar_size))
+    if (!main_player.texture.loadFromMemory((void*)dxTarRead(tarFile, tar_size, "GameData/graphics/custom/character.png", &file_size), tar_size))
     {
         LOG("unable to load game resourses");
-        free(tarFile);
-        fclose(f);
         exit(1);
     }
 
-    texture.setSmooth (true);
-    texture.setRepeated (false);
-    sprite.setTexture(texture);
+    main_player.texture.setSmooth (true);
+    main_player.texture.setRepeated (false);
+    main_player.sprite.setTexture(main_player.texture);
 
     free(tarFile);
-    fclose(f);
 }

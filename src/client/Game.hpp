@@ -1,10 +1,12 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
+#include "MainPlayer.hpp"
 
 struct Game
 {
     sf::RenderWindow window;
-    sf::Texture texture;
-    sf::Sprite sprite;
+    MainPlayer main_player;
 
     Game();
     void run();

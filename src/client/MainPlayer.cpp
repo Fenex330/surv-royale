@@ -7,25 +7,28 @@ void MainPlayer::move()
 {
     int mul = surv::DEFAULT_PLAYER_SPEED; // multiply by speed coefficients
 
-    if (sf::Keyboard::isKeyPressed (sf::Keyboard::D))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        sprite.move (1 * mul, 0 * mul);
-        view.move (1 * mul, 0 * mul);
+        sprite.move(1 * mul, 0 * mul);
+        view.move(1 * mul, 0 * mul);
     }
-    else if (sf::Keyboard::isKeyPressed (sf::Keyboard::A))
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        sprite.move (-1 * mul, 0 * mul);
-        view.move (-1 * mul, 0 * mul);
+        sprite.move(-1 * mul, 0 * mul);
+        view.move(-1 * mul, 0 * mul);
     }
-    else if (sf::Keyboard::isKeyPressed (sf::Keyboard::W))
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         sprite.move (0 * mul, -1 * mul);
-        view.move (0 * mul, -1 * mul);
+        view.move(0 * mul, -1 * mul);
     }
-    else if (sf::Keyboard::isKeyPressed (sf::Keyboard::S))
+    
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        sprite.move (0 * mul, 1 * mul);
-        view.move (0 * mul, 1 * mul);
+        sprite.move(0 * mul, 1 * mul);
+        view.move(0 * mul, 1 * mul);
     }
 }
 
