@@ -31,6 +31,7 @@ void Game::run()
         }
 
         window.clear();
+        window.setView(main_player.view);
         window.draw(main_player.sprite);
         window.display();
 
