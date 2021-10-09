@@ -5,8 +5,8 @@
 
 void MainPlayer::init()
 {
-    texture.setSmooth (true);
-    texture.setRepeated (false);
+    texture.setSmooth(true);
+    texture.setRepeated(false);
     sprite.setTexture(texture);
 
     sprite.setOrigin(sprite.getLocalBounds().width * 0.5, sprite.getLocalBounds().height * 0.5);
@@ -32,7 +32,7 @@ void MainPlayer::move()
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        sprite.move (0, -1 * mul);
+        sprite.move(0, -1 * mul);
         view.move(0, -1 * mul);
     }
     
