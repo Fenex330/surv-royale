@@ -4,7 +4,7 @@
 #include "../Global.hpp"
 #include "Game.hpp"
 
-Game::Game() : window {sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu"}
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu")
 {
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
