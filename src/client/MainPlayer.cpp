@@ -10,8 +10,10 @@ void MainPlayer::init()
     sprite.setTexture(texture);
 
     sprite.setOrigin(sprite.getLocalBounds().width * 0.5, sprite.getLocalBounds().height * 0.5 + 12.0);
-    sprite.setPosition(surv::VIEW_DIM_X * 0.5, surv::VIEW_DIM_Y * 0.5);
-    sprite.setScale(0.4, 0.4);
+    sprite.setScale(0.3, 0.3);
+
+    view.setCenter(sprite.getPosition().x, sprite.getPosition().y);
+    view.setSize(surv::VIEW_DIM_X, surv::VIEW_DIM_Y);
 }
 
 void MainPlayer::move()
