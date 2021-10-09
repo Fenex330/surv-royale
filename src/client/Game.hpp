@@ -5,4 +5,8 @@ struct Game
     sf::RenderWindow window;
     sf::Texture texture;
     sf::Sprite sprite;
+
+    Game();
+    void run();
+    void loadResources();
 };
