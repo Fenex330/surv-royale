@@ -4,6 +4,9 @@
 #include "../Global.hpp"
 #include "Game.hpp"
 
+long Game::tar_size;
+unsigned char *Game::tarFile;
+
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu")
 {
     window.setVerticalSyncEnabled(true);
