@@ -19,32 +19,40 @@ At the moment, only Linux and Windows platforms are officially supported.
 
 ### Building
 
-1. Dependencies: C++17 capable compiler, 7zip/tar, SFML
+1. Dependencies: GNU make, git, C++17 capable compiler, 7zip/tar, SFML>=2.5
 
 2. Clone the repository:
 ```
-        git clone --depth 1 https://github.com/Fenex330/surv-royale.git
+        git clone --depth 1 <url of one of the mirrors listed below>
 ```
 
-3. Execute build-windows.bat for Windows OR build-unix.sh for Linux & MacOS
+3. Build and install the game
+```
+	make && make install
+```
+
+4. On Windows, execute build-windows.bat instead. The built game will be placed inside "build" directory
 
 
 
 ### Notice
 
 On Windows, SFML is bundled locally with the project. On Linux and MacOS however, nothing is bundled,
-the dependencies are assumed to be installed globally and system-wide. On Windows, the only compiler supported is
-"mingw x86_64 seh 8.1.0" and is assumed that directories for compiler and 7zip executables exist inside PATH variable.
+the dependencies are assumed to be installed globally and system-wide.
+
+On Windows, the only compiler supported is "mingw x86_64 seh 8.1.0" and is assumed that directories
+for compiler and 7zip executables exist inside PATH variable.
+
 In the future, only Windows builds will be provided for download in "Releases" section as a self-contained zip archive,
-while Linux builds can typically be installed via package managers. For MacOS users the only option is to build the game from source.
+while Linux builds can typically be installed via package managers. MacOS users can install the game via Homebrew.
 
 
 
 ### Mirrors
 
-Primary https://github.com/Fenex330/surv-royale
+Primary https://github.com/Fenex330/surv-royale.git
 
-Secondary https://notabug.org/Fenex33/surv-royale
+Secondary https://notabug.org/Fenex33/surv-royale.git
 
 
 

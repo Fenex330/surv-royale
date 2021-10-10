@@ -1,10 +1,13 @@
 #include <cmath>
 #include <SFML/Graphics.hpp>
 #include "../Global.hpp"
+#include "Game.hpp"
 #include "MainPlayer.hpp"
 
-void MainPlayer::init()
+MainPlayer::MainPlayer()
 {
+    Game::loadTexture(texture, "GameData/gpaphics/custom/character.png");
+
     texture.setSmooth(true);
     texture.setRepeated(false);
     sprite.setTexture(texture);
@@ -45,7 +48,7 @@ void MainPlayer::move()
     }
 }
 
-void MainPlayer::rotate(sf::RenderWindow &window)
+void MainPlayer::rotate(const sf::RenderWindow &window)
 {
     sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
     double rot = std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2, mouse_position.x - surv::VIEW_DIM_X / 2) * (180 / surv::PI) + 90;
