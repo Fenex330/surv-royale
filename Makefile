@@ -5,16 +5,21 @@ server:
 	g++ -std=c++17 -pedantic-errors -O3 -pthread src/server/*.cpp -o surv-royale-server -lsfml-network -lsfml-system
 
 clean:
-	mkdir -p /usr/local/share/SurvRoyale
 	rm -rf /usr/local/share/SurvRoyale
-	mkdir /usr/local/share/SurvRoyale
+	rm surv-royale-client
+	rm surv-royale-server
+	rm /usr/local/bin/surv-royale-client
+	rm /usr/local/bin/surv-royale-server
 
 install:
-	make clean
+	mkdir /usr/local/share/SurvRoyale
 	tar -cf /usr/local/share/SurvRoyale/GameData.tar GameData
-	cp server.conf /usr/local/share/SurvRoyale/
-	cp LICENSE.txt /usr/local/share/SurvRoyale/
-	cp CHANGELOG.txt /usr/local/share/SurvRoyale/
+	cp server.conf /usr/local/share/SurvRoyale
+	cp LICENSE.txt /usr/local/share/SurvRoyale
+	cp CHANGELOG.txt /usr/local/share/SurvRoyale
+	cp surv-royale-client /usr/local/bin
+	cp surv-royale-server /usr/local/bin
 
 all:
-	make client server
+	make client
+	make server
