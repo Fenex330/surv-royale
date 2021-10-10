@@ -9,14 +9,12 @@ clean:
 	rm -rf /usr/local/share/SurvRoyale
 	mkdir /usr/local/share/SurvRoyale
 
-prepare:
+install:
+	make clean
 	tar -cf /usr/local/share/SurvRoyale/GameData.tar GameData
 	cp server.conf /usr/local/share/SurvRoyale/
 	cp LICENSE.txt /usr/local/share/SurvRoyale/
 	cp CHANGELOG.txt /usr/local/share/SurvRoyale/
-
-install:
-	make clean prepare
 
 all:
 	make client server

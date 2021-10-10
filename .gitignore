@@ -36,3 +36,6 @@
 .DS_Store
 __MACOSX/
 build/
+
+surv-royale-client
+surv-royale-server
