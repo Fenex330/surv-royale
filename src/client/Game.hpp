@@ -7,11 +7,11 @@ struct Game
 {
     sf::RenderWindow window;
     MainPlayer main_player;
-    static long tar_size = 0;
-    static unsigned char *tarFile = nullptr;
+    static long tar_size;
+    static unsigned char *tarFile;
 
     Game();
     ~Game();
     void run();
-    static void loadResources(sf::Texture &texture, const char *path);
+    static void loadTexture(sf::Texture &texture, const char *path);
 };

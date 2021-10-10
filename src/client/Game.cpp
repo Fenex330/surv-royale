@@ -20,7 +20,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     fclose(f);
 }
 
-~Game::Game()
+Game::~Game()
 {
     free(tarFile);
 }
@@ -53,7 +53,7 @@ void Game::run()
     }
 }
 
-static void Game::loadTexture(sf::Texture &texture, const char *path)
+void Game::loadTexture(sf::Texture &texture, const char *path)
 {   
     long file_size;
 

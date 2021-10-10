@@ -12,6 +12,7 @@
 #else
     #define GAMEDATA_PATH "/usr/local/share/SurvRoyale/GameData.tar"
     #define SERVER_CONF_PATH "/usr/local/share/SurvRoyale/server.conf"
+#endif
 
 namespace surv
 {
