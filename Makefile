@@ -1,3 +1,5 @@
+all: client server
+
 client:
 	g++ -std=c++17 -pedantic-errors -O3 -pthread src/client/*.cpp -o surv-royale-client -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system # -Wall -Wextra
 
@@ -19,7 +21,3 @@ install:
 	cp CHANGELOG.txt /usr/local/share/SurvRoyale
 	cp surv-royale-client /usr/local/bin
 	cp surv-royale-server /usr/local/bin
-
-all:
-	make client
-	make server
