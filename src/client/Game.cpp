@@ -62,7 +62,7 @@ long Game::loadTexture(sf::Texture &texture, const char *path)
 {   
     long file_size = 0;
 
-    if (!texture.loadFromMemory((void*)dxTarRead(tarFile, tar_size, path, &file_size), tar_size))
+    if (!texture.loadFromMemory(dxTarRead(tarFile, tar_size, path, &file_size), tar_size))
     {
         LOG("unable to load game resources");
         exit(1);
