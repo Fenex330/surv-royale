@@ -4,8 +4,8 @@
 #include "../Global.hpp"
 #include "Game.hpp"
 
-long Game::tar_size;
-unsigned char *Game::tarFile;
+long Game::tar_size = 0;
+unsigned char *Game::tarFile = nullptr;
 
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu")
 {
@@ -56,13 +56,15 @@ void Game::run()
     }
 }
 
-void Game::loadTexture(sf::Texture &texture, const char *path)
+long Game::loadTexture(sf::Texture &texture, const char *path)
 {   
-    long file_size;
+    long file_size = 0;
 
-    if (!texture.loadFromMemory((void*)dxTarRead(tarFile, tar_size, path, &file_size), tar_size))
+    if (!texture.loadFromMemory(dxTarRead(tarFile, tar_size, path, &file_size), tar_size))
     {
         LOG("unable to load game resourses");
         exit(1);
     }
+
+    return file_size;
 }

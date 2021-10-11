@@ -13,5 +13,5 @@ struct Game
     Game();
     ~Game();
     void run();
-    static void loadTexture(sf::Texture &texture, const char *path);
+    static long loadTexture(sf::Texture &texture, const char *path);
 };
