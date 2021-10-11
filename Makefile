@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -pedantic-errors -O3 -pthread # -Wall -Wextra
+CXXFLAGS = -std=c++17 -pedantic-errors -O3 # -pthread -Wall -Wextra
 LIBS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
 LIBS_SERVER = -lsfml-network -lsfml-system
 PREFIX = /usr/local
