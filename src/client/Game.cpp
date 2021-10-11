@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
 #include "../dxTarRead.h"
-#include "../Global.hpp"
+#include "../config.hpp"
 #include "Game.hpp"
 
 long Game::tar_size = 0;

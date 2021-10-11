@@ -1,6 +1,6 @@
 #include <cmath>
 #include <SFML/Graphics.hpp>
-#include "../Global.hpp"
+#include "../config.hpp"
 #include "Game.hpp"
 #include "MainPlayer.hpp"
 
