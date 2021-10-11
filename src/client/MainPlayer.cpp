@@ -4,7 +4,7 @@
 #include "Game.hpp"
 #include "MainPlayer.hpp"
 
-MainPlayer::MainPlayer()
+void MainPlayer::init()
 {
     Game::loadTexture(texture, "GameData/gpaphics/custom/character.png");
 

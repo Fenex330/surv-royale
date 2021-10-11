@@ -21,6 +21,8 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     tarFile = (unsigned char *)malloc(tar_size + 1);
     fread(tarFile, 1, tar_size, f);
     fclose(f);
+
+    main_player.init();
 }
 
 Game::~Game()
