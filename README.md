@@ -23,7 +23,7 @@ At the moment, only Linux and Windows platforms are officially supported.
 
 2. Clone the repository:
 ```
-        git clone --depth 1 <url from one of the mirrors listed below>
+        git clone --depth 1 <url from one of the mirrors below>
 ```
 
 3. Build and install the game
