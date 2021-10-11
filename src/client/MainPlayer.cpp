@@ -6,7 +6,7 @@
 
 void MainPlayer::init()
 {
-    Game::loadTexture(texture, "GameData/gpaphics/custom/character.png");
+    Game::loadTexture(texture, "GameData/graphics/custom/character.png");
 
     texture.setSmooth(true);
     texture.setRepeated(false);
