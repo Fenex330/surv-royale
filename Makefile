@@ -2,8 +2,9 @@ CXX = g++
 CXXFLAGS = -std=c++17 -pedantic-errors -O3 -pthread # -Wall -Wextra
 LINKFLAGS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
 LINKFLAGS_SERVER = -lsfml-network -lsfml-system
-SHARE_PATH = /usr/local/share/SurvRoyale
-BIN_PATH = /usr/local/bin
+PREFIX = /usr/local
+SHARE_PATH = $(PREFIX)/share/SurvRoyale
+BIN_PATH = $(PREFIX)/bin
 
 all: client server
 
