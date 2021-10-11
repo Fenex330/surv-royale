@@ -1,16 +1,17 @@
-SHARE_PATH = /usr/local/share/SurvRoyale
-BIN_PATH = /usr/local/bin
+CXX = g++
 CXXFLAGS = -std=c++17 -pedantic-errors -O3 -pthread # -Wall -Wextra
 LINKFLAGS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
 LINKFLAGS_SERVER = -lsfml-network -lsfml-system
+SHARE_PATH = /usr/local/share/SurvRoyale
+BIN_PATH = /usr/local/bin
 
 all: client server
 
 client:
-	g++ $(CXXFLAGS) $(LINKFLAGS_CLIENT) src/client/*.cpp -o surv-royale-client
+	$(CXX) $(CXXFLAGS) $(LINKFLAGS_CLIENT) src/client/*.cpp -o surv-royale-client
 
 server:
-	g++ $(CXXFLAGS) $(LINKFLAGS_SERVER) src/server/*.cpp -o surv-royale-server
+	$(CXX) $(CXXFLAGS) $(LINKFLAGS_SERVER) src/server/*.cpp -o surv-royale-server
 
 clean:
 	rm -rf $(SHARE_PATH)
