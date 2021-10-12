@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "../dxTarRead.h"
+#include "../config.hpp"
 #include "MainPlayer.hpp"
 
 struct Game
@@ -13,5 +15,18 @@ struct Game
     Game();
     ~Game();
     void run();
-    static long loadTexture(sf::Texture &texture, const char *path);
+
+    template <class T> inline static
+    long loadAsset(T &asset, const char *path)
+    {   
+        long file_size = 0;
+
+        if (!asset.loadFromMemory(dxTarRead(tarFile, tar_size, path, &file_size), tar_size))
+        {
+            LOG("Failed to load game resources");
+            exit(1);
+        }
+
+        return file_size;
+    }
 };

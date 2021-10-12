@@ -13,7 +13,7 @@ LICENSE:
 #ifndef DX_TAR_READ_H
 #define DX_TAR_READ_H
 
-const char* dxTarRead(const void* tarData, const long tarSize, 
+static const char* dxTarRead(const void* tarData, const long tarSize, 
                       const char* fileName, long* fileSize)
 {
     const int NAME_OFFSET = 0, SIZE_OFFSET = 124, MAGIC_OFFSET = 257;

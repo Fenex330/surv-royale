@@ -1,6 +1,5 @@
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
-#include "../dxTarRead.h"
 #include "../config.hpp"
 #include "Game.hpp"
 
@@ -56,17 +55,4 @@ void Game::run()
         main_player.move();
         main_player.rotate(window);
     }
-}
-
-long Game::loadTexture(sf::Texture &texture, const char *path)
-{   
-    long file_size = 0;
-
-    if (!texture.loadFromMemory(dxTarRead(tarFile, tar_size, path, &file_size), tar_size))
-    {
-        LOG("Failed to load game resources");
-        exit(1);
-    }
-
-    return file_size;
 }
