@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <SFML/Graphics.hpp>
 #include "../dxTarRead.h"
 #include "../config.hpp"
@@ -17,7 +18,7 @@ struct Game
     void run();
 
     template <class T> inline static
-    long loadAsset(T &asset, const char *path)
+    void loadAsset(T &asset, const char *path)
     {   
         long file_size = 0;
 
@@ -27,6 +28,6 @@ struct Game
             exit(1);
         }
 
-        return file_size;
+        assert(file_size % 512);
     }
 };
