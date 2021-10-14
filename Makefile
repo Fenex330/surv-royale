@@ -1,12 +1,20 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -pedantic-errors -O3 # -pthread -Wall -Wextra
+CXXFLAGS = -std=c++17 -pedantic-errors # -pthread -Wall -Wextra
+RELEASE_FLAGS = -O3 -DNDEBUG
+DEBUG_FLAGS = -O0 -g
 LIBS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
 LIBS_SERVER = -lsfml-network -lsfml-system
 PREFIX = /usr/local
 SHARE_PATH = $(PREFIX)/share/SurvRoyale
 BIN_PATH = $(PREFIX)/bin
 
-all: client server
+all: release client server
+
+release:
+	$(CXXFLAGS) += $(RELEASE_FLAGS)
+
+debug:
+	$(CXXFLAGS) += $(DEBUG_FLAGS)
 
 client:
 	$(CXX) $(CXXFLAGS) $(LIBS_CLIENT) src/client/*.cpp -o surv-royale-client

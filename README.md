@@ -19,7 +19,7 @@ At the moment, only Linux and Windows platforms are officially supported.
 
 ### Building
 
-1. Dependencies: GNU make, git, C++17 capable compiler, 7zip/tar, SFML>=2.5
+1. Dependencies: GNU make, GNU parallel (optional), git, C++17 capable compiler, 7zip/tar, SFML>=2.5
 
 2. Clone the repository:
 ```
