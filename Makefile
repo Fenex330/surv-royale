@@ -10,11 +10,9 @@ BIN_PATH = $(PREFIX)/bin
 
 all: release client server
 
-release:
-	$(CXXFLAGS) += $(RELEASE_FLAGS)
+release: CXXFLAGS += $(RELEASE_FLAGS)
 
-debug:
-	$(CXXFLAGS) += $(DEBUG_FLAGS)
+debug: CXXFLAGS += $(DEBUG_FLAGS)
 
 client:
 	$(CXX) $(CXXFLAGS) $(LIBS_CLIENT) src/client/*.cpp -o surv-royale-client
