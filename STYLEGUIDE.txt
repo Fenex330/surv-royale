@@ -21,7 +21,7 @@
 5) a class should be declared in a header file and defined in a source
    file where the name of the files match the name of the class
 
-6) 4 spaces should be used instead of tabs
+6) 4 spaces should be used instead of tabs (unless it is a makefile, where tabs must be used)
 
 7) global variables should always be referred to using :: operator (::global_foo)
 
@@ -31,7 +31,7 @@
 
 10) every header file must contain an include guard ("#pragma once" prefered)
 
-11) variables should be initialized and used as close as possible to where they are declared
+11) variables and pointers should be initialized and used as close as possible to where they are declared
     and have smallest possible scope;
 
 12) use of global variables should be minimized
@@ -47,3 +47,5 @@
 17) an empty line should be put at the end of the file
 
 18) any violation to this guide is allowed only if it enhances readability
+
+19) template declaration should be place above the line of function/class declaration

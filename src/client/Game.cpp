@@ -34,6 +34,7 @@ void Game::run()
     while (window.isOpen())  // main game loop
     {
         sf::Event event;
+        
         while (window.pollEvent(event)) // event handler loop
         {
             switch (event.type)
