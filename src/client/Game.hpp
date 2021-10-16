@@ -21,13 +21,13 @@ struct Game
     void loadAsset(T &asset, const char *path)
     {   
         long file_size = 0;
+        const char *asset_file = dxTarRead(tarFile, tar_size, path, &file_size);
+        assert(file_size % 512);
 
-        if (!asset.loadFromMemory(dxTarRead(tarFile, tar_size, path, &file_size), tar_size))
+        if (!asset.loadFromMemory(asset_file, tar_size))
         {
             LOG("Failed to load game resources");
             exit(1);
         }
-
-        assert(file_size % 512);
     }
 };
