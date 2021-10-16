@@ -22,12 +22,14 @@ struct Game
     {   
         long file_size = 0;
         const char *asset_file = dxTarRead(tarFile, tar_size, path, &file_size);
-        assert(file_size % 512);
+
+        assert(file_size > 0);
+        assert(file_size % 512 > 0);
 
         if (!asset.loadFromMemory(asset_file, tar_size))
         {
             LOG("Failed to load game resources");
-            exit(1);
+            std::exit(1);
         }
     }
 };
