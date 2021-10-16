@@ -9,6 +9,8 @@ PREFIX = /usr/local
 SHARE_PATH = $(PREFIX)/share/SurvRoyale
 BIN_PATH = $(PREFIX)/bin
 
+# additional compiler flags: -Weffc++ -Weverything (clang only) -ftrapv (integer overflow detection)
+
 all: release client-serial server-serial
 
 debug:
@@ -35,21 +37,21 @@ server-serial:
 	$(CXX) $(CXXFLAGS) $(LIBS_SERVER) src/server/*.cpp -o surv-royale-server
 
 clean:
-	rm surv-royale-client
-	rm surv-royale-server
-	rm src/client/*.o
-	rm src/server/*.o
+	rm surv-royale-client &
+	rm surv-royale-server &
+	rm src/client/*.o &
+	rm src/server/*.o &
 
 install:
 	mkdir $(SHARE_PATH)
-	tar -cf $(SHARE_PATH)/GameData.tar GameData
-	cp server.conf $(SHARE_PATH)
-	cp LICENSE.txt $(SHARE_PATH)
-	cp CHANGELOG.txt $(SHARE_PATH)
-	cp surv-royale-client $(BIN_PATH)
-	cp surv-royale-server $(BIN_PATH)
+	tar -cf $(SHARE_PATH)/GameData.tar GameData &
+	cp server.conf $(SHARE_PATH) &
+	cp LICENSE.txt $(SHARE_PATH) &
+	cp CHANGELOG.txt $(SHARE_PATH) &
+	cp surv-royale-client $(BIN_PATH) &
+	cp surv-royale-server $(BIN_PATH) &
 
 uninstall:
-	rm -rf $(SHARE_PATH)
-	rm $(BIN_PATH)/surv-royale-client
-	rm $(BIN_PATH)/surv-royale-server
+	rm -rf $(SHARE_PATH) &
+	rm $(BIN_PATH)/surv-royale-client &
+	rm $(BIN_PATH)/surv-royale-server &
