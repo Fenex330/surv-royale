@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -pedantic-errors # -pthread -Wall -Wextra
-DEBUG_FLAGS = -O0 -g
+CXXFLAGS = -std=c++17 -pedantic-errors
+DEBUG_FLAGS = -O0 -g -Wall -Wextra
 RELEASE_FLAGS = -O3 -DNDEBUG
 RELEASE_MAX_FLAGS = -Ofast -march=native -DNDEBUG
 LIBS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
@@ -21,11 +21,11 @@ release-max:
 	$(eval CXXFLAGS += $(RELEASE_MAX_FLAGS))
 
 client:
-	parallel $(CXX) $(CXXFLAGS) -c {} -o {.}.o ::: src/client/*.cpp
+	parallel $(CXX) $(CXXFLAGS) -pipe -c {} -o {.}.o ::: src/client/*.cpp
 	$(CXX) src/client/*.o $(LIBS_CLIENT) -o surv-royale-client
 
 server:
-	parallel $(CXX) $(CXXFLAGS) -c {} -o {.}.o ::: src/server/*.cpp
+	parallel $(CXX) $(CXXFLAGS) -pipe -c {} -o {.}.o ::: src/server/*.cpp
 	$(CXX) src/server/*.o $(LIBS_SERVER) -o surv-royale-server
 
 client-serial:
