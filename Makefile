@@ -9,7 +9,7 @@ PREFIX = /usr/local
 SHARE_PATH = $(PREFIX)/share/SurvRoyale
 BIN_PATH = $(PREFIX)/bin
 
-# additional compiler flags: -Weffc++ -Weverything (clang only) -ftrapv (integer overflow detection)
+# additional compiler flags: -Weffc++ -Weverything (clang only) -ftrapv (integer overflow detection) -pthread
 
 all: release client-serial server-serial
 
