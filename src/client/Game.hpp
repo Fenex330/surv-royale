@@ -10,11 +10,12 @@ struct Game
 {
     sf::RenderWindow window;
     MainPlayer main_player;
+    static bool quit;
     static long tar_size;
     static unsigned char *tarFile;
 
     Game();
-    ~Game();
+    void cleanup();
     void run();
 
     template <class T> inline static

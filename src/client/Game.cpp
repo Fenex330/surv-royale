@@ -3,11 +3,14 @@
 #include "../config.hpp"
 #include "Game.hpp"
 
+bool Game::quit = false;
 long Game::tar_size = 0;
 unsigned char *Game::tarFile = nullptr;
 
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu")
 {
+    std::atexit(cleanup);
+
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
 
@@ -24,14 +27,14 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     main_player.init();
 }
 
-Game::~Game()
+Game::cleanup()
 {
     free(tarFile);
 }
 
 void Game::run()
 {
-    while (window.isOpen())  // main game loop
+    while (window.isOpen() && !quit)  // main game loop
     {
         sf::Event event;
         
