@@ -9,7 +9,7 @@ unsigned char *Game::tarFile = nullptr;
 
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu")
 {
-    std::atexit(cleanup);
+    std::atexit(Game::cleanup);
 
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
@@ -25,11 +25,6 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     fclose(f);
 
     main_player.init();
-}
-
-Game::cleanup()
-{
-    free(tarFile);
 }
 
 void Game::run()
@@ -59,4 +54,9 @@ void Game::run()
         main_player.move();
         main_player.rotate(window);
     }
+}
+
+void Game::cleanup()
+{
+    free(tarFile);
 }

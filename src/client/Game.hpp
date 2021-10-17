@@ -15,8 +15,8 @@ struct Game
     static unsigned char *tarFile;
 
     Game();
-    void cleanup();
     void run();
+    static void cleanup();
 
     template <class T> inline static
     void loadAsset(T &asset, const char *path)
