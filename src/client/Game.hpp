@@ -12,7 +12,7 @@ struct Game
     MainPlayer main_player;
     static bool quit;
     static long tar_size;
-    static unsigned char *tarFile;
+    static char *tarFile;
 
     Game();
     void run();

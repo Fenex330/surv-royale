@@ -5,7 +5,7 @@
 
 bool Game::quit = false;
 long Game::tar_size = 0;
-unsigned char *Game::tarFile = nullptr;
+char *Game::tarFile = nullptr;
 
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu")
 {
@@ -20,7 +20,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     tar_size = ftell(f);
     fseek(f, 0, SEEK_SET);
 
-    tarFile = (unsigned char *)malloc(tar_size + 1);
+    tarFile = (char*)malloc(tar_size + 1);
     fread(tarFile, 1, tar_size, f);
     fclose(f);
 
