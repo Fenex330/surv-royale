@@ -13,7 +13,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
 
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
-    window.ShowMouseCursor(false); // replace cursor with an aim sprite
+    window.setMouseCursorVisible(false); // replace cursor with an aim sprite
 
     FILE *f = fopen(GAMEDATA_PATH, "rb");
 
