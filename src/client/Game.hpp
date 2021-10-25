@@ -10,6 +10,7 @@ struct Game
 {
     sf::RenderWindow window;
     MainPlayer main_player;
+    sf::Texture crosshair_texture;
     sf::Sprite crosshair;
     
     static bool quit;

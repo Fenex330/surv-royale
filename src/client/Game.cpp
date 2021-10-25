@@ -25,8 +25,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     fread(tarFile, 1, tar_size, f);
     fclose(f);
 
-    sf::Texture crosshair_texture;
-    Game::loadAsset(crosshair_texture, "GameData/graphics/crosshairs/1.png");
+    Game::loadAsset(crosshair_texture, "GameData/graphics/crosshairs/11.png");
     crosshair.setTexture(crosshair_texture);
     crosshair.setScale(0.5, 0.5);
 
@@ -55,7 +54,7 @@ void Game::run()
         window.clear();
         window.setView(main_player.view);
         window.draw(main_player.sprite);
-        //window.draw(crosshair);
+        window.draw(crosshair);
         window.display();
 
         if (window.hasFocus())
