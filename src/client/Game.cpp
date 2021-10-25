@@ -52,8 +52,11 @@ void Game::run()
         window.draw(main_player.sprite);
         window.display();
 
-        main_player.move();
-        main_player.rotate(window);
+        if (window.hasFocus())
+        {
+            main_player.move();
+            main_player.rotate(window);
+        }
     }
 }
 
