@@ -10,6 +10,8 @@ struct Game
 {
     sf::RenderWindow window;
     MainPlayer main_player;
+    sf::Sprite crosshair;
+    
     static bool quit;
     static long tar_size;
     static char *tarFile;
