@@ -28,6 +28,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     sf::Texture crosshair_texture;
     Game::loadAsset(crosshair_texture, "GameData/graphics/crosshairs/1.png");
     crosshair.setTexture(crosshair_texture);
+    crosshair.setScale(0.5, 0.5);
 
     main_player.init();
 }
@@ -54,11 +55,12 @@ void Game::run()
         window.clear();
         window.setView(main_player.view);
         window.draw(main_player.sprite);
+        //window.draw(crosshair);
         window.display();
 
         if (window.hasFocus())
         {
-            crosshair.setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+            crosshair.setPosition(sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2, sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2);
             main_player.move();
             main_player.rotate(window);
         }
