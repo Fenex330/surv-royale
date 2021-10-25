@@ -7,7 +7,7 @@ bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
-Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu")
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close)
 {
     std::atexit(Game::cleanup);
 
