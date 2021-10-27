@@ -59,9 +59,11 @@ void Game::run()
 
         if (window.hasFocus())
         {
-            crosshair.setPosition(sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2, sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2);
             main_player.move();
             main_player.rotate(window);
+
+            crosshair.setPosition(sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2 + main_player.sprite.getPosition().x,
+                sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2 + main_player.sprite.getPosition().y);
         }
     }
 }
