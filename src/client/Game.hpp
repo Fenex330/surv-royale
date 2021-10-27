@@ -2,12 +2,14 @@
 
 #include <cassert>
 #include <SFML/Graphics.hpp>
-#include "../dxTarRead.h"
+#include "dxTarRead.h"
 #include "../config.hpp"
 #include "MainPlayer.hpp"
 
-struct Game
+class Game
 {
+public:
+
     sf::RenderWindow window;
     MainPlayer main_player;
     sf::Texture crosshair_texture;

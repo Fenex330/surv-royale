@@ -49,3 +49,5 @@
 18) any violation to this guide is allowed only if it enhances readability
 
 19) template declaration should be place above the line of function/class declaration
+
+20) if your class has only attributes and no methods use "struct" keyword

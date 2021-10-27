@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -pedantic-errors
-DEBUG_FLAGS = -O0 -g -Wall -Wextra
+DEBUG_FLAGS = -O0 -g -Wall -Wextra -ftrapv
 RELEASE_FLAGS = -O3 -DNDEBUG
 RELEASE_MAX_FLAGS = -Ofast -march=native -DNDEBUG
 LIBS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
@@ -9,7 +9,7 @@ PREFIX = /usr/local
 SHARE_PATH = $(PREFIX)/share/SurvRoyale
 BIN_PATH = $(PREFIX)/bin
 
-# additional compiler flags: -Weffc++ -Weverything (clang only) -ftrapv (integer overflow detection) -pthread
+# additional compiler flags: -Weffc++, -Weverything (clang only), -pthread
 
 all: release client-serial server-serial
 
