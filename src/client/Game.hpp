@@ -34,7 +34,7 @@ public:
 
         if (!asset.loadFromMemory(asset_file, tar_size))
         {
-            LOG("Failed to load game resources");
+            //LOG("Failed to load game resources");
             std::exit(1);
         }
     }
