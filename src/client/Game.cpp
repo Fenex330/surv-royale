@@ -53,8 +53,7 @@ void Game::run()
 
         window.clear();
         window.setView(main_player.view);
-        window.draw(main_player.sprite);
-        window.draw(crosshair);
+        draw();
         window.display();
 
         if (window.hasFocus())
@@ -66,6 +65,12 @@ void Game::run()
                 sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2 + main_player.sprite.getPosition().y);
         }
     }
+}
+
+void Game::draw()
+{
+    window.draw(main_player.sprite);
+    window.draw(crosshair);
 }
 
 void Game::cleanup()
