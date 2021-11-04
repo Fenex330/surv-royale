@@ -34,9 +34,6 @@ public:
         assert(file_size % 512 > 0);
 
         if (!asset.loadFromMemory(asset_file, tar_size))
-        {
-            //LOG("Failed to load game resources");
             std::exit(1);
-        }
     }
 };
