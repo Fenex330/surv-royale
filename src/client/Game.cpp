@@ -18,9 +18,6 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     window.setKeyRepeatEnabled(false);
     window.setMouseCursorVisible(false);
 
-    UDPsocket.setBlocking(false);
-    TCPsocket.setBlocking(false);
-
     FILE *f = fopen(GAMEDATA_PATH, "rb");
 
     fseek(f, 0, SEEK_END);
@@ -35,10 +32,13 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     crosshair.setTexture(crosshair_texture);
     crosshair.setScale(0.5, 0.5);
 
+    main_player.init();
+
+    UDPsocket.setBlocking(false);
+    TCPsocket.setBlocking(false);
+
     if (UDPsocket.bind(surv::DEFAULT_PORT) != sf::Socket::Done)
         exit(1);
-
-    main_player.init();
 }
 
 void Game::run()
@@ -46,7 +46,6 @@ void Game::run()
     while (window.isOpen() && !quit)  // main game loop
     {
         sf::Event event;
-        sf::Packet packet;
         
         while (window.pollEvent(event)) // event handler loop
         {
@@ -67,17 +66,9 @@ void Game::run()
         window.display();
 
         if (window.hasFocus())
-        {
-            auto [x, y] = main_player.move();
-            double rotation = main_player.rotate(window);
+        {            
+            send();
 
-            packet << static_cast<sf::Uint8>(NetCodes::MoveAndRotate) << x << y << rotation;
-            assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-
-            if (UDPsocket.send(packet, TEST_IP, surv::DEFAULT_PORT) != sf::Socket::Done)
-                exit(1);
-
-            packet.clear();
             crosshair.setPosition(sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2 + main_player.sprite.getPosition().x,
                                   sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2 + main_player.sprite.getPosition().y);
         }
@@ -88,6 +79,22 @@ void Game::draw()
 {
     window.draw(main_player.sprite);
     window.draw(crosshair);
+}
+
+void Game::send()
+{
+    sf::Packet packet;
+
+    auto [x, y] = main_player.move();
+    double rotation = main_player.rotate(window);
+
+    packet << static_cast<sf::Uint8>(NetCodes::MoveAndRotate) << x << y << rotation;
+    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+
+    if (UDPsocket.send(packet, TEST_IP, surv::DEFAULT_PORT) != sf::Socket::Done)
+        exit(1);
+
+    packet.clear();
 }
 
 void Game::cleanup()

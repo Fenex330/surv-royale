@@ -27,6 +27,7 @@ public:
     Game();
     void run();
     void draw();
+    void send();
     static void cleanup();
 
     template <class T> inline static
