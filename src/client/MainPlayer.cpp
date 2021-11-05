@@ -1,5 +1,4 @@
 #include <cmath>
-#include <SFML/Graphics.hpp>
 #include "../config.hpp"
 #include "MainPlayer.hpp"
 
@@ -16,31 +15,36 @@ void MainPlayer::setPosition(int x, int y)
     view.setCenter(x * surv::DEFAULT_PLAYER_SPEED, y * surv::DEFAULT_PLAYER_SPEED);
 }
 
-void MainPlayer::move()
+std::pair<int, int> MainPlayer::move()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    int x = 0;
+    int y = 0;
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
-        //(1, 0);
+        y = -1;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        //(-1, 0);
+        x = -1;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    {
-        //(0, -1);
-    }
-    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
-        //(0, 1);
+        y = 1;
     }
+    
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        x = 1;
+    }
+
+    return std::make_pair(x, y);
 }
 
-void MainPlayer::rotate(const sf::RenderWindow &window)
+double MainPlayer::rotate(const sf::RenderWindow &window)
 {
     sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
-    double rot = std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2, mouse_position.x - surv::VIEW_DIM_X / 2) * (180 / surv::PI) + 90;
+    return std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2, mouse_position.x - surv::VIEW_DIM_X / 2) * (180 / surv::PI) + 90;
 }

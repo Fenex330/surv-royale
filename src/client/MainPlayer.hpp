@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include <utility>
 #include "Player.hpp"
 
 class MainPlayer : public Player
@@ -11,8 +11,8 @@ class MainPlayer : public Player
         virtual void init() override;
         virtual void setPosition(int x, int y) override;
         
-        void move();
-        void rotate(const sf::RenderWindow &window);
+        std::pair<int, int> move();
+        double rotate(const sf::RenderWindow &window);
 
         ~MainPlayer() {};
 };

@@ -4,8 +4,8 @@
 #include <string>
 #include <map>
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
 #include "dxTarRead.h"
-#include "../config.hpp"
 #include "MainPlayer.hpp"
 
 class Game
