@@ -28,6 +28,7 @@ public:
     void run();
     void draw();
     void send();
+    void receive();
     static void cleanup();
 
     template <class T> inline static

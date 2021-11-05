@@ -3,7 +3,7 @@
 #include "Game.hpp"
 
 // REMOVE
-#define TEST_IP "192.168.0.5"
+#define TEST_IP "192.168.0.11"
 #define TEST_NICK "test"
 
 bool Game::quit = false;
@@ -46,6 +46,7 @@ void Game::run()
     while (window.isOpen() && !quit)  // main game loop
     {
         sf::Event event;
+        sf::Packet packet;
         
         while (window.pollEvent(event)) // event handler loop
         {
@@ -68,6 +69,7 @@ void Game::run()
         if (window.hasFocus())
         {            
             send();
+            receive();
 
             crosshair.setPosition(sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2 + main_player.sprite.getPosition().x,
                                   sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2 + main_player.sprite.getPosition().y);
@@ -83,8 +85,6 @@ void Game::draw()
 
 void Game::send()
 {
-    sf::Packet packet;
-
     auto [x, y] = main_player.move();
     double rotation = main_player.rotate(window);
 
@@ -95,6 +95,10 @@ void Game::send()
         exit(1);
 
     packet.clear();
+}
+
+void Game::receive()
+{
 }
 
 void Game::cleanup()
