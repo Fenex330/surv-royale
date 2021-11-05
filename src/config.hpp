@@ -13,10 +13,10 @@
 namespace surv
 {
     inline const double PI = 3.14159265359;
+    inline const unsigned short DEFAULT_PORT = 7777;
     inline const unsigned int VIEW_DIM_X = 800;
     inline const unsigned int VIEW_DIM_Y = 800;
     inline const unsigned int DEFAULT_PLAYER_SPEED = 10;
-    inline const unsigned int DEFAULT_PORT = 7777;
     inline const unsigned int MAP_DIMENSION = 1000;
     inline const unsigned int MAX_PLAYERS = 100;
     inline const unsigned int MAX_BULLETS = 50000;

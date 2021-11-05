@@ -15,10 +15,10 @@ void MainPlayer::setPosition(int x, int y)
     view.setCenter(x * surv::DEFAULT_PLAYER_SPEED, y * surv::DEFAULT_PLAYER_SPEED);
 }
 
-std::pair<int, int> MainPlayer::move()
+std::pair<sf::Int8, sf::Int8> MainPlayer::move()
 {
-    int x = 0;
-    int y = 0;
+    sf::Int8 x = 0;
+    sf::Int8 y = 0;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {

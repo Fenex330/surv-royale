@@ -18,11 +18,11 @@ public:
     sf::UdpSocket UDPsocket;
     sf::TcpSocket TCPsocket;
     MainPlayer main_player;
+    std::map<std::string, Player> players;
     
     static bool quit;
     static long tar_size;
     static char *tarFile;
-    static std::map<std::string, Player> players;
 
     Game();
     void run();

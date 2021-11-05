@@ -2,10 +2,13 @@
 #include "../config.hpp"
 #include "Game.hpp"
 
+// REMOVE
+#define TEST_IP "192.168.0.5"
+#define TEST_NICK "test"
+
 bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
-std::map<std::string, Player> Game::players;
 
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close)
 {
@@ -32,6 +35,9 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     crosshair.setTexture(crosshair_texture);
     crosshair.setScale(0.5, 0.5);
 
+    if (UDPsocket.bind(surv::DEFAULT_PORT) != sf::Socket::Done)
+        exit(1);
+
     main_player.init();
 }
 
@@ -40,6 +46,7 @@ void Game::run()
     while (window.isOpen() && !quit)  // main game loop
     {
         sf::Event event;
+        sf::Packet packet;
         
         while (window.pollEvent(event)) // event handler loop
         {
@@ -61,9 +68,16 @@ void Game::run()
 
         if (window.hasFocus())
         {
-            main_player.move();
-            main_player.rotate(window);
+            auto [x, y] = main_player.move();
+            double rotation = main_player.rotate(window);
 
+            packet << static_cast<sf::Uint8>(NetCodes::MoveAndRotate) << x << y << rotation;
+            assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+
+            if (UDPsocket.send(packet, TEST_IP, surv::DEFAULT_PORT) != sf::Socket::Done)
+                exit(1);
+
+            packet.clear();
             crosshair.setPosition(sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2 + main_player.sprite.getPosition().x,
                                   sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2 + main_player.sprite.getPosition().y);
         }

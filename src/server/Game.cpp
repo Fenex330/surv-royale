@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-std::map<std::string, Player> Game::players;
+bool Game::quit = false;
 
 Game::Game()
 {
@@ -10,5 +10,8 @@ Game::Game()
 
 void Game::run()
 {
-    //
+    while (!quit)
+    {
+        //
+    }
 }
