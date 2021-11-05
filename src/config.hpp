@@ -2,9 +2,6 @@
 
 #pragma once
 
-//#include <iostream>
-//#define LOG(X) std::cout << X << std::endl
-
 #ifdef _WIN32
     #define GAMEDATA_PATH "GameData.tar"
     #define SERVER_CONF_PATH "server.conf"
@@ -25,12 +22,12 @@ namespace surv
     inline const unsigned int MAX_BULLETS = 50000;
 }
 
-// verbs are actions, nouns are states
 enum class NetCodes
 {
-    Players,
+    RegisterRequest,
+    RegisterResponse,
+    PlayersList,
     Bullets,
-    Fire,
-    Move,
-    Rotate
+    MoveAndRotate,
+    Fire
 };

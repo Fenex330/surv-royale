@@ -6,6 +6,7 @@
 bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
+std::map<std::string, Player> Game::players;
 
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close)
 {
@@ -14,6 +15,9 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
     window.setMouseCursorVisible(false);
+
+    UDPsocket.setBlocking(false);
+    TCPsocket.setBlocking(false);
 
     FILE *f = fopen(GAMEDATA_PATH, "rb");
 

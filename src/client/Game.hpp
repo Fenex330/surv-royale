@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cassert>
+#include <string>
+#include <map>
 #include <SFML/Graphics.hpp>
 #include "dxTarRead.h"
 #include "../config.hpp"
@@ -11,13 +13,16 @@ class Game
 public:
 
     sf::RenderWindow window;
-    MainPlayer main_player;
     sf::Texture crosshair_texture;
     sf::Sprite crosshair;
+    sf::UdpSocket UDPsocket;
+    sf::TcpSocket TCPsocket;
+    MainPlayer main_player;
     
     static bool quit;
     static long tar_size;
     static char *tarFile;
+    static std::map<std::string, Player> players;
 
     Game();
     void run();
