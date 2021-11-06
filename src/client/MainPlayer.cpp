@@ -46,5 +46,5 @@ std::pair<sf::Int8, sf::Int8> MainPlayer::move()
 double MainPlayer::rotate(const sf::RenderWindow &window)
 {
     sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
-    return std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2, mouse_position.x - surv::VIEW_DIM_X / 2) * (180 / surv::PI) + 90;
+    return std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2.0, mouse_position.x - surv::VIEW_DIM_X / 2.0) * (180.0 / surv::PI) + 90.0;
 }
