@@ -16,6 +16,4 @@ public:
 
     Game();
     void run();
-    void send();
-    void receive();
 };

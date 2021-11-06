@@ -25,9 +25,10 @@ namespace surv
 enum class NetCodes
 {
     RegisterRequest,
-    RegisterResponse,
+    RegisterSuccess,
+    RegisterFail,
     PlayersList,
-    Bullets,
+    BulletsList,
     MoveAndRotate,
     Fire
 };

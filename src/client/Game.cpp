@@ -68,8 +68,8 @@ void Game::run()
 
         if (window.hasFocus())
         {            
-            send();
-            receive();
+            sendMoveAndRotate(packet);
+            receive(packet);
 
             crosshair.setPosition(sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2 + main_player.sprite.getPosition().x,
                                   sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2 + main_player.sprite.getPosition().y);
@@ -83,7 +83,7 @@ void Game::draw()
     window.draw(crosshair);
 }
 
-void Game::send()
+void Game::sendMoveAndRotate(sf::Packet packet)
 {
     auto [x, y] = main_player.move();
     double rotation = main_player.rotate(window);
@@ -93,12 +93,11 @@ void Game::send()
 
     if (UDPsocket.send(packet, TEST_IP, surv::DEFAULT_PORT) != sf::Socket::Done)
         exit(1);
-
-    packet.clear();
 }
 
-void Game::receive()
+void Game::receive(sf::Packet packet)
 {
+    //
 }
 
 void Game::cleanup()

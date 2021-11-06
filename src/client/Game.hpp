@@ -27,8 +27,8 @@ public:
     Game();
     void run();
     void draw();
-    void send();
-    void receive();
+    void sendMoveAndRotate(sf::Packet packet);
+    void receive(sf::Packet packet);
     static void cleanup();
 
     template <class T> inline static
