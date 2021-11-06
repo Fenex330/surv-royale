@@ -19,7 +19,7 @@ void Player::setPosition(int x, int y)
     sprite.setPosition(x * surv::DEFAULT_PLAYER_SPEED, y * surv::DEFAULT_PLAYER_SPEED);
 }
 
-void Player::setRotation(int rotation)
+void Player::setRotation(double rotation)
 {
     sprite.setRotation(rotation);
 }

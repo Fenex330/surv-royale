@@ -97,7 +97,35 @@ void Game::sendMoveAndRotate(sf::Packet packet)
 
 void Game::receive(sf::Packet packet)
 {
-    //
+    sf::IpAddress address;
+    unsigned short port;
+
+    if (UDPsocket.receive(packet, address, port) != sf::Socket::Done)
+        return;
+
+    sf::Uint8 netcode_raw;
+    packet >> netcode_raw;
+    NetCodes netcode = static_cast<NetCodes>(netcode_raw);
+
+    switch (netcode)
+    {
+        case NetCodes::PlayersList:
+            sf::Int8 x, y;
+            double rotation;
+
+            if (packet /*>> netcode_raw*/ >> x >> y >> rotation)
+            {
+                main_player.setPosition(x, y);
+                main_player.setRotation(rotation);
+            }
+            else
+                exit(1);
+
+            break;
+
+        default:
+            break;
+    }
 }
 
 void Game::cleanup()
