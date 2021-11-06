@@ -3,7 +3,7 @@
 #include "Game.hpp"
 
 // REMOVE
-#define TEST_IP "192.168.0.11"
+#define TEST_IP "192.168.0.5"
 #define TEST_NICK "test"
 
 bool Game::quit = false;

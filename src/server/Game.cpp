@@ -1,4 +1,5 @@
 #include <cassert>
+#include <iostream>
 #include "../config.hpp"
 #include "Game.hpp"
 
@@ -13,11 +14,14 @@ Game::Game()
     x = 0;
     y = 0;
     rotation = 0.0;
-    address = "127.0.0.1";
+    address = "192.168.0.11";
     port = surv::DEFAULT_PORT;
 
     if (UDPsocket.bind(surv::DEFAULT_PORT) != sf::Socket::Done)
+    {
+        std::cout << "could not bind socket\n";
         exit(1);
+    }
 }
 
 void Game::run()
@@ -26,8 +30,8 @@ void Game::run()
     {
         sf::Packet packet;
 
-        receive(packet);
         sendPlayersList(packet);
+        receive(packet);
     }
 }
 
@@ -37,7 +41,10 @@ void Game::sendPlayersList(sf::Packet packet)
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
 
     if (UDPsocket.send(packet, address, port) != sf::Socket::Done)
+    {
+        std::cout << "could not send packet\n";
         exit(1);
+    }
 }
 
 void Game::receive(sf::Packet packet)
@@ -54,7 +61,10 @@ void Game::receive(sf::Packet packet)
         case NetCodes::MoveAndRotate:
             if (packet /*>> netcode_raw*/ >> x >> y >> rotation) {}
             else
+            {
+                std::cout << "could not read packet\n";
                 exit(1);
+            }
 
             break;
 
