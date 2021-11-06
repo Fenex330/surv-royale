@@ -1,12 +1,6 @@
 #pragma once
 
-#include <cassert>
-#include <string>
-#include <map>
-#include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
-#include "dxTarRead.h"
-#include "MainPlayer.hpp"
+#include "headers.hpp"
 
 class Game
 {

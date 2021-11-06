@@ -1,6 +1,4 @@
-#include <cmath>
-#include "../config.hpp"
-#include "MainPlayer.hpp"
+#include "headers.hpp"
 
 void MainPlayer::init()
 {

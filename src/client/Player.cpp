@@ -1,6 +1,4 @@
-#include "../config.hpp"
-#include "Game.hpp"
-#include "Player.hpp"
+#include "headers.hpp"
 
 void Player::init()
 {

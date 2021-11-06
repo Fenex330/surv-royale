@@ -1,5 +1,5 @@
 #include <SFML/GpuPreference.hpp>
-#include "Game.hpp"
+#include "headers.hpp"
 
 SFML_DEFINE_DISCRETE_GPU_PREFERENCE
 

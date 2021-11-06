@@ -1,8 +1,6 @@
 #pragma once
 
-#include <string>
-#include <map>
-#include <SFML/Network.hpp>
+#include "headers.hpp"
 
 class Game
 {

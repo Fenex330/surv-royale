@@ -1,7 +1,4 @@
-#include <cassert>
-#include <iostream>
-#include "../config.hpp"
-#include "Game.hpp"
+#include "headers.hpp"
 
 bool Game::quit = false;
 

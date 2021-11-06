@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Player.hpp"
+#include "headers.hpp"
 
 class MainPlayer : public Player
 {

@@ -1,6 +1,4 @@
-#include <cstdlib>
-#include "../config.hpp"
-#include "Game.hpp"
+#include "headers.hpp"
 
 // REMOVE
 #define TEST_IP "192.168.0.5"
