@@ -39,12 +39,7 @@ void Game::sendPlayersList(sf::Packet packet)
 {
     packet << static_cast<sf::Uint8>(NetCodes::PlayersList) << x << y << rotation;
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-
-    if (UDPsocket.send(packet, address, port) != sf::Socket::Done)
-    {
-        std::cout << "could not send packet\n";
-        exit(1);
-    }
+    UDPsocket.send(packet, address, port);
 }
 
 void Game::receive(sf::Packet packet)
