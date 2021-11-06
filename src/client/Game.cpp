@@ -1,5 +1,4 @@
 #include <cstdlib>
-#include <iostream>
 #include "../config.hpp"
 #include "Game.hpp"
 
