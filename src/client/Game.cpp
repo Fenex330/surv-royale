@@ -71,8 +71,9 @@ void Game::run()
             sendMoveAndRotate(packet);
             receive(packet);
 
-            crosshair.setPosition(sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2 + main_player.sprite.getPosition().x,
-                                  sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2 + main_player.sprite.getPosition().y);
+            float crossX = sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2 + main_player.sprite.getPosition().x;
+            float crossY = sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2 + main_player.sprite.getPosition().y;
+            crosshair.setPosition(crossX, crossY);
         }
     }
 }
