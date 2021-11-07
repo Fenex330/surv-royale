@@ -8,3 +8,4 @@
 
 #include "../config.hpp"
 #include "Game.hpp"
+#include "Player.hpp"

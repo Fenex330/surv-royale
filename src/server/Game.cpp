@@ -4,35 +4,37 @@ bool Game::quit = false;
 
 Game::Game()
 {
+    std::atexit(Game::cleanup);
+
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
-    if (UDPsocket.bind(surv::DEFAULT_PORT) != sf::Socket::Done)
-    {
-        std::cout << "could not bind socket\n";
-        exit(1);
-    }
+    if (UDPsocket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
+        std::exit(1);
+
+    //local_port = UDPsocket.getLocalPort();
+}
+
+Game::~Game()
+{
+    Game::cleanup();
 }
 
 void Game::run()
 {
     while (!quit)
     {
-        sf::Packet packet;
-
-        sendPlayersList(packet);
-        receive(packet);
+        send();
+        receive();
     }
 }
 
-void Game::sendPlayersList(sf::Packet packet)
+void Game::send()
 {
-    packet << static_cast<sf::Uint8>(NetCodes::PlayersList) << x << y << rotation;
-    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    UDPsocket.send(packet, address, port);
+    sendPlayersList();
 }
 
-void Game::receive(sf::Packet packet)
+void Game::receive()
 {
     if (UDPsocket.receive(packet, address, port) != sf::Socket::Done)
         return;
@@ -56,4 +58,27 @@ void Game::receive(sf::Packet packet)
         default:
             break;
     }
+}
+
+void Game::sendPlayersList()
+{
+    packet << static_cast<sf::Uint8>(NetCodes::PlayersList) << x << y << rotation;
+    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+    UDPsocket.send(packet, address, port);
+}
+
+void Game::receiveMoveAndRotate()
+{
+    //
+}
+
+void Game::cleanup()
+{
+    static bool isCleaned = false;
+
+    if (isCleaned) // to make sure cleanup happens only once
+        return;
+
+    // ...
+    isCleaned = true;
 }
