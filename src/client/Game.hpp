@@ -11,6 +11,8 @@ public:
     sf::Sprite crosshair;
     sf::UdpSocket UDPsocket;
     sf::TcpSocket TCPsocket;
+    sf::Clock deltaClock;
+
     MainPlayer main_player;
     std::map<std::string, Player> players;
     

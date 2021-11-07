@@ -16,6 +16,8 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     window.setKeyRepeatEnabled(false);
     window.setMouseCursorVisible(false);
 
+    ImGui::SFML::Init(window);
+
     FILE *f = fopen(GAMEDATA_PATH, "rb");
 
     fseek(f, 0, SEEK_END);
@@ -49,6 +51,8 @@ void Game::run()
         
         while (window.pollEvent(event)) // event handler loop
         {
+            ImGui::SFML::ProcessEvent(event);
+
             switch (event.type)
             {
                 case sf::Event::Closed:
@@ -60,9 +64,15 @@ void Game::run()
             }
         }
 
+        ImGui::SFML::Update(window, deltaClock.restart());
+
+        //ImGui::Begin("window name");
+        //ImGui::End();
+
         window.clear();
         window.setView(main_player.view);
         draw();
+        ImGui::SFML::Render(window);
         window.display();
 
         if (window.hasFocus())
@@ -131,4 +141,5 @@ void Game::receive(sf::Packet packet)
 void Game::cleanup()
 {
     free(tarFile);
+    ImGui::SFML::Shutdown();
 }
