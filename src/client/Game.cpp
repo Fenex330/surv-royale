@@ -38,6 +38,11 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
         exit(1);
 }
 
+Game::~Game()
+{
+    Game::cleanup();
+}
+
 void Game::run()
 {
     while (window.isOpen() && !quit)  // main game loop
@@ -142,6 +147,12 @@ void Game::receive(sf::Packet packet)
 
 void Game::cleanup()
 {
+    static bool isCleaned = false;
+
+    if (isCleaned)
+        return;
+
     free(tarFile);
     ImGui::SFML::Shutdown();
+    isCleaned = true;
 }

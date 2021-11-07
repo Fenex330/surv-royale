@@ -21,6 +21,8 @@ public:
     static char *tarFile;
 
     Game();
+    ~Game();
+
     void run();
     void imguiMapUI();
     void draw();
