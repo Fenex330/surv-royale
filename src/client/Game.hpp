@@ -16,7 +16,7 @@ public:
     sf::IpAddress server_address;
 
     unsigned short server_port;
-    MainPlayer main_player;
+    std::string nickname;
     std::map<std::string, Player> players;
     
     static bool quit;

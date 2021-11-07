@@ -36,7 +36,10 @@ void Game::send()
 
 void Game::receive()
 {
-    if (UDPsocket.receive(packet, address, port) != sf::Socket::Done)
+    sf::IpAddress remote_address;
+    unsigned short remote_port;
+
+    if (UDPsocket.receive(packet, remote_address, remote_port) != sf::Socket::Done)
         return;
 
     sf::Uint8 netcode_raw;
@@ -46,30 +49,27 @@ void Game::receive()
     switch (netcode)
     {
         case NetCodes::MoveAndRotate:
-            if (packet >> x >> y >> rotation) {}
-            else
-            {
-                std::cout << "could not read packet\n";
-                exit(1);
-            }
-
+            receiveMoveAndRotate();
             break;
 
         default:
             break;
     }
+
+    packet.clear();
 }
 
 void Game::sendPlayersList()
 {
     packet << static_cast<sf::Uint8>(NetCodes::PlayersList) << x << y << rotation;
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    UDPsocket.send(packet, address, port);
+    if (UDPsocket.send(packet, address, port) != sf::Socket::Done) {}
+    packet.clear();
 }
 
 void Game::receiveMoveAndRotate()
 {
-    //
+    packet >> x >> y >> rotation;
 }
 
 void Game::cleanup()

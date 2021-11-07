@@ -117,8 +117,6 @@ void Game::receive()
         return;
 
     server_port = remote_port;
-    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-
     sf::Uint8 netcode_raw;
     packet >> netcode_raw;
     NetCodes netcode = static_cast<NetCodes>(netcode_raw);
@@ -144,7 +142,7 @@ void Game::sendMoveAndRotate()
     packet << static_cast<sf::Uint8>(NetCodes::MoveAndRotate) << x << y << rotation;
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
 
-    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done); // error
+    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
     packet.clear();
 }
 
