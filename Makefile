@@ -3,7 +3,7 @@ CXXFLAGS = -std=c++17 -pedantic-errors
 DEBUG_FLAGS = -O0 -g -Wall -Wextra -ftrapv
 RELEASE_FLAGS = -O3 -DNDEBUG
 RELEASE_MAX_FLAGS = -Ofast -march=native -DNDEBUG
-LIBS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
+LIBS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -lgl
 LIBS_SERVER = -lsfml-network -lsfml-system
 PREFIX = /usr/local
 SHARE_PATH = $(PREFIX)/share/SurvRoyale
@@ -23,15 +23,15 @@ release-max:
 	$(eval CXXFLAGS += $(RELEASE_MAX_FLAGS))
 
 client:
-	parallel $(CXX) $(CXXFLAGS) -pipe -c {} -o {}.o ::: src/client/*.cpp
-	$(CXX) src/client/*.o $(LIBS_CLIENT) -o surv-royale-client
+	parallel $(CXX) $(CXXFLAGS) -pipe -c {} -o {}.o ::: src/client/*.cpp src/client/imgui/*.cpp
+	$(CXX) src/client/*.o src/client/imgui/*.o $(LIBS_CLIENT) -o surv-royale-client
 
 server:
 	parallel $(CXX) $(CXXFLAGS) -pipe -c {} -o {}.o ::: src/server/*.cpp
 	$(CXX) src/server/*.o $(LIBS_SERVER) -o surv-royale-server
 
 client-serial:
-	$(CXX) $(CXXFLAGS) $(LIBS_CLIENT) src/client/*.cpp -o surv-royale-client
+	$(CXX) $(CXXFLAGS) $(LIBS_CLIENT) src/client/*.cpp src/client/imgui/*.cpp -o surv-royale-client
 
 server-serial:
 	$(CXX) $(CXXFLAGS) $(LIBS_SERVER) src/server/*.cpp -o surv-royale-server
@@ -40,6 +40,7 @@ clean:
 	rm surv-royale-client &
 	rm surv-royale-server &
 	rm src/client/*.o &
+	rm src/client/imgui/*.o &
 	rm src/server/*.o &
 
 install:
