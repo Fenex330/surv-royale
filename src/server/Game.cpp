@@ -7,13 +7,6 @@ Game::Game()
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
-    // REMOVE
-    x = 0;
-    y = 0;
-    rotation = 0.0;
-    address = "192.168.0.11";
-    port = surv::DEFAULT_PORT;
-
     if (UDPsocket.bind(surv::DEFAULT_PORT) != sf::Socket::Done)
     {
         std::cout << "could not bind socket\n";

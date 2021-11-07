@@ -22,6 +22,7 @@ public:
 
     Game();
     void run();
+    void imguiMapUI();
     void draw();
     void sendMoveAndRotate(sf::Packet packet);
     void receive(sf::Packet packet);

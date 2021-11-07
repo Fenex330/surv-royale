@@ -1,9 +1,5 @@
 #include "headers.hpp"
 
-// REMOVE
-#define TEST_IP "192.168.0.5"
-#define TEST_NICK "test"
-
 bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
@@ -66,9 +62,7 @@ void Game::run()
 
         ImGui::SFML::Update(window, deltaClock.restart());
 
-        //ImGui::Begin("window name");
-        // ...
-        //ImGui::End();
+        //imguiMapUI();
 
         window.clear();
         window.setView(main_player.view);
@@ -86,6 +80,13 @@ void Game::run()
             crosshair.setPosition(crossX, crossY);
         }
     }
+}
+
+void imguiMapUI()
+{
+    ImGui::Begin("window name");
+    // ...
+    ImGui::End();
 }
 
 void Game::draw()
