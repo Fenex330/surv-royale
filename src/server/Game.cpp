@@ -51,7 +51,7 @@ void Game::receive(sf::Packet packet)
     switch (netcode)
     {
         case NetCodes::MoveAndRotate:
-            if (packet /*>> netcode_raw*/ >> x >> y >> rotation) {}
+            if (packet >> x >> y >> rotation) {}
             else
             {
                 std::cout << "could not read packet\n";

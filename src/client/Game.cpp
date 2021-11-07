@@ -67,6 +67,7 @@ void Game::run()
         ImGui::SFML::Update(window, deltaClock.restart());
 
         //ImGui::Begin("window name");
+        // ...
         //ImGui::End();
 
         window.clear();
@@ -123,7 +124,7 @@ void Game::receive(sf::Packet packet)
             sf::Int8 x, y;
             double rotation;
 
-            if (packet /*>> netcode_raw*/ >> x >> y >> rotation)
+            if (packet >> x >> y >> rotation)
             {
                 main_player.setPosition(x, y);
                 main_player.setRotation(rotation);
