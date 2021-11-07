@@ -12,7 +12,10 @@ public:
     sf::UdpSocket UDPsocket;
     sf::TcpSocket TCPsocket;
     sf::Clock deltaClock;
+    sf::Packet packet;
+    sf::IpAddress server_address;
 
+    unsigned short server_port;
     MainPlayer main_player;
     std::map<std::string, Player> players;
     
@@ -26,8 +29,11 @@ public:
     void run();
     void imguiMapUI();
     void draw();
-    void sendMoveAndRotate(sf::Packet packet);
-    void receive(sf::Packet packet);
+    void send();
+    void receive();
+    void sendMoveAndRotate();
+    void receivePlayersList();
+    
     static void cleanup();
 
     template <class T> inline static
