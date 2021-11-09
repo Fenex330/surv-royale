@@ -1,6 +1,6 @@
 #include "headers.hpp"
 
-void Player::init()
+void Player::Player() : active(true)
 {
     Game::loadAsset(texture, "GameData/graphics/custom/character.png");
 

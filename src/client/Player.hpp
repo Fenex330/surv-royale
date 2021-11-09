@@ -8,14 +8,17 @@ class Player
         sf::Texture texture;
 
     public:
+        bool active;
         sf::Sprite sprite;
 
-        virtual void init();
+        Player();
+        virtual ~Player() {}
+
         virtual void setPosition(int x, int y);
-        virtual std::pair<sf::Int8, sf::Int8> move() {return std::make_pair(0, 0);}
-        virtual double rotate([[maybe_unused]] const sf::RenderWindow &window) {return 0.0;}
+        virtual std::pair<sf::Int8, sf::Int8> move()
+            {return std::make_pair(0, 0);}
+        virtual double rotate([[maybe_unused]] const sf::RenderWindow &window)
+            {return 0.0;}
 
         void setRotation(double rotation);
-
-        ~Player() {}
 };
