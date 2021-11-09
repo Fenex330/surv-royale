@@ -29,8 +29,6 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     crosshair.setOrigin(crosshair.getLocalBounds().width * 0.5, crosshair.getLocalBounds().height * 0.5);
     crosshair.setScale(0.5, 0.5);
 
-    main_player.init();
-
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
