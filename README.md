@@ -40,8 +40,9 @@ At the moment, only Linux and Windows platforms are officially supported.
 On Windows, SFML is bundled locally with the project. On Linux and MacOS however, nothing is bundled,
 the dependencies are assumed to be installed globally and system-wide.
 
-On Windows, the only compiler supported is MinGW (tested on mingw-x86_64-seh-8.1.0) and is assumed that directories
-for compiler and 7zip executables exist inside PATH variable.
+On Windows, the only compiler supported is MinGW (tested on llvm-mingw-ucrt-x86_64) and is assumed that directories
+for compiler and 7zip executables exist inside PATH variable. Also, universal C runtime comes pre-installed on Windows 10,
+but needs to be manually installed on earlier Windows versions.
 
 Only Windows builds are be provided for download in "Releases" section as a self-contained zip archive,
 while on Linux the game can typically be installed via flatpak or from AUR. For MacOS and other operating systems,
