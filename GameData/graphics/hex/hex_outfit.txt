@@ -1,0 +1,124 @@
+Outfit Hex Colors
+
+'Basic Outfit'
+baseTint: f8c574
+handTint: f8c574
+backpackTint: 816537
+
+'Tallow's Little Helper'
+baseTint: c40000
+handTint: 16b900
+backpackTint: 059300
+
+'Imperial Seal'
+baseTint: bc002d
+handTint: FFFFFF
+backpackTint: c0a73f
+
+'Poncho Verde'
+baseTint: 1b400c
+handTint: b5c58b
+backpackTint: ab7c29
+
+'Valiant Pineapple'
+baseTint: 990000
+handTint: 4c1111
+backpackTint: ffcc00
+
+'Tarkhany Regal'
+baseTint: 4b2e83
+handTint: ffb400
+backpackTint: 472060
+
+'Water Elemental'
+baseTint: 6cffe9
+handTint: f4005c
+backpackTint: 007f84
+
+'Falling Star'
+baseTint: 950000
+handTint: ff7800
+backpackTint: 48231e
+
+'Island Time'
+baseTint: ffc600
+handTint: 024600
+backpackTint: 449700
+
+'Aquatic Avenger'
+baseTint: 00baa2
+handTint: 00ffde
+backpackTint: 08302c
+
+'Coral Guise'
+baseTint: ff5f67
+handTint: ff898f
+backpackTint: ffecca
+
+'The Initiative'
+baseTint: c3ae85
+handTint: 8f8064
+backpackTint: 40392c
+
+'Casanova Silks'
+baseTint: 42080c
+handTint: 740007
+backpackTint: 101010
+
+'The New Black'
+baseTint: ff5c22
+handTint: fc7523
+backpackTint: ffae00
+    
+'Jester's Folly'
+baseTint: 770078
+handTint: 4b004c
+backpackTint: 0e4c00
+        
+'Woodland Combat'
+baseTint: 2b332a
+handTint: 5a6c52
+backpackTint: 4d2600
+
+'Royal Fortune'
+baseTint: 7f2723
+handTint: e8c22a
+backpackTint: 984f00
+      
+'Key Lime'
+baseTint: c7ff3f,
+handTint: eeff5d,
+backpackTint: bc8737
+      
+'Cobalt Shell'
+baseTint: 002b57
+handTint: 295e7c
+backpackTint: 004a95
+          
+'Carbon Fiber'
+baseTint: 212121
+handTint: 1c1c1c
+backpackTint: 363636
+          
+'The Professional'
+baseTint: f8c574
+handTint: be7800
+backpackTint: a36700
+       
+'Ghillie Suit'
+baseTint: 83af50
+
+'Forest Camo'
+baseTint: 999966
+handTint: 848457
+backpackTint: 666633
+      
+'Target Practice'
+baseTint: ff0000
+handTint: d40000
+backpackTint: b70000
+         
+'Arctic Avenger'
+baseTint: e3e3e3
+handTint: eeeeee
+backpackTint: dcdcdc

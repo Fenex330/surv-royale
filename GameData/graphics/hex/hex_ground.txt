@@ -1,0 +1,57 @@
+Ground Hex Colors
+
+- Default -
+
+water: 3282ab
+beach: cdb35b
+riverbank: 905e24
+grass: 80af49
+underground: 1b0d03
+
+- Desert -
+
+water: 8a9b4e
+beach: c9843a
+riverbank: b25e24
+grass: dfa757
+underground: 3d0d03
+
+- Woods -
+
+water: 3282ab
+beach: efb35b
+riverbank: 77360b
+grass: 8e832a
+underground: 1b0d03
+
+- Halloween -
+
+water: 280000
+beach: 64410e
+riverbank: 3c1b05
+grass: 212404
+underground: 120801
+
+- Snow -
+
+water: 0c4d51
+beach: cdb35b
+riverbank: 905e24
+grass: bdbdbd
+underground: 1b0d03
+
+- Faction -
+
+water: 071b36
+beach: 8e5632
+riverbank: 653313
+grass: 4e6128
+underground: 1b0d03
+
+- Spring -
+
+water: 3282ab
+beach: f4ae48
+riverbank: 8a8a8a
+grass: 5c910a
+underground: 1b0d03
