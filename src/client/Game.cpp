@@ -51,7 +51,7 @@ void Game::run()
         
         while (window.pollEvent(event)) // event handler loop
         {
-            ImGui::SFML::ProcessEvent(event);
+            ImGui::SFML::ProcessEvent(window, event);
 
             switch (event.type)
             {
