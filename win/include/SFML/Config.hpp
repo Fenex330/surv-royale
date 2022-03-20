@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2021 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2007-2018 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -36,7 +36,7 @@
 
 ////////////////////////////////////////////////////////////
 // Identify the operating system
-// see https://sourceforge.net/p/predef/wiki/Home/
+// see http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system
 ////////////////////////////////////////////////////////////
 #if defined(_WIN32)
 
@@ -90,11 +90,6 @@
 
         // OpenBSD
         #define SFML_SYSTEM_OPENBSD
-
-    #elif defined(__NetBSD__)
-
-        // NetBSD
-        #define SFML_SYSTEM_NETBSD
 
     #else
 

@@ -40,7 +40,7 @@ At the moment, only Linux and Windows platforms are officially supported.
 On Windows, SFML is bundled locally with the project. On Linux and MacOS however, nothing is bundled,
 the dependencies are assumed to be installed globally and system-wide.
 
-On Windows, the only compiler supported is MinGW (tested on llvm-mingw-ucrt-x86_64) and is assumed that directories
+On Windows, the only compiler supported is MinGW (tested on x86_64-8.1.0-release-win32-seh-rt_v6-rev0) and is assumed that directories
 for compiler and 7zip executables exist inside PATH variable. Also, universal C runtime comes pre-installed on Windows 10,
 but needs to be manually installed on earlier Windows versions.
 
