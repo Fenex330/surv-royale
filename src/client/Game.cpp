@@ -5,7 +5,9 @@ bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
-Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close), slot (1)
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close),
+               server_port (surv::DEFAULT_PORT),
+               slot (1)
 {
     std::atexit(Game::cleanup);
 
@@ -80,7 +82,7 @@ void Game::run()
         ImGui::SFML::Render(window);
         window.display();
 
-        if (window.hasFocus() && isGameRunning)
+        /*if (window.hasFocus() && isGameRunning)
         {
             sendPlayerInput();
             receive();
@@ -89,7 +91,7 @@ void Game::run()
             float crossY = sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2.0 + main_player.sprite.getPosition().y;
             crosshair_distance = getDistance(crossX, main_player.sprite.getPosition().x, crossY, main_player.sprite.getPosition().y);
             crosshair.setPosition(crossX, crossY);
-        }
+        }*/
     }
 }
 
@@ -99,14 +101,22 @@ void Game::imguiMapUI()
     char buf2[64] = "";
     char buf3[64] = "";
 
+    if (isGameRunning)
+        return;
+
     ImGui::Begin("-");
     ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 0.0f), error.c_str());
     ImGui::InputText("nickname", buf1, 64);
     ImGui::InputText("server address", buf2, 64);
     ImGui::InputTextWithHint("password", "leave empty if none", buf3, 64, ImGuiInputTextFlags_Password);
 
-    if (ImGui::Button("PLAY!"))
+    if (ImGui::Button("PLAY!")
+    {
+        nickname = std::string(buf1);
+        server_address = std::string(buf2);
+        password = std::string(buf3);
         sendJoinRequest();
+    }
 
     ImGui::End();
 }
@@ -119,7 +129,7 @@ void Game::draw()
 
 void Game::sendJoinRequest()
 {
-    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << id;
+    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << id << password;
 
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
     if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}

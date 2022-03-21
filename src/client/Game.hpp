@@ -19,6 +19,7 @@ public:
     double crosshair_distance;
     unsigned short server_port;
     std::string nickname;
+    std::string password;
     std::map<std::string, Player> players;
 
     static bool isGameRunning;
