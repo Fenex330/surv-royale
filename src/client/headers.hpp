@@ -7,6 +7,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <cmath>
+#include <ctime>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>

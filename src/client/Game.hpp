@@ -15,6 +15,7 @@ public:
     sf::Packet packet;
     sf::IpAddress server_address;
     sf::Int8 slot;
+    sf::Int32 ID;
 
     double crosshair_distance;
     unsigned short server_port;
@@ -34,6 +35,7 @@ public:
     void run();
     void imguiMapUI();
     void draw();
+    void generateID();
 
     void sendJoinRequest();
     void sendPlayerInput();

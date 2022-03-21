@@ -16,7 +16,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     window.setMouseCursorVisible(true);
 
     ImGui::SFML::Init(window);
-
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
     FILE *f = fopen(GAMEDATA_PATH, "rb");
 
     fseek(f, 0, SEEK_END);
@@ -115,6 +115,7 @@ void Game::imguiMapUI()
         nickname = std::string(buf1);
         server_address = std::string(buf2);
         password = std::string(buf3);
+        generateID();
         sendJoinRequest();
     }
 
@@ -126,10 +127,23 @@ void Game::draw()
     window.draw(main_player.sprite);
     window.draw(crosshair);
 }
+#include <iostream>
+void generateID()
+{
+    ID = 0;
+
+    for (int i = 0; i < 9; i++)
+    {
+        ID += rand() % 9;
+        ID *= 10;
+    }
+
+    std::cout << ID;
+}
 
 void Game::sendJoinRequest()
 {
-    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << id << password;
+    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password;
 
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
     if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
@@ -142,7 +156,7 @@ void Game::sendPlayerInput()
     auto [R, L] = mainPlayerInputMouse();
     double rotation = mainPlayerInputRotation();
 
-    packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << id << x << y << R << L << rotation << slot << crosshair_distance;
+    packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << ID << x << y << R << L << rotation << slot << crosshair_distance;
 
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
     if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
