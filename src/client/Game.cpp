@@ -1,5 +1,6 @@
 #include "headers.hpp"
 
+bool Game::isGameRunning = false;
 bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
@@ -10,7 +11,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
 
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
-    window.setMouseCursorVisible(false);
+    window.setMouseCursorVisible(true);
 
     ImGui::SFML::Init(window);
 
@@ -43,6 +44,12 @@ Game::~Game()
     Game::cleanup();
 }
 
+Game::play()
+{
+    isGameRunning = true;
+    window.setMouseCursorVisible(false);
+}
+
 void Game::run()
 {
     while (window.isOpen() && !quit) // main game loop
@@ -65,7 +72,7 @@ void Game::run()
         }
 
         ImGui::SFML::Update(window, deltaClock.restart());
-        //imguiMapUI();
+        imguiMapUI();
 
         window.clear();
         window.setView(main_player.view);
@@ -73,7 +80,7 @@ void Game::run()
         ImGui::SFML::Render(window);
         window.display();
 
-        if (window.hasFocus())
+        if (window.hasFocus() && isGameRunning)
         {
             sendPlayerInput();
             receive();
@@ -88,8 +95,19 @@ void Game::run()
 
 void Game::imguiMapUI()
 {
-    ImGui::Begin("widget name");
-    // ...
+    char buf1[64] = "";
+    char buf2[64] = "";
+    char buf3[64] = "";
+
+    ImGui::Begin("-");
+    ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 0.0f), error.c_str());
+    ImGui::InputText("nickname", buf1, 64);
+    ImGui::InputText("server address", buf2, 64);
+    ImGui::InputTextWithHint("password", "leave empty if none", buf3, 64, ImGuiInputTextFlags_Password);
+
+    if (ImGui::Button("PLAY!"))
+        sendJoinRequest();
+
     ImGui::End();
 }
 
@@ -99,10 +117,13 @@ void Game::draw()
     window.draw(crosshair);
 }
 
-
 void Game::sendJoinRequest()
 {
-    //
+    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << id;
+
+    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
+    packet.clear();
 }
 
 void Game::sendPlayerInput()
@@ -111,9 +132,9 @@ void Game::sendPlayerInput()
     auto [R, L] = mainPlayerInputMouse();
     double rotation = mainPlayerInputRotation();
 
-    packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << x << y << R << L << rotation << slot << crosshair_distance;
-    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+    packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << id << x << y << R << L << rotation << slot << crosshair_distance;
 
+    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
     if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
     packet.clear();
 }

@@ -21,6 +21,7 @@ public:
     std::string nickname;
     std::map<std::string, Player> players;
 
+    static bool isGameRunning;
     static bool quit;
     static long tar_size;
     static char *tarFile;
@@ -28,6 +29,7 @@ public:
     Game();
     ~Game();
 
+    void play();
     void run();
     void imguiMapUI();
     void draw();
