@@ -20,15 +20,22 @@ namespace surv
     inline const unsigned int MAP_DIMENSION = 1000;
     inline const unsigned int MAX_PLAYERS = 100;
     inline const unsigned int MAX_BULLETS = 50000;
+
+    inline static
+    double getDistance(x1, x2, y1, y2)
+    {
+        return std::sqrt(std::pow((x1 - x2), 2) + std::pow((y1 - y2), 2));
+    }
 }
 
 enum class NetCodes
 {
     JoinRequest,
+    PlayerInput,
+
     JoinError,
     PlayersList,
     ProjectilesList,
     ObjectsList,
-    GameState,
-    PlayerInput
+    GameState
 };

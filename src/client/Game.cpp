@@ -4,7 +4,7 @@ bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
-Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close)
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close), slot (1)
 {
     std::atexit(Game::cleanup);
 
@@ -48,7 +48,7 @@ void Game::run()
     while (window.isOpen() && !quit) // main game loop
     {
         sf::Event event;
-        
+
         while (window.pollEvent(event)) // event handler loop
         {
             ImGui::SFML::ProcessEvent(window, event);
@@ -74,12 +74,13 @@ void Game::run()
         window.display();
 
         if (window.hasFocus())
-        {            
-            send();
+        {
+            sendPlayerInput();
             receive();
 
             float crossX = sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2.0 + main_player.sprite.getPosition().x;
             float crossY = sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2.0 + main_player.sprite.getPosition().y;
+            crosshair_distance = getDistance(crossX, main_player.sprite.getPosition().x, crossY, main_player.sprite.getPosition().y);
             crosshair.setPosition(crossX, crossY);
         }
     }
@@ -98,9 +99,23 @@ void Game::draw()
     window.draw(crosshair);
 }
 
-void Game::send()
+
+void Game::sendJoinRequest()
 {
-    sendMoveAndRotate();
+    //
+}
+
+void Game::sendPlayerInput()
+{
+    auto [x, y] = mainPlayerInputMovement();
+    auto [R, L] = mainPlayerInputMouse();
+    double rotation = mainPlayerInputRotation();
+
+    packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << x << y << R << L << rotation << slot << crosshair_distance;
+    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+
+    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
+    packet.clear();
 }
 
 void Game::receive()
@@ -121,8 +136,24 @@ void Game::receive()
 
     switch (netcode)
     {
+        case NetCodes::JoinError
+            receiveJoinError();
+            break;
+
         case NetCodes::PlayersList:
             receivePlayersList();
+            break;
+
+        case NetCodes::ProjectilesList:
+            receiveProjectilesList();
+            break;
+
+        case NetCodes::ObjectsList:
+            receiveObjectsList();
+            break;
+
+        case NetCodes::GameState:
+            receiveGameState();
             break;
 
         default:
@@ -132,16 +163,9 @@ void Game::receive()
     packet.clear();
 }
 
-void Game::sendMoveAndRotate()
+void Game::receiveJoinError()
 {
-    auto [x, y] = main_player.move();
-    double rotation = main_player.rotate(window);
-
-    packet << static_cast<sf::Uint8>(NetCodes::MoveAndRotate) << x << y << rotation;
-    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-
-    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
-    packet.clear();
+    //
 }
 
 void Game::receivePlayersList()
@@ -154,6 +178,56 @@ void Game::receivePlayersList()
         main_player.setPosition(x, y);
         main_player.setRotation(rotation);
     }
+}
+
+void receiveProjectilesList()
+{
+    //
+}
+
+void receiveObjectsList()
+{
+    //
+}
+
+void receiveGameState()
+{
+    //
+}
+
+std::pair<sf::Int8, sf::Int8> Game::mainPlayerInputMovement()
+{
+    sf::Int8 x = 0;
+    sf::Int8 y = 0;
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) y++;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) x--;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) y--;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) x++;
+
+    return std::make_pair(x, y);
+}
+
+std::pair<bool, bool> Game::mainPlayerInputMouse()
+{
+    return std::make_pair(sf::Mouse::isButtonPressed(sf::Mouse::Right),
+                          sf::Mouse::isButtonPressed(sf::Mouse::Left));
+}
+
+double Game::mainPlayerInputRotation()
+{
+    sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+    return std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2.0, mouse_position.x - surv::VIEW_DIM_X / 2.0) * (180.0 / surv::PI) + 90.0;
+}
+
+void Game::mainPlayerInputSlot()
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) slot = 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) slot = 2;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) slot = 3;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) slot = 4;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) slot = 5;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) slot = 6;
 }
 
 void Game::cleanup()

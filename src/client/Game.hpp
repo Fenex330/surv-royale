@@ -14,11 +14,13 @@ public:
     sf::Clock deltaClock;
     sf::Packet packet;
     sf::IpAddress server_address;
+    sf::Int8 slot;
 
+    double crosshair_distance;
     unsigned short server_port;
     std::string nickname;
     std::map<std::string, Player> players;
-    
+
     static bool quit;
     static long tar_size;
     static char *tarFile;
@@ -29,16 +31,27 @@ public:
     void run();
     void imguiMapUI();
     void draw();
-    void send();
+
+    void sendJoinRequest();
+    void sendPlayerInput();
+
     void receive();
-    void sendMoveAndRotate();
+    void receiveJoinError();
     void receivePlayersList();
-    
+    void receiveProjectilesList();
+    void receiveObjectsList();
+    void receiveGameState();
+
+    void mainPlayerInputMovement();
+    void mainPlayerInputMouse();
+    void mainPlayerInputRotation();
+    void mainPlayerInputSlot();
+
     static void cleanup();
 
-    template <class T> inline static
+    template <class T> static
     void loadAsset(T &asset, const char *path)
-    {   
+    {
         long file_size = 0;
         const char *asset_file = dxTarRead(tarFile, tar_size, path, &file_size);
 

@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <cassert>
+#include <cmath>
 #include <SFML/Network.hpp>
 
 #include "../config.hpp"

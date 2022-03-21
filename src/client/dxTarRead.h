@@ -13,7 +13,7 @@ LICENSE:
 #ifndef DX_TAR_READ_H
 #define DX_TAR_READ_H
 
-static const char* dxTarRead(const void* tarData, const long tarSize, 
+static const char* dxTarRead(const void* tarData, const long tarSize,
                       const char* fileName, long* fileSize)
 {
     const int NAME_OFFSET = 0, SIZE_OFFSET = 124, MAGIC_OFFSET = 257;
@@ -21,7 +21,7 @@ static const char* dxTarRead(const void* tarData, const long tarSize,
     const char MAGIC[] = "ustar"; /* Modern GNU tar's magic const */
     const char* tar = (const char*) tarData; /* From "void*" to "char*" */
     long size, mul, i, p = 0, found = 0, newOffset = 0;
-    
+
     *fileSize = 0; /* will be zero if TAR wrong or there is no such file */
     do { /* "Load" data from tar - just point to passed memory*/
         const char* name = tar + NAME_OFFSET + p + newOffset;
