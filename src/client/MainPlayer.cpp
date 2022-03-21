@@ -12,14 +12,17 @@ void MainPlayer::setPosition(int x, int y)
     view.setCenter(x * surv::DEFAULT_PLAYER_SPEED, y * surv::DEFAULT_PLAYER_SPEED);
 }
 
-std::tuple<bool, bool, bool, bool> MainPlayer::move()
+std::pair<sf::Int8, sf::Int8> MainPlayer::move()
 {
-    bool w = sf::Keyboard::isKeyPressed(sf::Keyboard::W)
-    bool a = sf::Keyboard::isKeyPressed(sf::Keyboard::A)
-    bool s = sf::Keyboard::isKeyPressed(sf::Keyboard::S)
-    bool d = sf::Keyboard::isKeyPressed(sf::Keyboard::D)
+    sf::Int8 x = 0;
+    sf::Int8 y = 0;
 
-    return std::make_tuple(w,a,s,d);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) y++;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) x--;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) y--;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) x++;
+
+    return std::make_pair(x, y);
 }
 
 double MainPlayer::rotate(const sf::RenderWindow &window)
