@@ -22,7 +22,7 @@ void Game::run()
 {
     while (!quit)
     {
-        broadcast();
+        send();
         listen();
     }
 }
