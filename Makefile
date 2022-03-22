@@ -48,6 +48,7 @@ install:
 	mkdir $(SHARE_PATH)
 	tar -cf $(SHARE_PATH)/GameData.tar GameData &
 	cp server.conf $(SHARE_PATH) &
+	cp banlist.txt $(SHARE_PATH) &
 	cp LICENSE.txt $(SHARE_PATH) &
 	cp CHANGELOG.txt $(SHARE_PATH) &
 	cp surv-royale-client $(BIN_PATH) &
