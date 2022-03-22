@@ -11,6 +11,7 @@ public:
     sf::Packet packet;
 
     std::unordered_map<std::string, Player> players;
+    std::vector<Player> players_pool (surv::MAX_PLAYERS);
 
     static bool quit;
 

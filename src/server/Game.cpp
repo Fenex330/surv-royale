@@ -58,7 +58,24 @@ void Game::listen()
 
 void Game::receiveJoinRequest()
 {
-    //
+    std::string nickname;
+    packet >> nickname;
+
+    if (players.find(nickname) != players.end())
+    {
+        sendJoinError(ErrorCodes::NicknameExists);
+        return;
+    }
+
+    if (players.size() >= surv::MAX_PLAYERS)
+    {
+        sendJoinError(ErrorCodes::MapFull);
+        return;
+    }
+
+    players.insert(std::make_pair(nickname, std::move(player_pool.back())));
+    player_pool.pop_back();
+    packet >> players.at(nickname).ID
 }
 
 void Game::receivePlayerInput()
@@ -81,7 +98,7 @@ void Game::send()
     packet.clear();
 }
 
-void Game::sendJoinError()
+void Game::sendJoinError(ErrorCodes)
 {
     send();
 }
