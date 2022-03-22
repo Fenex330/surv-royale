@@ -85,9 +85,6 @@ void Game::run()
 
         /*if (window.hasFocus() && isGameRunning)
         {
-            sendPlayerInput();
-            receive();
-
             float crossX = sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2.0 + main_player.sprite.getPosition().x;
             float crossY = sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2.0 + main_player.sprite.getPosition().y;
             crosshair_distance = getDistance(crossX, main_player.sprite.getPosition().x, crossY, main_player.sprite.getPosition().y);
@@ -145,7 +142,7 @@ void Game::generateID()
     }
 }
 
-void Game::sendPacket()
+void Game::send()
 {
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
     if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
@@ -155,7 +152,7 @@ void Game::sendPacket()
 void Game::sendJoinRequest()
 {
     packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password;
-    sendPacket();
+    send();
 }
 
 void Game::sendPlayerInput()
@@ -165,10 +162,10 @@ void Game::sendPlayerInput()
     double rotation = mainPlayerInputRotation();
 
     packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << ID << x << y << R << L << rotation << slot << crosshair_distance;
-    sendPacket();
+    send();
 }
 
-void Game::receive()
+void Game::listen()
 {
     // unused placeholders
     sf::IpAddress remote_address;

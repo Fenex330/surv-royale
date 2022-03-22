@@ -37,11 +37,11 @@ public:
     void draw();
     void generateID();
 
-    void sendPacket();
+    void send();
     void sendJoinRequest();
     void sendPlayerInput();
 
-    void receive();
+    void listen();
     void receiveJoinError();
     void receivePlayersList();
     void receiveProjectilesList();

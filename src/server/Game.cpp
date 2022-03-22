@@ -22,12 +22,12 @@ void Game::run()
 {
     while (!quit)
     {
-        send();
-        receive();
+        broadcast();
+        listen();
     }
 }
 
-void Game::receive()
+void Game::listen()
 {
     sf::IpAddress remote_address;
     unsigned short remote_port;
@@ -56,12 +56,12 @@ void Game::receive()
     packet.clear();
 }
 
-void receiveJoinRequest()
+void Game::receiveJoinRequest()
 {
     //
 }
 
-void receivePlayerInput()
+void Game::receivePlayerInput()
 {
     //
 }
@@ -74,36 +74,36 @@ void Game::broadcast()
     void sendGameState();
 }
 
-void Game::sendPacket()
+void Game::send()
 {
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
     //if (UDPsocket.send(packet, client_address, client_port) != sf::Socket::Done) {}
     packet.clear();
 }
 
-void sendJoinError()
+void Game::sendJoinError()
 {
-    sendPacket();
+    send();
 }
 
-void sendPlayersList()
+void Game::sendPlayersList()
 {
-    sendPacket();
+    send();
 }
 
-void sendProjectilesList()
+void Game::sendProjectilesList()
 {
-    sendPacket();
+    send();
 }
 
-void sendObjectsList()
+void Game::sendObjectsList()
 {
-    sendPacket();
+    send();
 }
 
-void sendGameState()
+void Game::sendGameState()
 {
-    sendPacket();
+    send();
 }
 
 void Game::cleanup()

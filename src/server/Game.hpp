@@ -18,12 +18,12 @@ public:
     ~Game();
 
     void run();
-    void receive();
+    void listen();
     void receiveJoinRequest();
     void receivePlayerInput();
 
     void broadcast();
-    void sendPacket();
+    void send();
     void sendJoinError();
     void sendPlayersList();
     void sendProjectilesList();
