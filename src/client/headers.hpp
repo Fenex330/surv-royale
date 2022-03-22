@@ -11,6 +11,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
+#include <SFML/Audio.hpp>
 
 #include "imgui/imgui.h"
 #include "imgui/imgui-SFML.h"

@@ -140,7 +140,7 @@ void Game::generateID()
 
     for (int i = 0; i < 8; i++)
     {
-        ID += rand() % 10;
+        ID += std::rand() % 10;
         ID *= 10;
     }
 }
