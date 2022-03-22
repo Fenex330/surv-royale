@@ -1,6 +1,6 @@
 #include "headers.hpp"
 
-void MainPlayer::MainPlayer()
+MainPlayer::MainPlayer()
 {
     view.setSize(surv::VIEW_DIM_X, surv::VIEW_DIM_Y);
     view.setCenter(sprite.getPosition().x, sprite.getPosition().y);

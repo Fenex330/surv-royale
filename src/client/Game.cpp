@@ -1,15 +1,16 @@
 #include "headers.hpp"
-
+#include <iostream>
 bool Game::isGameRunning = false;
 bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
-Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close),
-               server_port (surv::DEFAULT_PORT),
-               slot (1)
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close)
 {
     std::atexit(Game::cleanup);
+
+    server_port = surv::DEFAULT_PORT;
+    slot = 1;
 
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
@@ -46,7 +47,7 @@ Game::~Game()
     Game::cleanup();
 }
 
-Game::play()
+void Game::play()
 {
     isGameRunning = true;
     window.setMouseCursorVisible(false);
@@ -77,7 +78,7 @@ void Game::run()
         imguiMapUI();
 
         window.clear();
-        window.setView(main_player.view);
+        //window.setView(main_player.view);
         draw();
         ImGui::SFML::Render(window);
         window.display();
@@ -97,20 +98,20 @@ void Game::run()
 
 void Game::imguiMapUI()
 {
-    char buf1[64] = "";
-    char buf2[64] = "";
-    char buf3[64] = "";
+    static char buf1[64] = "";
+    static char buf2[64] = "";
+    static char buf3[64] = "";
 
     if (isGameRunning)
         return;
 
     ImGui::Begin("-");
-    ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 0.0f), error.c_str());
+    //ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 0.0f), error.c_str());
     ImGui::InputText("nickname", buf1, 64);
     ImGui::InputText("server address", buf2, 64);
     ImGui::InputTextWithHint("password", "leave empty if none", buf3, 64, ImGuiInputTextFlags_Password);
 
-    if (ImGui::Button("PLAY!")
+    if (ImGui::Button("PLAY!"))
     {
         nickname = std::string(buf1);
         server_address = std::string(buf2);
@@ -124,15 +125,15 @@ void Game::imguiMapUI()
 
 void Game::draw()
 {
-    window.draw(main_player.sprite);
+    //window.draw(main_player.sprite);
     window.draw(crosshair);
 }
-#include <iostream>
-void generateID()
+
+void Game::generateID()
 {
     ID = 0;
 
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < 8; i++)
     {
         ID += rand() % 9;
         ID *= 10;
@@ -181,7 +182,7 @@ void Game::receive()
 
     switch (netcode)
     {
-        case NetCodes::JoinError
+        case NetCodes::JoinError:
             receiveJoinError();
             break;
 
@@ -220,22 +221,22 @@ void Game::receivePlayersList()
 
     if (packet >> x >> y >> rotation)
     {
-        main_player.setPosition(x, y);
-        main_player.setRotation(rotation);
+        //main_player.setPosition(x, y);
+        //main_player.setRotation(rotation);
     }
 }
 
-void receiveProjectilesList()
+void Game::receiveProjectilesList()
 {
     //
 }
 
-void receiveObjectsList()
+void Game::receiveObjectsList()
 {
     //
 }
 
-void receiveGameState()
+void Game::receiveGameState()
 {
     //
 }

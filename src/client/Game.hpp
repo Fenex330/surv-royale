@@ -47,9 +47,9 @@ public:
     void receiveObjectsList();
     void receiveGameState();
 
-    void mainPlayerInputMovement();
-    void mainPlayerInputMouse();
-    void mainPlayerInputRotation();
+    std::pair<sf::Int8, sf::Int8> mainPlayerInputMovement();
+    std::pair<bool, bool> mainPlayerInputMouse();
+    double mainPlayerInputRotation();
     void mainPlayerInputSlot();
 
     static void cleanup();
