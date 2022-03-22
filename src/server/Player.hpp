@@ -7,10 +7,11 @@ class Player
     public:
         bool active;
         sf::IpAddress address;
-        unsigned short server_port;
+        unsigned short port;
+        unsigned short slot;
+        double rotation;
         int x;
         int y;
-        double rotation;
 
         Player();
 };

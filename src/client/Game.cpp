@@ -147,8 +147,8 @@ void Game::generateID()
 
 void Game::sendPacket()
 {
-    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize); \
-    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {} \
+    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
     packet.clear();
 }
 

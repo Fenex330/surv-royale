@@ -10,7 +10,7 @@ public:
     sf::TcpSocket TCPsocket;
     sf::Packet packet;
 
-    std::map<std::string, Player> players;
+    std::unordered_map<std::string, Player> players;
 
     static bool quit;
 
@@ -18,10 +18,17 @@ public:
     ~Game();
 
     void run();
-    void send();
     void receive();
+    void receiveJoinRequest();
+    void receivePlayerInput();
+
+    void broadcast();
+    void sendPacket();
+    void sendJoinError();
     void sendPlayersList();
-    void receiveMoveAndRotate();
+    void sendProjectilesList();
+    void sendObjectsList();
+    void sendGameState();
 
     static void cleanup();
 };

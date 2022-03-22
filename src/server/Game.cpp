@@ -9,10 +9,8 @@ Game::Game()
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
-    if (UDPsocket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
+    if (UDPsocket.bind(surv::DEFAULT_PORT) != sf::Socket::Done)
         std::exit(1);
-
-    //local_port = UDPsocket.getLocalPort();
 }
 
 Game::~Game()
@@ -29,11 +27,6 @@ void Game::run()
     }
 }
 
-void Game::send()
-{
-    sendPlayersList();
-}
-
 void Game::receive()
 {
     sf::IpAddress remote_address;
@@ -48,8 +41,12 @@ void Game::receive()
 
     switch (netcode)
     {
-        case NetCodes::MoveAndRotate:
-            receiveMoveAndRotate();
+        case NetCodes::JoinRequest:
+            receiveJoinRequest();
+            break;
+
+        case NetCodes::PlayerInput:
+            receivePlayerInput();
             break;
 
         default:
@@ -59,17 +56,54 @@ void Game::receive()
     packet.clear();
 }
 
-void Game::sendPlayersList()
+void receiveJoinRequest()
 {
-    packet << static_cast<sf::Uint8>(NetCodes::PlayersList) << x << y << rotation;
+    //
+}
+
+void receivePlayerInput()
+{
+    //
+}
+
+void Game::broadcast()
+{
+    void sendPlayersList();
+    void sendProjectilesList();
+    void sendObjectsList();
+    void sendGameState();
+}
+
+void Game::sendPacket()
+{
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    if (UDPsocket.send(packet, address, port) != sf::Socket::Done) {}
+    //if (UDPsocket.send(packet, client_address, client_port) != sf::Socket::Done) {}
     packet.clear();
 }
 
-void Game::receiveMoveAndRotate()
+void sendJoinError()
 {
-    packet >> x >> y >> rotation;
+    sendPacket();
+}
+
+void sendPlayersList()
+{
+    sendPacket();
+}
+
+void sendProjectilesList()
+{
+    sendPacket();
+}
+
+void sendObjectsList()
+{
+    sendPacket();
+}
+
+void sendGameState()
+{
+    sendPacket();
 }
 
 void Game::cleanup()
@@ -79,6 +113,5 @@ void Game::cleanup()
     if (isCleaned) // to make sure cleanup happens only once
         return;
 
-    // ...
     isCleaned = true;
 }
