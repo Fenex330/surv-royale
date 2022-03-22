@@ -52,7 +52,7 @@ void Game::play()
 {
     isGameRunning = true;
     window.setMouseCursorVisible(false);
-    players.insert(std::make_pair(nickname, main_player));
+    players.insert(std::make_pair(nickname, MainPlayer()));
 }
 
 void Game::run()

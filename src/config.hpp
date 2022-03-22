@@ -57,4 +57,4 @@ enum class ErrorCodes
     IpBan,
     InvalidPassword,
     NicknameExists
-}
+};

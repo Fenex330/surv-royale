@@ -42,7 +42,7 @@ void Game::listen()
     switch (netcode)
     {
         case NetCodes::JoinRequest:
-            receiveJoinRequest();
+            receiveJoinRequest(remote_address, remote_port);
             break;
 
         case NetCodes::PlayerInput:
@@ -56,7 +56,7 @@ void Game::listen()
     packet.clear();
 }
 
-void Game::receiveJoinRequest()
+void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 {
     std::string nickname;
     packet >> nickname;
@@ -73,9 +73,11 @@ void Game::receiveJoinRequest()
         return;
     }
 
-    players.insert(std::make_pair(nickname, std::move(player_pool.back())));
-    player_pool.pop_back();
-    packet >> players.at(nickname).ID
+    players.insert(std::make_pair(nickname, Player()));
+    packet >> players.at(nickname).ID;
+    players.at(nickname).address = address;
+    players.at(nickname).port = port;
+    std::cout << "player " << nickname << " joined the game" << std::endl;
 }
 
 void Game::receivePlayerInput()
@@ -98,7 +100,7 @@ void Game::send()
     packet.clear();
 }
 
-void Game::sendJoinError(ErrorCodes)
+void Game::sendJoinError(ErrorCodes code)
 {
     send();
 }

@@ -23,8 +23,6 @@ public:
     std::string password;
     std::string join_error;
     std::unordered_map<std::string, Player> players;
-    std::vector<Player> players_pool (surv::MAX_PLAYERS - 1);
-    MainPlayer main_player;
 
     static bool isGameRunning;
     static bool quit;
