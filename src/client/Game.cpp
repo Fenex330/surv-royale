@@ -1,5 +1,5 @@
 #include "headers.hpp"
-#include <iostream>
+
 bool Game::isGameRunning = false;
 bool Game::quit = false;
 long Game::tar_size = 0;
@@ -105,7 +105,7 @@ void Game::imguiMapUI()
     if (isGameRunning)
         return;
 
-    ImGui::Begin("-");
+    ImGui::Begin("Main Menu");
     //ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 0.0f), error.c_str());
     ImGui::InputText("nickname", buf1, 64);
     ImGui::InputText("server address", buf2, 64);
@@ -118,6 +118,11 @@ void Game::imguiMapUI()
         password = std::string(buf3);
         generateID();
         sendJoinRequest();
+    }
+
+    if (ImGui::Button("QUIT"))
+    {
+        window.close();
     }
 
     ImGui::End();
@@ -135,11 +140,9 @@ void Game::generateID()
 
     for (int i = 0; i < 8; i++)
     {
-        ID += rand() % 9;
+        ID += rand() % 10;
         ID *= 10;
     }
-
-    std::cout << ID;
 }
 
 void Game::sendJoinRequest()
