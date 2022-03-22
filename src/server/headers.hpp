@@ -8,5 +8,5 @@
 #include <SFML/Network.hpp>
 
 #include "../config.hpp"
-#include "Game.hpp"
 #include "Player.hpp"
+#include "Game.hpp"
