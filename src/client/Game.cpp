@@ -145,13 +145,17 @@ void Game::generateID()
     }
 }
 
+void Game::sendPacket()
+{
+    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize); \
+    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {} \
+    packet.clear();
+}
+
 void Game::sendJoinRequest()
 {
     packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password;
-
-    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
-    packet.clear();
+    sendPacket();
 }
 
 void Game::sendPlayerInput()
@@ -161,14 +165,12 @@ void Game::sendPlayerInput()
     double rotation = mainPlayerInputRotation();
 
     packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << ID << x << y << R << L << rotation << slot << crosshair_distance;
-
-    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
-    packet.clear();
+    sendPacket();
 }
 
 void Game::receive()
 {
+    // unused placeholders
     sf::IpAddress remote_address;
     unsigned short remote_port;
 
@@ -178,7 +180,6 @@ void Game::receive()
     if (remote_address != server_address)
         return;
 
-    server_port = remote_port;
     sf::Uint8 netcode_raw;
     packet >> netcode_raw;
     NetCodes netcode = static_cast<NetCodes>(netcode_raw);

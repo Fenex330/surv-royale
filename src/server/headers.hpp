@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <cassert>
 #include <cmath>
 #include <SFML/Network.hpp>

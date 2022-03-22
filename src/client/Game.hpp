@@ -21,7 +21,7 @@ public:
     unsigned short server_port;
     std::string nickname;
     std::string password;
-    std::map<std::string, Player> players;
+    std::unordered_map<std::string, Player> players;
 
     static bool isGameRunning;
     static bool quit;
@@ -37,6 +37,7 @@ public:
     void draw();
     void generateID();
 
+    void sendPacket();
     void sendJoinRequest();
     void sendPlayerInput();
 
