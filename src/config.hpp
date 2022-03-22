@@ -22,11 +22,20 @@ namespace surv
     inline const unsigned int MAX_BULLETS = 50000;
 
     inline static
-    double getDistance(float x1, float x2, float y1, float y2)
+    float getDistance(float x1, float x2, float y1, float y2)
     {
         return std::sqrt(std::pow((x1 - x2), 2) + std::pow((y1 - y2), 2));
     }
 }
+
+/*
+client-server handshake:
+  1. client sends join request
+  2. server replies back with 4 arrays (if successfull) (in loop) or error code (if unsuccessfull) (once)
+  3. if receives arrays - client loads the game
+  4. if receives error code - client displays it in message box
+  5. after game load client should only send keyboard & mouse input state + chat message if any
+*/
 
 enum class NetCodes
 {

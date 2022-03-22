@@ -76,15 +76,16 @@ void Game::run()
 
         ImGui::SFML::Update(window, deltaClock.restart());
         imguiMapUI();
-
         window.clear();
         //window.setView(main_player.view);
         draw();
         ImGui::SFML::Render(window);
         window.display();
+        listen();
 
         /*if (window.hasFocus() && isGameRunning)
         {
+            sendPlayerInput();
             float crossX = sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2.0 + main_player.sprite.getPosition().x;
             float crossY = sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2.0 + main_player.sprite.getPosition().y;
             crosshair_distance = getDistance(crossX, main_player.sprite.getPosition().x, crossY, main_player.sprite.getPosition().y);
@@ -151,7 +152,7 @@ void Game::send()
 
 void Game::sendJoinRequest()
 {
-    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password;
+    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password.empty() << password;
     send();
 }
 
@@ -217,6 +218,9 @@ void Game::receiveJoinError()
 
 void Game::receivePlayersList()
 {
+    if (!isGameRunning)
+        play();
+
     sf::Int8 x, y;
     double rotation;
 
