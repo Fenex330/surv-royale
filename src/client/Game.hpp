@@ -17,11 +17,13 @@ public:
     sf::Int8 slot;
     sf::Int32 ID;
 
-    double crosshair_distance;
+    float crosshair_distance;
     unsigned short server_port;
     std::string nickname;
     std::string password;
+    std::string join_error;
     std::unordered_map<std::string, Player> players;
+    MainPlayer main_player;
 
     static bool isGameRunning;
     static bool quit;

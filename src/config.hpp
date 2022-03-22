@@ -48,3 +48,11 @@ enum class NetCodes
     ObjectsList,
     GameState
 };
+
+enum class ErrorCodes
+{
+    MapFull,
+    IpBan,
+    InvalidPassword,
+    NicknameExists
+}

@@ -10,6 +10,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     std::atexit(Game::cleanup);
 
     server_port = surv::DEFAULT_PORT;
+    crosshair_distance = 0.0;
     slot = 1;
 
     window.setVerticalSyncEnabled(true);
@@ -51,6 +52,7 @@ void Game::play()
 {
     isGameRunning = true;
     window.setMouseCursorVisible(false);
+    players.insert(std::make_pair(nickname, main_player));
 }
 
 void Game::run()
@@ -96,15 +98,15 @@ void Game::run()
 
 void Game::imguiMapUI()
 {
+    if (isGameRunning)
+        return;
+
     static char buf1[64] = "";
     static char buf2[64] = "";
     static char buf3[64] = "";
 
-    if (isGameRunning)
-        return;
-
     ImGui::Begin("Main Menu");
-    //ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 0.0f), error.c_str());
+    ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 0.0f), join_error.c_str());
     ImGui::InputText("nickname", buf1, 64);
     ImGui::InputText("server address", buf2, 64);
     ImGui::InputTextWithHint("password", "leave empty if none", buf3, 64, ImGuiInputTextFlags_Password);
@@ -120,7 +122,7 @@ void Game::imguiMapUI()
 
     if (ImGui::Button("QUIT"))
     {
-        window.close();
+        quit = true;
     }
 
     ImGui::End();
@@ -136,7 +138,7 @@ void Game::generateID()
 {
     ID = 0;
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 1; i < 9; i++)
     {
         ID += std::rand() % 10;
         ID *= 10;
@@ -213,7 +215,31 @@ void Game::listen()
 
 void Game::receiveJoinError()
 {
-    //
+    sf::Uint8 errorcode_raw;
+    packet >> errorcode_raw;
+    ErrorCodes errorcode = static_cast<ErrorCodes>(errorcode_raw);
+
+    switch (errorcode)
+    {
+        case ErrorCodes::MapFull:
+            join_error = "game is full";
+            break;
+
+        case ErrorCodes::IpBan:
+            join_error = "you have been banned from this server";
+            break;
+
+        case ErrorCodes::InvalidPassword:
+            join_error = "invalid password";
+            break;
+
+        case ErrorCodes::NicknameExists:
+            join_error = "nickname already exists";
+            break;
+
+        default:
+            break;
+    }
 }
 
 void Game::receivePlayersList()
@@ -221,13 +247,19 @@ void Game::receivePlayersList()
     if (!isGameRunning)
         play();
 
-    sf::Int8 x, y;
+    sf::Int16 n;
+    sf::Int16 x, y;
     double rotation;
 
-    if (packet >> x >> y >> rotation)
+    packet >> n;
+
+    for (int i = 1; i < n; i++)
     {
-        //main_player.setPosition(x, y);
-        //main_player.setRotation(rotation);
+        if (packet >> nickname >> x >> y >> rotation)
+        {
+            players[nickname].setPosition(x, y);
+            players[nickname].setRotation(rotation);
+        }
     }
 }
 
