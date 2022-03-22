@@ -24,7 +24,7 @@ public:
 
     void broadcast();
     void send();
-    void sendJoinError(ErrorCodes code);
+    void sendJoinError(ErrorCodes code, std::string nickname);
     void sendPlayersList();
     void sendProjectilesList();
     void sendObjectsList();

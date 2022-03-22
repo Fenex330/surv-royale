@@ -63,13 +63,13 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 
     if (players.find(nickname) != players.end())
     {
-        sendJoinError(ErrorCodes::NicknameExists);
+        sendJoinError(ErrorCodes::NicknameExists, nickname);
         return;
     }
 
     if (players.size() >= surv::MAX_PLAYERS)
     {
-        sendJoinError(ErrorCodes::MapFull);
+        sendJoinError(ErrorCodes::MapFull, nickname);
         return;
     }
 
@@ -87,42 +87,45 @@ void Game::receivePlayerInput()
 
 void Game::broadcast()
 {
+    //assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+    //if (UDPsocket.send(packet, client_address, client_port) != sf::Socket::Done) {}
+    //packet.clear();
+}
+
+void Game::send()
+{
     void sendPlayersList();
     void sendProjectilesList();
     void sendObjectsList();
     void sendGameState();
 }
 
-void Game::send()
+void Game::sendJoinError(ErrorCodes code, std::string nickname)
 {
+    packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(code);
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    //if (UDPsocket.send(packet, client_address, client_port) != sf::Socket::Done) {}
+    if (UDPsocket.send(packet, players.at(nickname).address, players.at(nickname).port) != sf::Socket::Done) {}
     packet.clear();
-}
-
-void Game::sendJoinError(ErrorCodes code)
-{
-    send();
 }
 
 void Game::sendPlayersList()
 {
-    send();
+    broadcast();
 }
 
 void Game::sendProjectilesList()
 {
-    send();
+    broadcast();
 }
 
 void Game::sendObjectsList()
 {
-    send();
+    broadcast();
 }
 
 void Game::sendGameState()
 {
-    send();
+    broadcast();
 }
 
 void Game::cleanup()
