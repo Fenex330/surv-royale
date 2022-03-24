@@ -78,7 +78,6 @@ void Game::run()
         ImGui::SFML::Update(window, deltaClock.restart());
         imguiMapUI();
         window.clear();
-        window.setView(players.at(nickname).view);
         draw();
         ImGui::SFML::Render(window);
         window.display();
@@ -86,11 +85,11 @@ void Game::run()
 
         if (window.hasFocus() && isGameRunning)
         {
-            sendPlayerInput();
             float crossX = sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2.0 + players.at(nickname).sprite.getPosition().x;
             float crossY = sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2.0 + players.at(nickname).sprite.getPosition().y;
             crosshair_distance = surv::getDistance(crossX, players.at(nickname).sprite.getPosition().x, crossY, players.at(nickname).sprite.getPosition().y);
             crosshair.setPosition(crossX, crossY);
+            sendPlayerInput();
         }
     }
 }
@@ -129,8 +128,12 @@ void Game::imguiMapUI()
 
 void Game::draw()
 {
-    window.draw(players.at(nickname).sprite);
-    window.draw(crosshair);
+    if (isGameRunning)
+    {
+        window.setView(players.at(nickname).view);
+        window.draw(players.at(nickname).sprite);
+        window.draw(crosshair);
+    }
 }
 
 void Game::generateID()
@@ -162,6 +165,7 @@ void Game::sendPlayerInput()
     auto [x, y] = mainPlayerInputMovement();
     auto [R, L] = mainPlayerInputMouse();
     double rotation = mainPlayerInputRotation();
+    mainPlayerInputSlot();
 
     packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << ID << x << y << R << L << rotation << slot << crosshair_distance;
     send();
