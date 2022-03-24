@@ -6,6 +6,8 @@ Game::Game()
 {
     std::atexit(Game::cleanup);
 
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
@@ -82,22 +84,41 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 
 void Game::receivePlayerInput()
 {
-    //
+    std::string nickname;
+    sf::Int32 ID;
+
+    packet >> nickname >> ID;
+
+    if (players.find(nickname) == players.end())
+        return;
+
+    if (players.at(nickname).ID != ID)
+        return;
+
+    sf::Int8 x, y, slot;
+    bool R, L;
+    double rotation;
+    float crosshair_distance;
+
+    packet >> x >> y >> R >> L >> rotation >> slot >> crosshair_distance;
 }
 
 void Game::broadcast()
 {
-    //assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    //if (UDPsocket.send(packet, client_address, client_port) != sf::Socket::Done) {}
-    //packet.clear();
+    for(const auto& n : players)
+    {
+        assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+        if (UDPsocket.send(packet, n.second.address, n.second.port) != sf::Socket::Done) {}
+        packet.clear();
+    }
 }
 
 void Game::send()
 {
     void sendPlayersList();
-    void sendProjectilesList();
-    void sendObjectsList();
-    void sendGameState();
+    //void sendProjectilesList();
+    //void sendObjectsList();
+    //void sendGameState();
 }
 
 void Game::sendJoinError(ErrorCodes code, std::string nickname)
@@ -110,6 +131,9 @@ void Game::sendJoinError(ErrorCodes code, std::string nickname)
 
 void Game::sendPlayersList()
 {
+    for(const auto& n : players)
+        packet << n.first << n.second.x << n.second.y << n.second.rotation;
+
     broadcast();
 }
 

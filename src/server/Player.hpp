@@ -12,8 +12,8 @@ class Player
         unsigned short slot;
         double rotation;
         float crosshair_distance;
-        int x;
-        int y;
+        sf::Int16 x;
+        sf::Int16 y;
 
         Player();
 };

@@ -10,6 +10,7 @@ class Player
     public:
         bool active;
         sf::Sprite sprite;
+        sf::View view;
 
         Player();
         virtual ~Player() {}

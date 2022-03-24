@@ -5,8 +5,6 @@
 class MainPlayer : public Player
 {
     public:
-        sf::View view;
-
         MainPlayer();
         virtual ~MainPlayer() {}
 

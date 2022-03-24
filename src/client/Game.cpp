@@ -5,13 +5,12 @@ bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
-Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close)
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close),
+               server_port (surv::DEFAULT_PORT),
+               crosshair_distance (0.0),
+               slot (1)
 {
     std::atexit(Game::cleanup);
-
-    server_port = surv::DEFAULT_PORT;
-    crosshair_distance = 0.0;
-    slot = 1;
 
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
@@ -79,20 +78,20 @@ void Game::run()
         ImGui::SFML::Update(window, deltaClock.restart());
         imguiMapUI();
         window.clear();
-        //window.setView(main_player.view);
+        window.setView(players.at(nickname).view);
         draw();
         ImGui::SFML::Render(window);
         window.display();
         listen();
 
-        /*if (window.hasFocus() && isGameRunning)
+        if (window.hasFocus() && isGameRunning)
         {
             sendPlayerInput();
-            float crossX = sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2.0 + main_player.sprite.getPosition().x;
-            float crossY = sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2.0 + main_player.sprite.getPosition().y;
-            crosshair_distance = getDistance(crossX, main_player.sprite.getPosition().x, crossY, main_player.sprite.getPosition().y);
+            float crossX = sf::Mouse::getPosition(window).x - surv::VIEW_DIM_X / 2.0 + players.at(nickname).sprite.getPosition().x;
+            float crossY = sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2.0 + players.at(nickname).sprite.getPosition().y;
+            crosshair_distance = surv::getDistance(crossX, players.at(nickname).sprite.getPosition().x, crossY, players.at(nickname).sprite.getPosition().y);
             crosshair.setPosition(crossX, crossY);
-        }*/
+        }
     }
 }
 
@@ -130,7 +129,7 @@ void Game::imguiMapUI()
 
 void Game::draw()
 {
-    //window.draw(main_player.sprite);
+    window.draw(players.at(nickname).sprite);
     window.draw(crosshair);
 }
 
@@ -247,19 +246,15 @@ void Game::receivePlayersList()
     if (!isGameRunning)
         play();
 
-    sf::Int16 n;
+    std::string nick;
     sf::Int16 x, y;
     double rotation;
 
-    packet >> n;
-
-    for (int i = 1; i < n; i++)
+    while (packet >> nick >> x >> y >> rotation)
     {
-        if (packet >> nickname >> x >> y >> rotation)
-        {
-            players[nickname].setPosition(x, y);
-            players[nickname].setRotation(rotation);
-        }
+        players.insert({nick, Player()});
+        players.at(nick).setPosition(x, y);
+        players.at(nick).setRotation(rotation);
     }
 }
 

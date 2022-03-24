@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -pedantic-errors
-DEBUG_FLAGS = -O0 -g -Wall -Wextra -ftrapv
+DEBUG_FLAGS = -O0 -g -Wall -Wextra -Wno-reorder -ftrapv
 RELEASE_FLAGS = -O3 -DNDEBUG
 RELEASE_MAX_FLAGS = -Ofast -march=native -DNDEBUG
 LIBS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -lGL
