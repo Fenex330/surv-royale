@@ -67,7 +67,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    if (players.size() >= surv::MAX_PLAYERS)
+    if (players.size() >= surv::MAX_PLAYERS) // || time elapsed > n seconds
     {
         sendJoinError(ErrorCodes::MapFull, nickname);
         return;
