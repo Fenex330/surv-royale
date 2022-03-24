@@ -105,12 +105,14 @@ void Game::receivePlayerInput()
 
 void Game::broadcast()
 {
+    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+
     for(const auto& n : players)
     {
-        assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
         if (UDPsocket.send(packet, n.second.address, n.second.port) != sf::Socket::Done) {}
-        packet.clear();
     }
+
+    packet.clear();
 }
 
 void Game::send()
@@ -131,6 +133,8 @@ void Game::sendJoinError(ErrorCodes code, std::string nickname)
 
 void Game::sendPlayersList()
 {
+    packet << static_cast<sf::Uint8>(NetCodes::PlayersList);
+
     for(const auto& n : players)
         packet << n.first << n.second.x << n.second.y << n.second.rotation;
 
