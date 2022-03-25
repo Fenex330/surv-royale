@@ -24,6 +24,10 @@ public:
     std::string join_error;
     std::unordered_map<std::string, Player> players;
 
+    std::random_device dev;
+    std::mt19937 rng;
+    std::uniform_int_distribution<std::mt19937::result_type> dist;
+
     static bool isGameRunning;
     static bool quit;
     static long tar_size;

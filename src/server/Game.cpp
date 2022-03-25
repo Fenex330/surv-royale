@@ -2,11 +2,10 @@
 
 bool Game::quit = false;
 
-Game::Game()
+Game::Game() : rng (dev()), dist (0, 9)
 {
     std::atexit(Game::cleanup);
 
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
@@ -101,6 +100,9 @@ void Game::receivePlayerInput()
     float crosshair_distance;
 
     packet >> x >> y >> R >> L >> rotation >> slot >> crosshair_distance;
+
+    players.at(nickname).rotation = std::clamp(rotation, 0.0, 360.0);
+    players.at(nickname).slot = std::clamp(slot, sf::Int8(1), sf::Int8(6));
 }
 
 void Game::broadcast()

@@ -5,11 +5,11 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <random>
 
 #include <cstdlib>
 #include <cassert>
 #include <cmath>
-#include <ctime>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>

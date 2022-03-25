@@ -8,7 +8,9 @@ char *Game::tarFile = nullptr;
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close),
                server_port (surv::DEFAULT_PORT),
                crosshair_distance (0.0),
-               slot (1)
+               slot (1),
+               rng (dev()),
+               dist (0, 9)
 {
     std::atexit(Game::cleanup);
 
@@ -17,7 +19,6 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     window.setMouseCursorVisible(true);
 
     ImGui::SFML::Init(window);
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
     FILE *f = fopen(GAMEDATA_PATH, "rb");
 
     fseek(f, 0, SEEK_END);
@@ -142,7 +143,7 @@ void Game::generateID()
 
     for (int i = 1; i < 9; i++)
     {
-        ID += std::rand() % 10;
+        ID += dist(rng);
         ID *= 10;
     }
 }
