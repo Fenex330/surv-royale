@@ -141,10 +141,10 @@ void Game::generateID()
 {
     ID = 0;
 
-    for (int i = 1; i < 9; i++)
+    for (int i = 0; i < 9; i++)
     {
-        ID += dist(rng);
         ID *= 10;
+        ID += dist(rng);
     }
 }
 
