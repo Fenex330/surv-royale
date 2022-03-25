@@ -65,12 +65,14 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 
     if (players.find(nickname) != players.end())
     {
+        packet.clear();
         sendJoinError(ErrorCodes::NicknameExists, nickname);
         return;
     }
 
     if (players.size() >= surv::MAX_PLAYERS) // || time elapsed > n seconds
     {
+        packet.clear();
         sendJoinError(ErrorCodes::MapFull, nickname);
         return;
     }
