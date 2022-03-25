@@ -107,12 +107,11 @@ void Game::receivePlayerInput()
 
 void Game::broadcast()
 {
+    std::this_thread::sleep_for(std::chrono::milliseconds(surv::SEND_DELAY));
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
 
     for (const auto& n : players)
-    {
         if (UDPsocket.send(packet, n.second.address, n.second.port) != sf::Socket::Done) {}
-    }
 
     packet.clear();
 }

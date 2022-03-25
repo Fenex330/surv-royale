@@ -150,6 +150,7 @@ void Game::generateID()
 
 void Game::send()
 {
+    std::this_thread::sleep_for(std::chrono::milliseconds(surv::SEND_DELAY));
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
     if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
     packet.clear();

@@ -22,6 +22,7 @@ namespace surv
     inline const unsigned int MAP_DIMENSION = 1000;
     inline const unsigned int MAX_PLAYERS = 100;
     inline const unsigned int MAX_BULLETS = 50000;
+    inline const unsigned int SEND_DELAY = 20;
 
     inline static
     float getDistance(float x1, float x2, float y1, float y2)
