@@ -14,7 +14,12 @@
 
 namespace surv
 {
-    inline const double PI = 3.14159265359;
+    inline static
+    float getDistance(float x1, float x2, float y1, float y2)
+    {
+        return std::sqrt(std::pow((x1 - x2), 2) + std::pow((y1 - y2), 2));
+    }
+
     inline const unsigned short DEFAULT_PORT = 7777;
     inline const unsigned int VIEW_DIM_X = 800;
     inline const unsigned int VIEW_DIM_Y = 800;
@@ -22,13 +27,9 @@ namespace surv
     inline const unsigned int MAP_DIMENSION = 1000;
     inline const unsigned int MAX_PLAYERS = 100;
     inline const unsigned int MAX_BULLETS = 50000;
-    inline const unsigned int SEND_DELAY = 20;
-
-    inline static
-    float getDistance(float x1, float x2, float y1, float y2)
-    {
-        return std::sqrt(std::pow((x1 - x2), 2) + std::pow((y1 - y2), 2));
-    }
+    inline const unsigned int SEND_DELAY = 10;
+    inline const double PI = std::acos(-1);
+    inline const float CROSS_CLAMP = getDistance(VIEW_DIM_X, 0, VIEW_DIM_Y, 0);
 }
 
 /*

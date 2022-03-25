@@ -158,7 +158,7 @@ void Game::send()
 
 void Game::sendJoinRequest()
 {
-    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password.empty() << password;
+    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password;
     send();
 }
 
