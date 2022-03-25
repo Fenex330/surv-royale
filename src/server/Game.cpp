@@ -59,23 +59,37 @@ void Game::listen()
 
 void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 {
-    std::string nickname;
-    packet >> nickname;
+    std::string nickname, password;
+    sf::Int32 ID;
+
+    packet >> nickname >> ID >> password;
 
     if (players.find(nickname) != players.end())
     {
-        sendJoinError(ErrorCodes::NicknameExists, nickname);
+        sendJoinError(ErrorCodes::NicknameExists, address, port);
         return;
     }
 
     if (players.size() >= surv::MAX_PLAYERS) // || time elapsed > n seconds
     {
-        sendJoinError(ErrorCodes::MapFull, nickname);
+        sendJoinError(ErrorCodes::MapFull, address, port);
+        return;
+    }
+
+    if (this->password != password)
+    {
+        sendJoinError(ErrorCodes::InvalidPassword, address, port);
+        return;
+    }
+
+    if (std::find(banlist.begin(), banlist.end(), address.toString()) != banlist.end())
+    {
+        sendJoinError(ErrorCodes::IpBan, address, port);
         return;
     }
 
     players.insert(std::make_pair(nickname, Player()));
-    packet >> players.at(nickname).ID;
+    players.at(nickname).ID = ID;
     players.at(nickname).address = address;
     players.at(nickname).port = port;
     std::cout << "player " << nickname << " joined the game" << std::endl;
@@ -128,12 +142,12 @@ void Game::send()
     //sendGameState();
 }
 
-void Game::sendJoinError(ErrorCodes code, std::string nickname)
+void Game::sendJoinError(ErrorCodes code, sf::IpAddress address, unsigned short port)
 {
     packet.clear();
     packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(code);
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    if (UDPsocket.send(packet, players.at(nickname).address, players.at(nickname).port) != sf::Socket::Done) {}
+    if (UDPsocket.send(packet, address, port) != sf::Socket::Done) {}
 }
 
 void Game::sendPlayersList()

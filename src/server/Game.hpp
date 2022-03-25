@@ -11,6 +11,8 @@ public:
     sf::Packet packet;
 
     std::unordered_map<std::string, Player> players;
+    std::vector<std::string> banlist;
+    std::string password;
 
     std::random_device dev;
     std::mt19937 rng;
@@ -28,7 +30,7 @@ public:
 
     void broadcast();
     void send();
-    void sendJoinError(ErrorCodes code, std::string nickname);
+    void sendJoinError(ErrorCodes code, sf::IpAddress address, unsigned short port);
     void sendPlayersList();
     void sendProjectilesList();
     void sendObjectsList();
