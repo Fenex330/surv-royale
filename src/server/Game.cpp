@@ -65,14 +65,12 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 
     if (players.find(nickname) != players.end())
     {
-        packet.clear();
         sendJoinError(ErrorCodes::NicknameExists, nickname);
         return;
     }
 
     if (players.size() >= surv::MAX_PLAYERS) // || time elapsed > n seconds
     {
-        packet.clear();
         sendJoinError(ErrorCodes::MapFull, nickname);
         return;
     }
@@ -109,7 +107,7 @@ void Game::broadcast()
 {
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
 
-    for(const auto& n : players)
+    for (const auto& n : players)
     {
         if (UDPsocket.send(packet, n.second.address, n.second.port) != sf::Socket::Done) {}
     }
@@ -127,17 +125,17 @@ void Game::send()
 
 void Game::sendJoinError(ErrorCodes code, std::string nickname)
 {
+    packet.clear();
     packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(code);
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
     if (UDPsocket.send(packet, players.at(nickname).address, players.at(nickname).port) != sf::Socket::Done) {}
-    packet.clear();
 }
 
 void Game::sendPlayersList()
 {
     packet << static_cast<sf::Uint8>(NetCodes::PlayersList);
 
-    for(const auto& n : players)
+    for (const auto& n : players)
         packet << n.first << n.second.x << n.second.y << n.second.rotation;
 
     broadcast();
