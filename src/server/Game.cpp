@@ -117,10 +117,10 @@ void Game::broadcast()
 
 void Game::send()
 {
-    void sendPlayersList();
-    //void sendProjectilesList();
-    //void sendObjectsList();
-    //void sendGameState();
+    sendPlayersList();
+    //sendProjectilesList();
+    //sendObjectsList();
+    //sendGameState();
 }
 
 void Game::sendJoinError(ErrorCodes code, std::string nickname)
