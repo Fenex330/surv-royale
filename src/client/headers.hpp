@@ -20,7 +20,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui-SFML.h"
 
-#include "../config.hpp"
+#include "../common.hpp"
 #include "dxTarRead.h"
 
 #include "Player.hpp"

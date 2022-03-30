@@ -15,6 +15,6 @@
 
 #include <SFML/Network.hpp>
 
-#include "../config.hpp"
+#include "../common.hpp"
 #include "Player.hpp"
 #include "Game.hpp"
