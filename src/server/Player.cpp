@@ -10,12 +10,12 @@ Player::Player() : active(true),
     //
 }
 
-Player::interact()
+void Player::interact()
 {
     //
 }
 
-Player::fire()
+void Player::fire()
 {
     //
 }
