@@ -92,7 +92,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
     players.at(nickname).ID = ID;
     players.at(nickname).address = address;
     players.at(nickname).port = port;
-    std::cout << "player " << nickname << " joined the game" << std::endl;
+    cout << "player " << nickname << " joined the game" << endl;
 }
 
 void Game::receivePlayerInput()

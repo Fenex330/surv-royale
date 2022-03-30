@@ -12,6 +12,9 @@
     #define BANLIST_PATH "/usr/local/share/SurvRoyale/banlist.txt"
 #endif
 
+using std::cout;
+using std::endl;
+
 namespace surv
 {
     inline static
