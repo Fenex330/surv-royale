@@ -19,7 +19,6 @@ public:
 
     float crosshair_distance;
     unsigned short server_port;
-    std::string nickname;
     std::string password;
     std::string join_error;
     std::unordered_map<std::string, Player> players;
@@ -28,6 +27,7 @@ public:
     std::mt19937 rng;
     std::uniform_int_distribution<std::mt19937::result_type> dist;
 
+    static std::string nickname;
     static bool isGameRunning;
     static bool quit;
     static long tar_size;

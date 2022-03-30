@@ -24,5 +24,4 @@
 #include "dxTarRead.h"
 
 #include "Player.hpp"
-#include "MainPlayer.hpp"
 #include "Game.hpp"

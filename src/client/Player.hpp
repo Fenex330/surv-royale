@@ -4,7 +4,8 @@
 
 class Player
 {
-    protected:
+    private:
+        std::string nickname;
         sf::Texture texture;
 
     public:
@@ -12,9 +13,8 @@ class Player
         sf::Sprite sprite;
         sf::View view;
 
-        Player();
-        virtual ~Player() {}
+        Player(std::string nickname);
 
-        virtual void setPosition(int x, int y);
+        void setPosition(int x, int y);
         void setRotation(double rotation);
 };

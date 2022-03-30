@@ -1,5 +1,6 @@
 #include "headers.hpp"
 
+std::string Game::nickname = "";
 bool Game::isGameRunning = false;
 bool Game::quit = false;
 long Game::tar_size = 0;
@@ -52,7 +53,7 @@ void Game::play()
 {
     isGameRunning = true;
     window.setMouseCursorVisible(false);
-    players.insert(std::make_pair(nickname, MainPlayer()));
+    players.insert(std::make_pair(nickname, Player(nickname)));
 }
 
 void Game::run()
@@ -258,7 +259,7 @@ void Game::receivePlayersList()
 
     while (packet >> nick >> x >> y >> rotation)
     {
-        players.insert({nick, Player()});
+        players.insert({nick, Player(nick)});
         players.at(nick).setPosition(x, y);
         players.at(nick).setRotation(rotation);
     }
