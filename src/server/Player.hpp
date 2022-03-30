@@ -16,4 +16,6 @@ class Player
         sf::Int16 y;
 
         Player();
+        interact();
+        fire();
 };

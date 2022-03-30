@@ -9,3 +9,13 @@ Player::Player() : active(true),
 {
     //
 }
+
+Player::interact()
+{
+    //
+}
+
+Player::fire()
+{
+    //
+}

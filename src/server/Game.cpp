@@ -115,9 +115,10 @@ void Game::receivePlayerInput()
 
     packet >> x >> y >> R >> L >> rotation >> slot >> crosshair_distance;
 
-    //if (R) players.at(nickname).interact();
-    //if (L) players.at(nickname).fire();
-    //players.at(nickname).move(x, y);
+    if (R) players.at(nickname).interact();
+    if (L) players.at(nickname).fire();
+    players.at(nickname).x += x * surv::DEFAULT_PLAYER_SPEED;
+    players.at(nickname).y += y * surv::DEFAULT_PLAYER_SPEED;
     players.at(nickname).rotation = std::clamp(rotation, 0.0, 360.0);
     players.at(nickname).slot = std::clamp(slot, sf::Int8(1), sf::Int8(6));
     players.at(nickname).crosshair_distance = std::clamp(crosshair_distance, 0.0f, surv::CROSS_CLAMP);
