@@ -53,7 +53,7 @@ void Game::play()
 {
     isGameRunning = true;
     window.setMouseCursorVisible(false);
-    players.insert(std::make_pair(nickname, Player(nickname)));
+    players.insert({nickname, Player(nickname)});
 }
 
 void Game::run()
@@ -259,7 +259,9 @@ void Game::receivePlayersList()
 
     while (packet >> nick >> x >> y >> rotation)
     {
-        players.insert({nick, Player(nick)});
+        if (players.find(nick) == players.end())
+            players.insert({nick, Player(nick)});
+
         players.at(nick).setPosition(x, y);
         players.at(nick).setRotation(rotation);
     }
