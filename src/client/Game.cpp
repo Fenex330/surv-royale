@@ -130,12 +130,14 @@ void Game::imguiMapUI()
 
 void Game::draw()
 {
-    if (isGameRunning)
-    {
-        window.setView(players.at(nickname).view);
-        window.draw(players.at(nickname).sprite);
-        window.draw(crosshair);
-    }
+    if (!isGameRunning)
+        return;
+
+    window.setView(players.at(nickname).view);
+    window.draw(crosshair);
+
+    for (const auto& n : players)
+        window.draw(n.second.sprite);
 }
 
 void Game::generateID()
