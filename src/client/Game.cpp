@@ -13,7 +13,9 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
                rng (dev()),
                dist (0, 9),
                fps (0),
-               ping (0)
+               ping (0),
+               ping_avg (0),
+               ping_count (0)
 {
     std::atexit(Game::cleanup);
 
@@ -48,8 +50,6 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
 
     if (UDPsocket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
         std::exit(1);
-
-    //local_port = UDPsocket.getLocalPort();
 }
 
 Game::~Game()
@@ -104,7 +104,7 @@ void Game::run()
             text.setString("fps: " + std::to_string(fps) + "    ping: " + std::to_string(ping));
             window.setView(players.at(nickname).view);
             sendPlayerInput();
-            countFps();
+            countFpsAndPing();
         }
     }
 }
@@ -164,7 +164,7 @@ void Game::generateID()
     }
 }
 
-void Game::countFps()
+void Game::countFpsAndPing()
 {
     static int i = 0;
     sf::Time elapsed = fpsClock.getElapsedTime();
@@ -173,7 +173,10 @@ void Game::countFps()
     if (elapsed > sf::seconds(1))
     {
         fps = i;
+        ping = (ping_avg / ping_count) % 5000;
         i = 0;
+        ping_avg = 0;
+        ping_count = 0;
         fpsClock.restart();
     }
 }
@@ -214,9 +217,8 @@ void Game::sendPlayerInput()
 
 void Game::listen()
 {
-    // unused placeholders
     sf::IpAddress remote_address;
-    unsigned short remote_port;
+    unsigned short remote_port; // unused placeholder
 
     if (UDPsocket.receive(packet, remote_address, remote_port) != sf::Socket::Done)
         return;
@@ -224,6 +226,8 @@ void Game::listen()
     if (remote_address != server_address)
         return;
 
+    ping_count++;
+    ping_avg += pingClock.restart().asMilliseconds();
     sf::Uint8 netcode_raw;
     packet >> netcode_raw;
     NetCodes netcode = static_cast<NetCodes>(netcode_raw);

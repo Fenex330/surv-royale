@@ -25,6 +25,8 @@ public:
 
     int fps;
     int ping;
+    int ping_avg;
+    int ping_count;
     float crosshair_distance;
     unsigned short server_port;
     std::string password;
@@ -49,7 +51,7 @@ public:
     void imguiMapUI();
     void draw();
     void generateID();
-    void countFps();
+    void countFpsAndPing();
 
     void send();
     void sendJoinRequest();
