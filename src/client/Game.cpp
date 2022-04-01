@@ -78,7 +78,7 @@ void Game::run()
             }
         }
 
-        ImGui::SFML::Update(window, deltaClock.restart());
+        ImGui::SFML::Update(window, imguiClock.restart());
         imguiMapUI();
         window.clear();
         draw();
@@ -154,7 +154,14 @@ void Game::generateID()
 
 void Game::send()
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(surv::SEND_DELAY));
+    //std::this_thread::sleep_for(std::chrono::milliseconds(surv::SEND_DELAY));
+
+    sf::Time elapsed = udpClock.getElapsedTime();
+
+    if (elapsed < sf::milliseconds(surv::SEND_DELAY))
+        return;
+
+    udpClock.restart();
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
     if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
     packet.clear();

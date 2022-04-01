@@ -10,6 +10,9 @@ public:
     sf::TcpSocket TCPsocket;
     sf::Packet packet;
 
+    sf::Clock udpClock;
+    sf::Clock sessionClock;
+
     std::unordered_map<std::string, Player> players;
     std::vector<std::string> banlist;
     std::string password;

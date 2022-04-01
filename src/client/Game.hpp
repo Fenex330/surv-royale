@@ -11,11 +11,15 @@ public:
     sf::Sprite crosshair;
     sf::UdpSocket UDPsocket;
     sf::TcpSocket TCPsocket;
-    sf::Clock deltaClock;
     sf::Packet packet;
     sf::IpAddress server_address;
     sf::Int8 slot;
     sf::Int32 ID;
+
+    sf::Clock imguiClock;
+    sf::Clock udpClock;
+    sf::Clock pingClock;
+    sf::Clock fpsClock;
 
     float crosshair_distance;
     unsigned short server_port;
