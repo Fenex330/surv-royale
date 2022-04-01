@@ -11,7 +11,9 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
                crosshair_distance (0.0),
                slot (1),
                rng (dev()),
-               dist (0, 9)
+               dist (0, 9),
+               fps (0),
+               ping (0)
 {
     std::atexit(Game::cleanup);
 
@@ -29,6 +31,13 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     tarFile = (char*)malloc(tar_size + 1);
     fread(tarFile, 1, tar_size, f);
     fclose(f);
+
+    Game::loadAsset(font, "GameData/fonts/RobotoCondensed-Regular.ttf");
+    text.setFont(font);
+    //text.setString("fps: " + std::to_string(fps) + "    ping: " + std::to_string(ping));
+    text.setCharacterSize(15);
+    text.setFillColor(sf::Color::Red);
+    text.setStyle(sf::Text::Bold);
 
     Game::loadAsset(crosshair_texture, "GameData/graphics/crosshairs/11.png");
     crosshair.setTexture(crosshair_texture);
@@ -134,8 +143,11 @@ void Game::draw()
     if (!isGameRunning)
         return;
 
+    text.setPosition(players.at(nickname).sprite.getPosition() - sf::Vector2f(surv::VIEW_DIM_X / 2, surv::VIEW_DIM_Y / 2));
+    text.setString("fps: " + std::to_string(fps) + "    ping: " + std::to_string(ping));
     window.setView(players.at(nickname).view);
     window.draw(crosshair);
+    window.draw(text);
 
     for (const auto& n : players)
         window.draw(n.second.sprite);

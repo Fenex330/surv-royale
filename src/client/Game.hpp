@@ -6,6 +6,8 @@ class Game
 {
 public:
 
+    sf::Font font;
+    sf::Text text;
     sf::RenderWindow window;
     sf::Texture crosshair_texture;
     sf::Sprite crosshair;
@@ -21,6 +23,8 @@ public:
     sf::Clock pingClock;
     sf::Clock fpsClock;
 
+    int fps;
+    int ping;
     float crosshair_distance;
     unsigned short server_port;
     std::string password;
