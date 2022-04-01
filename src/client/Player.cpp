@@ -2,15 +2,15 @@
 
 void Player::init(std::string nickname)
 {
-    Game::loadAsset(texture, "GameData/graphics/custom/character.png");
+    Game::loadAsset(texture, "GameData/graphics/outfits/Outfit_03.png");
 
     texture.setSmooth(true);
     texture.setRepeated(false);
     sprite.setTexture(texture);
 
-    sprite.setOrigin(sprite.getLocalBounds().width * 0.5, sprite.getLocalBounds().height * 0.5 + 12.0);
+    sprite.setOrigin(sprite.getLocalBounds().width * 0.5, sprite.getLocalBounds().height * 0.5);
     sprite.setPosition(surv::MAP_DIMENSION / 2, surv::MAP_DIMENSION / 2);
-    sprite.setScale(0.3, 0.3);
+    sprite.setScale(0.25, 0.25);
 
     active = true;
     this->nickname = nickname;

@@ -209,8 +209,6 @@ void Game::sendPlayerInput()
     double rotation = mainPlayerInputRotation();
     mainPlayerInputSlot();
 
-    //players.at(nickname).setRotation(rotation);
-
     packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << ID << x << y << R << L << rotation << slot << crosshair_distance;
     send();
 }
@@ -308,7 +306,7 @@ void Game::receivePlayersList()
         }
 
         players.at(nick).setPosition(x, -y);
-        players.at(nick).setRotation(rotation);
+        players.at(nick).setRotation(rotation + 90.0);
     }
 }
 
@@ -349,7 +347,7 @@ std::pair<bool, bool> Game::mainPlayerInputMouse()
 double Game::mainPlayerInputRotation()
 {
     sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
-    return std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2.0, mouse_position.x - surv::VIEW_DIM_X / 2.0) * (180.0 / surv::PI) + 90.0;
+    return std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2.0, mouse_position.x - surv::VIEW_DIM_X / 2.0) * (180.0 / surv::PI) + 180.0;
 }
 
 void Game::mainPlayerInputSlot()
