@@ -16,17 +16,22 @@ public:
     std::unordered_map<std::string, Player> players;
     std::vector<std::string> banlist;
     std::string password;
+    std::string command;
+    std::thread user_input;
+    std::mutex m;
 
     std::random_device dev;
     std::mt19937 rng;
     std::uniform_int_distribution<std::mt19937::result_type> dist;
 
-    static bool quit;
+    static std::atomic<bool> quit;
 
     Game();
     ~Game();
 
     void run();
+    void scan();
+    void parse();
     void listen();
     void receiveJoinRequest(sf::IpAddress address, unsigned short port);
     void receivePlayerInput();

@@ -1,11 +1,12 @@
 #include "headers.hpp"
 
-bool Game::quit = false;
+std::atomic<bool> Game::quit = false;
 
 Game::Game() : rng (dev()), dist (0, 9)
 {
     std::atexit(Game::cleanup);
 
+    user_input = std::thread(&Game::scan, this);
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
@@ -25,6 +26,32 @@ void Game::run()
     {
         send();
         listen();
+    }
+}
+
+void Game::scan()
+{
+    while (!quit)
+    {
+        std::string buffer;
+        std::cin >> buffer;
+
+        {
+            std::lock_guard<std::mutex> guard (m);
+            command = buffer;
+        }
+    }
+}
+
+void Game::parse()
+{
+    if (command == "list")
+    {
+        cout << "lol\n";
+    }
+    else
+    {
+        cout << "unknown command" << endl;
     }
 }
 
