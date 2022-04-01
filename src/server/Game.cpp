@@ -61,6 +61,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 {
     std::string nickname, password;
     sf::Int32 ID;
+    sf::Time elapsed = sessionClock.getElapsedTime();
 
     packet >> nickname >> ID >> password;
 
@@ -70,7 +71,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    if (players.size() >= surv::MAX_PLAYERS) // || time elapsed > n seconds
+    if (players.size() >= surv::MAX_PLAYERS || elapsed.asSeconds() > sf::seconds(surv::JOIN_TIME))
     {
         sendJoinError(ErrorCodes::MapFull, address, port);
         return;
@@ -130,7 +131,7 @@ void Game::broadcast()
 
     sf::Time elapsed = udpClock.getElapsedTime();
 
-    if (elapsed < sf::milliseconds(surv::SEND_DELAY))
+    if (elapsed.asMilliseconds() < sf::milliseconds(surv::SEND_DELAY))
         return;
 
     udpClock.restart();
