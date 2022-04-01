@@ -26,6 +26,7 @@ void Game::run()
     {
         send();
         listen();
+        parse();
     }
 }
 
@@ -45,6 +46,9 @@ void Game::scan()
 
 void Game::parse()
 {
+    if (command.empty())
+        return;
+
     if (command == "list")
     {
         cout << "lol\n";
@@ -53,6 +57,8 @@ void Game::parse()
     {
         cout << "unknown command" << endl;
     }
+
+    command.clear();
 }
 
 void Game::listen()
