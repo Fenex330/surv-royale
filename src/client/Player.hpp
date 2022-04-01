@@ -13,8 +13,7 @@ class Player
         sf::Sprite sprite;
         sf::View view;
 
-        Player(std::string nickname);
-
+        void init(std::string nickname);
         void setPosition(int x, int y);
         void setRotation(double rotation);
 };

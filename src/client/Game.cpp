@@ -53,7 +53,8 @@ void Game::play()
 {
     isGameRunning = true;
     window.setMouseCursorVisible(false);
-    players.insert({nickname, Player(nickname)});
+    players.insert({nickname, Player()});
+    players.at(nickname).init(nickname);
 }
 
 void Game::run()
@@ -262,7 +263,10 @@ void Game::receivePlayersList()
     while (packet >> nick >> x >> y >> rotation)
     {
         if (players.find(nick) == players.end())
-            players.insert({nick, Player(nick)});
+        {
+            players.insert({nick, Player()});
+            players.at(nickname).init(nickname);
+        }
 
         players.at(nick).setPosition(x, y);
         players.at(nick).setRotation(rotation);

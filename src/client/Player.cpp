@@ -1,6 +1,6 @@
 #include "headers.hpp"
 
-Player::Player(std::string nickname) : active(true)
+void Player::init(std::string nickname)
 {
     Game::loadAsset(texture, "GameData/graphics/custom/character.png");
 
@@ -11,6 +11,7 @@ Player::Player(std::string nickname) : active(true)
     sprite.setOrigin(sprite.getLocalBounds().width * 0.5, sprite.getLocalBounds().height * 0.5 + 12.0);
     sprite.setScale(0.3, 0.3);
 
+    active = true;
     this->nickname = nickname;
 
     if (nickname == Game::nickname)
