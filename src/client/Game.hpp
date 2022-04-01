@@ -49,6 +49,7 @@ public:
     void imguiMapUI();
     void draw();
     void generateID();
+    void countFps();
 
     void send();
     void sendJoinRequest();

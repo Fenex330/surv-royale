@@ -34,7 +34,6 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
 
     Game::loadAsset(font, "GameData/fonts/RobotoCondensed-Regular.ttf");
     text.setFont(font);
-    //text.setString("fps: " + std::to_string(fps) + "    ping: " + std::to_string(ping));
     text.setCharacterSize(15);
     text.setFillColor(sf::Color::Red);
     text.setStyle(sf::Text::Bold);
@@ -101,7 +100,11 @@ void Game::run()
             float crossY = sf::Mouse::getPosition(window).y - surv::VIEW_DIM_Y / 2.0 + players.at(nickname).sprite.getPosition().y;
             crosshair_distance = surv::getDistance(crossX, players.at(nickname).sprite.getPosition().x, crossY, players.at(nickname).sprite.getPosition().y);
             crosshair.setPosition(crossX, crossY);
+            text.setPosition(players.at(nickname).sprite.getPosition() - sf::Vector2f(surv::VIEW_DIM_X / 2, surv::VIEW_DIM_Y / 2));
+            text.setString("fps: " + std::to_string(fps) + "    ping: " + std::to_string(ping));
+            window.setView(players.at(nickname).view);
             sendPlayerInput();
+            countFps();
         }
     }
 }
@@ -143,9 +146,6 @@ void Game::draw()
     if (!isGameRunning)
         return;
 
-    text.setPosition(players.at(nickname).sprite.getPosition() - sf::Vector2f(surv::VIEW_DIM_X / 2, surv::VIEW_DIM_Y / 2));
-    text.setString("fps: " + std::to_string(fps) + "    ping: " + std::to_string(ping));
-    window.setView(players.at(nickname).view);
     window.draw(crosshair);
     window.draw(text);
 
@@ -161,6 +161,20 @@ void Game::generateID()
     {
         ID *= 10;
         ID += dist(rng);
+    }
+}
+
+void Game::countFps()
+{
+    static int i = 0;
+    sf::Time elapsed = fpsClock.getElapsedTime();
+    i++;
+
+    if (elapsed > sf::seconds(1))
+    {
+        fps = i;
+        i = 0;
+        fpsClock.restart();
     }
 }
 
