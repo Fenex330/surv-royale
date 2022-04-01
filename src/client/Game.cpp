@@ -269,7 +269,7 @@ void Game::receivePlayersList()
         if (players.find(nick) == players.end())
         {
             players.insert({nick, Player()});
-            players.at(nickname).init(nickname);
+            players.at(nick).init(nick);
         }
 
         players.at(nick).setPosition(x, y);
