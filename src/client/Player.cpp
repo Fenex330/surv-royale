@@ -9,6 +9,7 @@ void Player::init(std::string nickname)
     sprite.setTexture(texture);
 
     sprite.setOrigin(sprite.getLocalBounds().width * 0.5, sprite.getLocalBounds().height * 0.5 + 12.0);
+    sprite.setPosition(surv::MAP_DIMENSION / 2, surv::MAP_DIMENSION / 2);
     sprite.setScale(0.3, 0.3);
 
     active = true;
@@ -23,10 +24,10 @@ void Player::init(std::string nickname)
 
 void Player::setPosition(int x, int y)
 {
-    sprite.setPosition(x * surv::DEFAULT_PLAYER_SPEED, y * surv::DEFAULT_PLAYER_SPEED);
+    sprite.setPosition(x, y);
 
     if (nickname == Game::nickname)
-        view.setCenter(x * surv::DEFAULT_PLAYER_SPEED, y * surv::DEFAULT_PLAYER_SPEED);
+        view.setCenter(x, y);
 }
 
 void Player::setRotation(double rotation)
