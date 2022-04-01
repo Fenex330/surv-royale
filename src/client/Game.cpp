@@ -173,6 +173,10 @@ void Game::sendPlayerInput()
     double rotation = mainPlayerInputRotation();
     mainPlayerInputSlot();
 
+    players.at(nickname).setRotation(rotation);
+    players.at(nickname).setPosition(players.at(nickname).sprite.getPosition().x + x * surv::DEFAULT_PLAYER_SPEED,
+                                     players.at(nickname).sprite.getPosition().y + y * surv::DEFAULT_PLAYER_SPEED);
+
     packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << ID << x << y << R << L << rotation << slot << crosshair_distance;
     send();
 }

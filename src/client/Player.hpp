@@ -13,7 +13,7 @@ class Player
         sf::Sprite sprite;
         sf::View view;
 
-        void init(std::string nickname);
+        void init(std::string nickname); // is used instead if constructor to solve missing textur bug
         void setPosition(int x, int y);
         void setRotation(double rotation);
 };
