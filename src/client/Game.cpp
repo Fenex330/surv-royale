@@ -158,7 +158,7 @@ void Game::send()
 
     sf::Time elapsed = udpClock.getElapsedTime();
 
-    if (elapsed.asMilliseconds() < sf::milliseconds(surv::SEND_DELAY))
+    if (elapsed < sf::milliseconds(surv::SEND_DELAY))
         return;
 
     udpClock.restart();

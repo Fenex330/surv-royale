@@ -71,7 +71,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    if (players.size() >= surv::MAX_PLAYERS || elapsed.asSeconds() > sf::seconds(surv::JOIN_TIME))
+    if (players.size() >= surv::MAX_PLAYERS || elapsed > sf::seconds(surv::JOIN_TIME))
     {
         sendJoinError(ErrorCodes::MapFull, address, port);
         return;
@@ -131,7 +131,7 @@ void Game::broadcast()
 
     sf::Time elapsed = udpClock.getElapsedTime();
 
-    if (elapsed.asMilliseconds() < sf::milliseconds(surv::SEND_DELAY))
+    if (elapsed < sf::milliseconds(surv::SEND_DELAY))
         return;
 
     udpClock.restart();
