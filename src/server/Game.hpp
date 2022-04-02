@@ -24,13 +24,13 @@ public:
     std::thread user_input;
     std::mutex m;
 
+    std::fstream config_f;
+    std::fstream banlist_f;
 
     std::random_device dev;
     std::mt19937 rng;
     std::uniform_int_distribution<std::mt19937::result_type> dist;
 
-    static std::fstream config_f;
-    static std::fstream banlist_f;
     static std::atomic<bool> quit;
 
     Game();

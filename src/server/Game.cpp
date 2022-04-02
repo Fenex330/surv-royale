@@ -1,12 +1,12 @@
 #include "headers.hpp"
 
-std::fstream Game::config_f (SERVER_CONF_PATH, std::ios::in);
-std::fstream Game::banlist_f (BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
 std::atomic<bool> Game::quit (false);
 
 Game::Game() : rng (dev()),
                dist (0, 9),
-               user_input (&Game::scan, this)
+               user_input (&Game::scan, this),
+               config_f (SERVER_CONF_PATH, std::ios::in),
+               banlist_f (BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app)
 {
     std::atexit(Game::cleanup);
     user_input.detach();
@@ -268,9 +268,6 @@ void Game::cleanup()
 
     if (isCleaned) // to make sure cleanup happens only once
         return;
-
-    config_f.close();
-    banlist_f.close();
 
     isCleaned = true;
 }
