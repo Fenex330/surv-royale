@@ -11,7 +11,7 @@ Game::Game() : rng (dev()),
     std::atexit(Game::cleanup);
     user_input.detach();
 
-    clog << "version " << surv::VERSION << endl;
+    clog << "SurvRoyale version " << surv::VERSION << endl;
 
     if (!config_f)
     {

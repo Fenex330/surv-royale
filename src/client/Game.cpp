@@ -6,7 +6,7 @@ bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
-Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), surv::VERSION, sf::Style::Close),
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "SurvRoyale version " + surv::VERSION, sf::Style::Close),
                server_port (surv::DEFAULT_PORT),
                crosshair_distance (0.0),
                slot (1),
