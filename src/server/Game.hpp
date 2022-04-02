@@ -16,7 +16,8 @@ public:
     std::unordered_map<std::string, Player> players;
     std::vector<std::string> banlist;
     std::string password;
-    std::string command;
+    std::string command2;
+    std::string command1;
     std::thread user_input;
     std::mutex m;
 

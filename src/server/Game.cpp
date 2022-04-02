@@ -35,11 +35,13 @@ void Game::scan()
 {
     while (!quit)
     {
-        std::string buffer;
-        std::cin >> buffer;
+        std::string buffer1;
+        std::string buffer2;
+        std::cin >> buffer1 >> buffer2;
 
         std::lock_guard<std::mutex> lock(m);
-        command = buffer;
+        command1 = buffer1;
+        command2 = buffer2;
     }
 }
 
@@ -47,26 +49,26 @@ void Game::parse()
 {
     std::lock_guard<std::mutex> lock(m);
 
-    if (command.empty())
+    if (command1.empty())
         return;
 
-    if (command.substr(0, 4) == "kick")
+    if (command1 == "kick")
     {
-        std::string nick = command.substr(4);
+        std::string nick = command2;
         sendJoinError(ErrorCodes::Kick, players.at(nick).address, players.at(nick).port);
         players.erase(nick);
     }
-    else if (command.substr(0, 3) == "ban")
+    else if (command1 == "ban")
     {
-        std::string nick = command.substr(3);
+        std::string nick = command2;
         sendJoinError(ErrorCodes::IpBan, players.at(nick).address, players.at(nick).port);
         players.erase(nick);
         banlist.push_back(players.at(nick).address.toString());
         // add ip to banlist.txt
     }
-    else if (command.substr(0, 5) == "unban")
+    else if (command1 == "unban")
     {
-        std::string address = command.substr(5);
+        std::string address = command2;
         banlist.erase(std::find(banlist.begin(), banlist.end(), address));
         // remove ip from banlist.txt
     }
@@ -75,7 +77,7 @@ void Game::parse()
         cout << "unknown command" << endl;
     }
 
-    command.clear();
+    command1.clear();
 }
 
 void Game::listen()
