@@ -142,9 +142,7 @@ void Game::imguiMapUI()
     }
 
     if (ImGui::Button("QUIT"))
-    {
         quit = true;
-    }
 
     ImGui::End();
 }
