@@ -7,7 +7,6 @@ long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "SurvRoyale version " + surv::VERSION, sf::Style::Close),
-               server_port (surv::DEFAULT_PORT),
                crosshair_distance (0.0),
                slot (1),
                rng (dev()),
@@ -129,22 +128,23 @@ void Game::imguiMapUI()
         return;
 
     static char buf1[64] = "";
-    static char buf2[64] = "";
-    static char buf3[64] = "";
+    static char buf2[64] = "127.0.0.1";
+    static char buf3[64] = "7777";
+    static char buf4[64] = "";
 
     ImGui::Begin("Main Menu");
     ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), join_error.c_str());
     ImGui::InputText("nickname", buf1, 64);
     ImGui::InputText("address", buf2, 64);
-    ImGui::InputTextWithHint("password", "leave empty if none", buf3, 64, ImGuiInputTextFlags_Password);
+    ImGui::InputText("port", buf3, 64);
+    ImGui::InputTextWithHint("password", "leave empty if none", buf4, 64, ImGuiInputTextFlags_Password);
 
     if (ImGui::Button("PLAY!"))
     {
         nickname = std::string(buf1);
         server_address = std::string(buf2);
-        password = std::string(buf3);
-
-
+        server_port = std::stoi(std::string(buf3));
+        password = std::string(buf4);
         sendJoinRequest();
     }
 
