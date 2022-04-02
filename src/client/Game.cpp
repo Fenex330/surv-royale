@@ -166,7 +166,7 @@ void Game::generateID()
     ID = "";
 
     for (int i = 0; i < 20; i++)
-        ID = std::to_string(dist(rng));
+        ID.append(std::to_string(dist(rng)));
 
     std::ofstream id("ID");
     id << ID << endl;
