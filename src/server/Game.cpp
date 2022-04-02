@@ -95,6 +95,10 @@ void Game::parse()
         banlist_f << players.at(nick).address.toString() << endl;
         players.erase(nick);
     }
+    else if (command1 == "exit" || command1 == "quit")
+    {
+        quit = true;
+    }
     else
     {
         cerr << "unknown command" << endl;
