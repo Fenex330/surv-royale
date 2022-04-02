@@ -211,7 +211,7 @@ void Game::send()
 
 void Game::sendJoinRequest()
 {
-    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password;
+    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password << surv::VERSION;
     send();
 }
 
@@ -274,6 +274,7 @@ void Game::listen()
 
 void Game::receiveJoinError()
 {
+    std::string version;
     sf::Uint8 errorcode_raw;
     packet >> errorcode_raw;
     ErrorCodes errorcode = static_cast<ErrorCodes>(errorcode_raw);
@@ -282,6 +283,11 @@ void Game::receiveJoinError()
     {
         case ErrorCodes::MapFull:
             join_error = "game is full";
+            break;
+
+        case ErrorCodes::InvalidVersion:
+            packet >> version;
+            join_error = "versions do not match, please upgrade or downgrade your client.\nServer version is: " + version;
             break;
 
         case ErrorCodes::InvalidPassword:

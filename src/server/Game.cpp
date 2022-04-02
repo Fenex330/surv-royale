@@ -142,11 +142,17 @@ void Game::listen()
 
 void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 {
-    std::string nickname, password;
-    std::string ID;
+    std::string nickname, ID, password, version;
     sf::Time elapsed = sessionClock.getElapsedTime();
 
-    packet >> nickname >> ID >> password;
+    packet >> nickname >> ID >> password >> version;
+
+    if (version != surv::VERSION)
+    {
+        sendJoinError(ErrorCodes::InvalidVersion, address, port);
+        packet << surv::VERSION;
+        return;
+    }
 
     if (players.find(nickname) != players.end())
     {
