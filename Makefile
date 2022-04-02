@@ -41,8 +41,9 @@ clean:
 	rm surv-royale-server &
 	rm src/client/*.o &
 	rm src/client/imgui/*.o &
-	rm imgui.ini &
 	rm src/server/*.o &
+	rm imgui.ini &
+	rm ID &
 
 install:
 	mkdir $(SHARE_PATH)

@@ -59,9 +59,10 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     }
     else
     {
-        generateID();
         if (UDPsocket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
             std::exit(1);
+
+        generateID();
     }
 }
 
@@ -173,7 +174,7 @@ void Game::generateID()
         ID.append(std::to_string(dist(rng)));
 
     std::ofstream id("ID");
-    id << ID << UDPsocket.getLocalPort() << endl;
+    id << ID << " " << UDPsocket.getLocalPort() << endl;
 }
 
 void Game::countFpsAndPing()
