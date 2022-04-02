@@ -51,6 +51,4 @@ public:
     void sendProjectilesList();
     void sendObjectsList();
     void sendGameState();
-
-    static void cleanup();
 };

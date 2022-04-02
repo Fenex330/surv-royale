@@ -8,9 +8,7 @@ Game::Game() : rng (dev()),
                config_f (SERVER_CONF_PATH, std::ios::in),
                banlist_f (BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app)
 {
-    std::atexit(Game::cleanup);
     user_input.detach();
-
     clog << "SurvRoyale version " << surv::VERSION << endl;
 
     if (!config_f)
@@ -51,7 +49,11 @@ Game::Game() : rng (dev()),
 
 Game::~Game()
 {
-    Game::cleanup();
+    packet.clear()
+    packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(ErrorCodes::Kick);
+
+    for (const auto& n : players)
+        UDPsocket.send(packet, n.second.address, n.second.port)
 }
 
 void Game::run()
@@ -244,8 +246,7 @@ void Game::sendJoinError(ErrorCodes code, sf::IpAddress address, unsigned short 
 {
     packet.clear();
     packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(code);
-    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    if (UDPsocket.send(packet, address, port) != sf::Socket::Done) {}
+    UDPsocket.send(packet, address, port);
 }
 
 void Game::sendPlayersList()
@@ -271,14 +272,4 @@ void Game::sendObjectsList()
 void Game::sendGameState()
 {
     broadcast();
-}
-
-void Game::cleanup()
-{
-    static bool isCleaned = false;
-
-    if (isCleaned) // to make sure cleanup happens only once
-        return;
-
-    isCleaned = true;
 }
