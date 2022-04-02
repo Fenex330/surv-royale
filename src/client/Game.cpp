@@ -48,8 +48,21 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
-    if (UDPsocket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
-        std::exit(1);
+    if (std::filesystem::exists("ID"))
+    {
+        unsigned short local_port;
+        std::ifstream id("ID");
+        id >> ID >> local_port;
+
+        if (UDPsocket.bind(local_port) != sf::Socket::Done)
+            std::exit(1);
+    }
+    else
+    {
+        generateID();
+        if (UDPsocket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
+            std::exit(1);
+    }
 }
 
 Game::~Game()
@@ -130,13 +143,6 @@ void Game::imguiMapUI()
         server_address = std::string(buf2);
         password = std::string(buf3);
 
-        if (std::filesystem::exists("ID"))
-        {
-            std::ifstream id("ID");
-            id >> ID;
-        }
-        else
-            generateID();
 
         sendJoinRequest();
     }
@@ -167,7 +173,7 @@ void Game::generateID()
         ID.append(std::to_string(dist(rng)));
 
     std::ofstream id("ID");
-    id << ID << endl;
+    id << ID << UDPsocket.getLocalPort() << endl;
 }
 
 void Game::countFpsAndPing()
