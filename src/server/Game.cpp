@@ -153,8 +153,9 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 
     if (version != surv::VERSION)
     {
-        sendJoinError(ErrorCodes::InvalidVersion, address, port);
-        packet << surv::VERSION;
+        packet.clear();
+        packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(ErrorCodes::InvalidVersion) << surv::VERSION;
+        UDPsocket.send(packet, address, port);
         return;
     }
 
