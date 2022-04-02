@@ -94,6 +94,7 @@ void Game::parse()
         std::string nick = command2;
         sendJoinError(ErrorCodes::IpBan, players.at(nick).address, players.at(nick).port);
         banlist.push_back(players.at(nick).address.toString());
+        banlist_f.clear();
         banlist_f << players.at(nick).address.toString() << endl;
         banlist_f.flush();
         players.erase(nick);
