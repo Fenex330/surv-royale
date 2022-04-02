@@ -53,8 +53,8 @@ install:
 	cp CHANGELOG.txt $(SHARE_PATH) &
 	cp surv-royale-client $(BIN_PATH) &
 	cp surv-royale-server $(BIN_PATH) &
-	chmod 777 $(BIN_PATH)/server.conf &
-	chmod 777 $(BIN_PATH)/banlist.txt &
+	chmod 777 $(SHARE_PATH)/server.conf &
+	chmod 777 $(SHARE_PATH)/banlist.txt &
 
 uninstall:
 	rm -rf $(SHARE_PATH) &
