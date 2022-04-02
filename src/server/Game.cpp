@@ -2,12 +2,41 @@
 
 std::atomic<bool> Game::quit (false);
 
-Game::Game() : rng (dev()), dist (0, 9)
+Game::Game() : rng (dev()),
+               dist (0, 9),
+               user_input (&Game::scan, this),
+               config_f (SERVER_CONF_PATH, std::ios::in),
+               banlist_f (BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app)
 {
     std::atexit(Game::cleanup);
-
-    user_input = std::thread(&Game::scan, this);
     user_input.detach();
+
+    if (!config_f)
+    {
+        cerr << "server.conf open error" << endl;
+        std::exit(1);
+    }
+
+    if (!banlist_f)
+    {
+        cerr << "banlist.txt open error" << endl;
+        std::exit(1);
+    }
+
+    while (!config_f.eof())
+    {
+        std::string param;
+        std::string value;
+        config_f >> param >> value;
+        config[param] = value;
+    }
+
+    while (!banlist_f.eof())
+    {
+        std::string line;
+        std::getline(banlist_f, line);
+        banlist.append(line);
+    }
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
@@ -37,7 +66,7 @@ void Game::scan()
     {
         std::string buffer1;
         std::string buffer2;
-        std::cin >> buffer1 >> buffer2;
+        cin >> buffer1 >> buffer2;
 
         std::lock_guard<std::mutex> lock(m);
         command1 = buffer1;
@@ -64,17 +93,11 @@ void Game::parse()
         sendJoinError(ErrorCodes::IpBan, players.at(nick).address, players.at(nick).port);
         players.erase(nick);
         banlist.push_back(players.at(nick).address.toString());
-        // add ip to banlist.txt
-    }
-    else if (command1 == "unban")
-    {
-        std::string address = command2;
-        banlist.erase(std::find(banlist.begin(), banlist.end(), address));
-        // remove ip from banlist.txt
+        banlist_f << players.at(nick).address.toString() << endl;
     }
     else
     {
-        cout << "unknown command" << endl;
+        cerr << "unknown command" << endl;
     }
 
     command1.clear();
@@ -145,7 +168,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
     players.at(nickname).ID = ID;
     players.at(nickname).address = address;
     players.at(nickname).port = port;
-    cout << "player " << nickname << " joined the game" << endl;
+    clog << "player " << nickname << " joined the game" << endl;
 }
 
 void Game::receivePlayerInput()
@@ -240,6 +263,9 @@ void Game::cleanup()
 
     if (isCleaned) // to make sure cleanup happens only once
         return;
+
+    config_f.close();
+    banlist_f.close();
 
     isCleaned = true;
 }

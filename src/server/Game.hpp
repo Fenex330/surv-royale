@@ -14,12 +14,18 @@ public:
     sf::Clock sessionClock;
 
     std::unordered_map<std::string, Player> players;
+    std::unordered_map<std::string, std::string> config;
     std::vector<std::string> banlist;
+
     std::string password;
-    std::string command2;
     std::string command1;
+    std::string command2;
+
     std::thread user_input;
     std::mutex m;
+
+    std::fstream config_f;
+    std::fstream banlist_f;
 
     std::random_device dev;
     std::mt19937 rng;
@@ -33,6 +39,7 @@ public:
     void run();
     void scan();
     void parse();
+
     void listen();
     void receiveJoinRequest(sf::IpAddress address, unsigned short port);
     void receivePlayerInput();
