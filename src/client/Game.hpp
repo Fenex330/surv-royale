@@ -16,7 +16,6 @@ public:
     sf::Packet packet;
     sf::IpAddress server_address;
     sf::Int8 slot;
-    sf::Int32 ID;
 
     sf::Clock imguiClock;
     sf::Clock udpClock;
@@ -29,9 +28,12 @@ public:
     int ping_count;
     float crosshair_distance;
     unsigned short server_port;
+
+    std::unordered_map<std::string, Player> players;
+
+    std::string ID;
     std::string password;
     std::string join_error;
-    std::unordered_map<std::string, Player> players;
 
     std::random_device dev;
     std::mt19937 rng;

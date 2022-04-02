@@ -155,13 +155,10 @@ void Game::draw()
 
 void Game::generateID()
 {
-    ID = 0;
+    ID = "";
 
-    for (int i = 0; i < 9; i++)
-    {
-        ID *= 10;
-        ID += dist(rng);
-    }
+    for (int i = 0; i < 20; i++)
+        ID = std::to_string(dist(rng));
 }
 
 void Game::countFpsAndPing()

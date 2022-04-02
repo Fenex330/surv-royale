@@ -6,7 +6,7 @@ class Player
 {
     public:
         bool active;
-        sf::Int32 ID;
+        std::string ID;
         sf::IpAddress address;
         unsigned short port;
         unsigned short slot;

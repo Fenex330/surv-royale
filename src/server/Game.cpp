@@ -142,7 +142,7 @@ void Game::listen()
 void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 {
     std::string nickname, password;
-    sf::Int32 ID;
+    std::string ID;
     sf::Time elapsed = sessionClock.getElapsedTime();
 
     packet >> nickname >> ID >> password;
@@ -181,7 +181,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 void Game::receivePlayerInput()
 {
     std::string nickname;
-    sf::Int32 ID;
+    std::string ID;
 
     packet >> nickname >> ID;
 
