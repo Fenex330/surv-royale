@@ -11,6 +11,8 @@ Game::Game() : rng (dev()),
     std::atexit(Game::cleanup);
     user_input.detach();
 
+    clog << "version " << surv::VERSION << endl;
+
     if (!config_f)
     {
         cerr << "server.conf open error" << endl;

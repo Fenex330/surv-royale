@@ -6,7 +6,7 @@ bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
-Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Main Menu", sf::Style::Close),
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), surv::VERSION, sf::Style::Close),
                server_port (surv::DEFAULT_PORT),
                crosshair_distance (0.0),
                slot (1),
@@ -287,7 +287,7 @@ void Game::receiveJoinError()
 
         case ErrorCodes::InvalidVersion:
             packet >> version;
-            join_error = "versions do not match, please upgrade or downgrade your client.\nServer version is: " + version;
+            join_error = "versions do not match\nplease upgrade or downgrade your client\nserver version is " + version;
             break;
 
         case ErrorCodes::InvalidPassword:
