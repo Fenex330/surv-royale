@@ -26,7 +26,7 @@ namespace surv
         return std::sqrt(std::pow((x1 - x2), 2) + std::pow((y1 - y2), 2));
     }
 
-    inline const unsigned short DEFAULT_PORT = 7777;
+    inline const unsigned int DEFAULT_PORT = 7777;
     inline const unsigned int VIEW_DIM_X = 800;
     inline const unsigned int VIEW_DIM_Y = 800;
     inline const unsigned int DEFAULT_PLAYER_SPEED = 10;

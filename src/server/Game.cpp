@@ -38,10 +38,12 @@ Game::Game() : rng (dev()),
         banlist.push_back(line);
     }
 
+    password = config.at("password") == "-" ? "" : config.at("password");
+
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
-    if (UDPsocket.bind(surv::DEFAULT_PORT) != sf::Socket::Done)
+    if (UDPsocket.bind(std::stoi(config.at("port"))) != sf::Socket::Done)
         std::exit(1);
 }
 
