@@ -129,7 +129,15 @@ void Game::imguiMapUI()
         nickname = std::string(buf1);
         server_address = std::string(buf2);
         password = std::string(buf3);
-        generateID();
+
+        if (std::filesystem::exists("ID"))
+        {
+            std::ifstream id("ID");
+            id >> ID;
+        }
+        else
+            generateID();
+
         sendJoinRequest();
     }
 
@@ -159,6 +167,9 @@ void Game::generateID()
 
     for (int i = 0; i < 20; i++)
         ID = std::to_string(dist(rng));
+
+    std::ofstream id("ID");
+    id << ID << endl;
 }
 
 void Game::countFpsAndPing()
@@ -372,5 +383,9 @@ void Game::cleanup()
 
     free(tarFile);
     ImGui::SFML::Shutdown();
+
+    if (!isGameRunning)
+        std::filesystem::remove("ID");
+
     isCleaned = true;
 }
