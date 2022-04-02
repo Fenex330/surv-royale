@@ -42,9 +42,10 @@ Game::Game() : rng (dev()),
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
+    int i = 0;
 
-    if (UDPsocket.bind(std::stoi(config.at("port"))) != sf::Socket::Done)
-        std::exit(1);
+    while (UDPsocket.bind(std::stoi(config.at("port")) + i) != sf::Socket::Done) i++;
+    clog << "binded to port " << UDPsocket.getLocalPort() << endl;
 }
 
 Game::~Game()

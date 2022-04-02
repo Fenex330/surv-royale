@@ -135,7 +135,7 @@ void Game::imguiMapUI()
     ImGui::Begin("Main Menu");
     ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), join_error.c_str());
     ImGui::InputText("nickname", buf1, 64);
-    ImGui::InputText("server address", buf2, 64);
+    ImGui::InputText("address", buf2, 64);
     ImGui::InputTextWithHint("password", "leave empty if none", buf3, 64, ImGuiInputTextFlags_Password);
 
     if (ImGui::Button("PLAY!"))
