@@ -93,6 +93,7 @@ void Game::parse()
         sendJoinError(ErrorCodes::IpBan, players.at(nick).address, players.at(nick).port);
         banlist.push_back(players.at(nick).address.toString());
         banlist_f << players.at(nick).address.toString() << endl;
+        banlist_f.flush();
         players.erase(nick);
     }
     else if (command1 == "exit" || command1 == "quit")
