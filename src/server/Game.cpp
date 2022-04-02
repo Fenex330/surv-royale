@@ -49,11 +49,11 @@ Game::Game() : rng (dev()),
 
 Game::~Game()
 {
-    packet.clear()
+    packet.clear();
     packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(ErrorCodes::Kick);
 
     for (const auto& n : players)
-        UDPsocket.send(packet, n.second.address, n.second.port)
+        UDPsocket.send(packet, n.second.address, n.second.port);
 }
 
 void Game::run()
