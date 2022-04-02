@@ -1,12 +1,12 @@
 #include "headers.hpp"
 
+std::fstream Game::config_f (SERVER_CONF_PATH, std::ios::in);
+std::fstream Game::banlist_f (BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
 std::atomic<bool> Game::quit (false);
 
 Game::Game() : rng (dev()),
                dist (0, 9),
-               user_input (&Game::scan, this),
-               config_f (SERVER_CONF_PATH, std::ios::in),
-               banlist_f (BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app)
+               user_input (&Game::scan, this)
 {
     std::atexit(Game::cleanup);
     user_input.detach();
@@ -35,7 +35,7 @@ Game::Game() : rng (dev()),
     {
         std::string line;
         std::getline(banlist_f, line);
-        banlist.append(line);
+        banlist.push_back(line);
     }
 
     UDPsocket.setBlocking(false);
