@@ -271,16 +271,22 @@ void Game::receiveJoinError()
             join_error = "game is full";
             break;
 
-        case ErrorCodes::IpBan:
-            join_error = "you have been banned from this server";
-            break;
-
         case ErrorCodes::InvalidPassword:
             join_error = "invalid password";
             break;
 
         case ErrorCodes::NicknameExists:
             join_error = "nickname already exists";
+            break;
+
+        case ErrorCodes::Kick:
+            isGameRunning = false;
+            join_error = "you have been kicked from this match";
+            break;
+
+        case ErrorCodes::IpBan:
+            isGameRunning = false;
+            join_error = "you have been banned from this server";
             break;
 
         default:

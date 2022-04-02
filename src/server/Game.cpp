@@ -1,12 +1,13 @@
 #include "headers.hpp"
 
-std::atomic<bool> Game::quit = false;
+std::atomic<bool> Game::quit (false);
 
 Game::Game() : rng (dev()), dist (0, 9)
 {
     std::atexit(Game::cleanup);
 
     user_input = std::thread(&Game::scan, this);
+    user_input.detach();
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
@@ -37,10 +38,8 @@ void Game::scan()
         std::string buffer;
         std::cin >> buffer;
 
-        {
-            std::lock_guard<std::mutex> guard (m);
-            command = buffer;
-        }
+        std::lock_guard<std::mutex> lock(m);
+        command = buffer;
     }
 }
 
@@ -49,9 +48,25 @@ void Game::parse()
     if (command.empty())
         return;
 
-    if (command == "list")
+    if (command.substr(0, 4) == "kick")
     {
-        cout << "lol\n";
+        std::string nick = command.substr(4);
+        sendJoinError(ErrorCodes::Kick, players.at(nick).address, players.at(nick).port);
+        players.erase(nick);
+    }
+    else if (command.substr(0, 3) == "ban")
+    {
+        std::string nick = command.substr(3);
+        sendJoinError(ErrorCodes::IpBan, players.at(nick).address, players.at(nick).port);
+        players.erase(nick);
+        banlist.push_back(players.at(nick).address.toString());
+        // add ip to banlist.txt
+    }
+    else if (command.substr(0, 5) == "unban")
+    {
+        std::string address = command.substr(5);
+        banlist.erase(std::find(banlist.begin(), banlist.end(), address));
+        // remove ip from banlist.txt
     }
     else
     {

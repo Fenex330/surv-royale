@@ -60,7 +60,8 @@ enum class NetCodes
 enum class ErrorCodes
 {
     MapFull,
-    IpBan,
     InvalidPassword,
-    NicknameExists
+    NicknameExists,
+    Kick,
+    IpBan
 };

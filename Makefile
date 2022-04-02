@@ -3,8 +3,8 @@ CXXFLAGS = -std=c++17 -pedantic-errors
 DEBUG_FLAGS = -O0 -g -Wall -Wextra -Wno-reorder -ftrapv
 RELEASE_FLAGS = -O3 -DNDEBUG
 RELEASE_MAX_FLAGS = -Ofast -march=native -DNDEBUG
-LIBS_CLIENT = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -lGL
-LIBS_SERVER = -lsfml-network -lsfml-system
+LIBS_CLIENT = -pthread -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -lGL
+LIBS_SERVER = -pthread -lsfml-network -lsfml-system
 PREFIX = /usr/local
 SHARE_PATH = $(PREFIX)/share/SurvRoyale
 BIN_PATH = $(PREFIX)/bin
