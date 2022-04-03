@@ -28,12 +28,8 @@ namespace surv
 
     inline const unsigned int VIEW_DIM_X = 800;
     inline const unsigned int VIEW_DIM_Y = 800;
-    inline const unsigned int DEFAULT_PLAYER_SPEED = 10;
-    inline const unsigned int MAP_DIMENSION = 10000;
-    inline const unsigned int MAX_PLAYERS = 100;
-    inline const unsigned int MAX_BULLETS = 10000;
     inline const unsigned int SEND_DELAY = 50;
-    inline const unsigned int JOIN_TIME = 60;
+    inline const unsigned int MAX_BULLETS = 1000;
     inline const double PI = std::acos(-1);
     inline const float CROSS_CLAMP = getDistance(VIEW_DIM_X, 0, VIEW_DIM_Y, 0);
     inline const std::string VERSION = "0.0.1";

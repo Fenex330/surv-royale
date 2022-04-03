@@ -166,7 +166,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    if (players.size() >= surv::MAX_PLAYERS || elapsed > sf::seconds(surv::JOIN_TIME))
+    if (players.size() >= std::stoul(config.at("max_players")) || elapsed > sf::seconds(std::stoi(config.at("join_time"))))
     {
         sendJoinError(ErrorCodes::MapFull, address, port);
         return;
@@ -185,6 +185,8 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
     }
 
     players.insert(std::make_pair(nickname, Player()));
+    players.at(nickname).map_size = std::stoi(config.at("map_size"));
+    players.at(nickname).speed = std::stoi(config.at("player_speed"));
     players.at(nickname).ID = ID;
     players.at(nickname).address = address;
     players.at(nickname).port = port;

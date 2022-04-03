@@ -9,7 +9,6 @@ void Player::init(std::string nickname)
     sprite.setTexture(texture);
 
     sprite.setOrigin(sprite.getLocalBounds().width * 0.5, sprite.getLocalBounds().height * 0.5);
-    sprite.setPosition(surv::MAP_DIMENSION / 2, surv::MAP_DIMENSION / 2);
     sprite.setScale(0.25, 0.25);
 
     active = true;

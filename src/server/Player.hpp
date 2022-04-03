@@ -14,8 +14,11 @@ class Player
         float crosshair_distance;
         sf::Int16 x;
         sf::Int16 y;
+        int map_size;
+        int speed;
 
         Player();
+
         void interact();
         void fire();
         void move(sf::Int16 x, sf::Int16 y);
