@@ -9,7 +9,7 @@ PREFIX = /usr/local
 SHARE_PATH = $(PREFIX)/share/SurvRoyale
 BIN_PATH = $(PREFIX)/bin
 
-# additional compiler flags: -Werror, -Weffc++, -Weverything (clang only), -pthread
+# additional warning flags: -Werror, -Weffc++, -Weverything (clang only)
 
 all: release client-serial server-serial
 

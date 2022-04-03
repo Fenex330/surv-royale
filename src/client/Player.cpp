@@ -31,5 +31,5 @@ void Player::setPosition(int x, int y)
 
 void Player::setRotation(double rotation)
 {
-    sprite.setRotation(rotation);
+    sprite.setRotation(rotation * (180.0 / surv::PI));
 }

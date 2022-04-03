@@ -23,5 +23,6 @@
 #include "../common.hpp"
 #include "dxTarRead.h"
 
+#include "Bullet.hpp"
 #include "Player.hpp"
 #include "Game.hpp"

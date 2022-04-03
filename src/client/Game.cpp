@@ -331,7 +331,7 @@ void Game::receivePlayersList()
         }
 
         players.at(nick).setPosition(x, -y);
-        players.at(nick).setRotation(rotation + 90.0);
+        players.at(nick).setRotation(rotation + surv::PI / 2.0);
     }
 }
 
@@ -372,7 +372,7 @@ std::pair<bool, bool> Game::mainPlayerInputMouse()
 double Game::mainPlayerInputRotation()
 {
     sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
-    return std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2.0, mouse_position.x - surv::VIEW_DIM_X / 2.0) * (180.0 / surv::PI) + 180.0;
+    return std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2.0, mouse_position.x - surv::VIEW_DIM_X / 2.0) + surv::PI;
 }
 
 void Game::mainPlayerInputSlot()
