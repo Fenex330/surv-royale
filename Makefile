@@ -5,7 +5,7 @@ RELEASE_FLAGS = -O3 -DNDEBUG
 RELEASE_MAX_FLAGS = -Ofast -march=native -DNDEBUG
 LIBS_CLIENT = -pthread -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -lGL
 LIBS_SERVER = -pthread -lsfml-network -lsfml-system
-PREFIX = /usr/local
+PREFIX ?= /usr/local
 SHARE_PATH = $(PREFIX)/share/SurvRoyale
 BIN_PATH = $(PREFIX)/bin
 

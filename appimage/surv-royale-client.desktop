@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Icon=surv-royale-client
+Exec=surv-royale-client
+Name=SurvRoyale
+Type=Application
+Categories=Game;
+#Terminal=false
