@@ -7,14 +7,16 @@
     #define SERVER_CONF_PATH "server.conf"
     #define BANLIST_PATH "banlist.txt"
 #elif defined (APPIMAGE)
-    #define GAMEDATA_PATH "../share/SurvRoyale/GameData.tar"
-    #define SERVER_CONF_PATH "../share/SurvRoyale/server.conf"
-    #define BANLIST_PATH "../share/SurvRoyale/banlist.txt"
+    #define GAMEDATA_PATH "share/SurvRoyale/GameData.tar"
+    #define SERVER_CONF_PATH "share/SurvRoyale/server.conf"
+    #define BANLIST_PATH "share/SurvRoyale/banlist.txt"
 #else
     #define GAMEDATA_PATH "/usr/local/share/SurvRoyale/GameData.tar"
     #define SERVER_CONF_PATH "/usr/local/share/SurvRoyale/server.conf"
     #define BANLIST_PATH "/usr/local/share/SurvRoyale/banlist.txt"
 #endif
+
+namespace fs = std::filesystem;
 
 using std::cin;
 using std::cout;

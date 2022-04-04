@@ -2,7 +2,7 @@
 
 if [[ $1 == "--server" ]]
 then
-    exec ./surv-royale-server
+    exec bin/surv-royale-server
 else
-    exec ./surv-royale-client
+    exec bin/surv-royale-client
 fi

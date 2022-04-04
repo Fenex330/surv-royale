@@ -1,5 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -pedantic-errors
+APPIMAGE_FLAGS = -DAPPIMAGE
 DEBUG_FLAGS = -O0 -g -Wall -Wextra -Wno-reorder -ftrapv
 RELEASE_FLAGS = -O3 -DNDEBUG
 RELEASE_MAX_FLAGS = -Ofast -march=native -DNDEBUG
@@ -13,6 +14,9 @@ BIN_PATH = $(PREFIX)/bin
 # export LD_LIBRARY_PATH=<sfml-install-path>/lib && ./sfml-app
 
 all: release client-serial server-serial
+
+appimage:
+	$(eval CXXFLAGS += $(APPIMAGE_FLAGS))
 
 debug:
 	$(eval CXXFLAGS += $(DEBUG_FLAGS))

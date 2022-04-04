@@ -47,7 +47,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
-    if (std::filesystem::exists("ID"))
+    if (fs::exists("ID"))
     {
         unsigned short local_port;
         std::ifstream id("ID");
@@ -396,7 +396,7 @@ void Game::cleanup()
     ImGui::SFML::Shutdown();
 
     if (!isGameRunning)
-        std::filesystem::remove("ID");
+        fs::remove("ID");
 
     isCleaned = true;
 }
