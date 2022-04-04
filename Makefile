@@ -46,6 +46,7 @@ clean:
 	rm imgui.ini &
 	rm ID &
 	rm *.AppImage &
+	rm -rf build &
 
 install:
 	mkdir $(SHARE_PATH)
