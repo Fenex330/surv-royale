@@ -77,7 +77,7 @@ package:
 	$(MAKE) install PREFIX=build/AppDir/usr
 	cp /usr/lib/libsfml-* build/AppDir/usr/lib
 	cp appimage/SurvRoyale.sh build/AppDir/usr/bin/SurvRoyale
-	cp appimage/surv-royale-client.desktop build/AppDir
-	cp appimage/surv-royale-client.png build/AppDir
+	cp appimage/SurvRoyale.desktop build/AppDir
+	cp appimage/SurvRoyale.png build/AppDir
 	cp appimage/AppRun build/AppDir
 	appimage/linuxdeploy-x86_64.AppImage --appdir build/AppDir --output appimage
