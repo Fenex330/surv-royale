@@ -13,11 +13,8 @@ BIN_PATH = $(PREFIX)/bin
 # additional warning flags: -Werror, -Weffc++, -Weverything (clang only)
 # export LD_LIBRARY_PATH=<sfml-install-path>/lib && ./sfml-app
 
-.PHONY:
-	all appimage debug release release-max client server client-serial server-serial clean install uninstall package
-
-all:
-	release client-serial server-serial
+.PHONY: all appimage debug release release-max client server client-serial server-serial clean install uninstall package
+all: release client-serial server-serial
 
 appimage:
 	$(eval CXXFLAGS += $(APPIMAGE_FLAGS))
