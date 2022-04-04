@@ -1,3 +1,4 @@
+*.AppImage
 build/
 surv-royale-client
 surv-royale-server

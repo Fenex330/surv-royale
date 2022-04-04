@@ -10,6 +10,7 @@ SHARE_PATH = $(PREFIX)/share/SurvRoyale
 BIN_PATH = $(PREFIX)/bin
 
 # additional warning flags: -Werror, -Weffc++, -Weverything (clang only)
+# export LD_LIBRARY_PATH=<sfml-install-path>/lib && ./sfml-app
 
 all: release client-serial server-serial
 
@@ -44,20 +45,37 @@ clean:
 	rm src/server/*.o &
 	rm imgui.ini &
 	rm ID &
+	rm *.AppImage &
 
 install:
 	mkdir $(SHARE_PATH)
-	tar -cf $(SHARE_PATH)/GameData.tar GameData &
-	cp server.conf $(SHARE_PATH) &
-	cp banlist.txt $(SHARE_PATH) &
-	cp LICENSE.txt $(SHARE_PATH) &
-	cp CHANGELOG.txt $(SHARE_PATH) &
-	cp surv-royale-client $(BIN_PATH) &
-	cp surv-royale-server $(BIN_PATH) &
-	chmod 777 $(SHARE_PATH)/server.conf &
-	chmod 777 $(SHARE_PATH)/banlist.txt &
+	cp server.conf $(SHARE_PATH)
+	cp banlist.txt $(SHARE_PATH)
+	cp LICENSE.txt $(SHARE_PATH)
+	cp CHANGELOG.txt $(SHARE_PATH)
+	cp surv-royale-client $(BIN_PATH)
+	cp surv-royale-server $(BIN_PATH)
+	chmod 777 $(SHARE_PATH)/server.conf
+	chmod 777 $(SHARE_PATH)/banlist.txt
+	tar -cf $(SHARE_PATH)/GameData.tar GameData
 
 uninstall:
 	rm -rf $(SHARE_PATH) &
 	rm $(BIN_PATH)/surv-royale-client &
 	rm $(BIN_PATH)/surv-royale-server &
+
+package:
+	mkdir -p build
+	rm -rf build
+	mkdir build
+	mkdir build/AppDir
+	mkdir build/AppDir/usr
+	mkdir build/AppDir/usr/bin
+	mkdir build/AppDir/usr/lib
+	mkdir build/AppDir/usr/share
+	$(MAKE) install PREFIX=build/AppDir/usr
+	cp /usr/lib/libsfml-* build/AppDir/usr/lib
+	cp appimage/surv-royale-client.desktop build/AppDir
+	cp appimage/surv-royale-client.png build/AppDir
+	cp appimage/AppRun build/AppDir
+	appimage/linuxdeploy-x86_64.AppImage --appdir build/AppDir --output appimage
