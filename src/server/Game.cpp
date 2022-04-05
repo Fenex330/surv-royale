@@ -9,11 +9,6 @@ Game::Game() : rng (dev()),
     user_input.detach();
     clog << "SurvRoyale version " << surv::VERSION << endl;
 
-    //char buf [100];
-    //std::system("cd ~ && pwd > /tmp/curdir");
-    //std::ifstream("/tmp/curdir").getline();
-    //fs::remove("/tmp/curdir");
-
     const std::string HOME = std::getenv("HOME");
 
     if (!fs::exists(HOME + CONFIG_DIR))
