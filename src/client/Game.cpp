@@ -173,7 +173,7 @@ void Game::generateID()
     for (int i = 0; i < 20; i++)
         ID.append(std::to_string(dist(rng)));
 
-    std::ofstream id("/tmp/surv-royale-ID");
+    std::ofstream id (ID_PATH);
     id << ID << " " << UDPsocket.getLocalPort() << endl;
 }
 
