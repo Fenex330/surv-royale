@@ -9,16 +9,21 @@ Game::Game() : rng (dev()),
     user_input.detach();
     clog << "SurvRoyale version " << surv::VERSION << endl;
 
-    const std::string HOME = std::getenv("HOME");
+    #ifdef _WIN32
+        config_f.open(SERVER_CONF_PATH, std::ios::in);
+        banlist_f.open(BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
+    #else
+        const std::string HOME = std::getenv("HOME");
 
-    if (!fs::exists(HOME + CONFIG_DIR))
-        fs::create_directory(HOME + CONFIG_DIR);
+        if (!fs::exists(HOME + CONFIG_DIR))
+            fs::create_directory(HOME + CONFIG_DIR);
 
-    if (!fs::exists(HOME + SERVER_CONF_PATH))
-        fs::copy_file(DEFAULT_SERVER_CONF_PATH, HOME + SERVER_CONF_PATH);
+        if (!fs::exists(HOME + SERVER_CONF_PATH))
+            fs::copy_file(DEFAULT_SERVER_CONF_PATH, HOME + SERVER_CONF_PATH);
 
-    config_f.open(HOME + SERVER_CONF_PATH, std::ios::in);
-    banlist_f.open(HOME + BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
+        config_f.open(HOME + SERVER_CONF_PATH, std::ios::in);
+        banlist_f.open(HOME + BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
+    #endif
 
     if (!config_f)
     {
