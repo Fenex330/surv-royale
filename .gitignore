@@ -1,4 +1,4 @@
-*.AppImage
+SurvRoyale-*.AppImage
 build/
 surv-royale-client
 surv-royale-server
@@ -24,6 +24,7 @@ ID
 # Compiled Dynamic libraries
 *.so
 *.dylib
+#*.dll
 
 # Fortran module files
 *.mod
