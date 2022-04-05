@@ -4,12 +4,19 @@ std::atomic<bool> Game::quit (false);
 
 Game::Game() : rng (dev()),
                dist (0, 9),
-               user_input (&Game::scan, this),
-               config_f (SERVER_CONF_PATH, std::ios::in),
-               banlist_f (BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app)
+               user_input (&Game::scan, this)
 {
     user_input.detach();
     clog << "SurvRoyale version " << surv::VERSION << endl;
+
+    if (!fs::exists(CONFIG_DIR))
+        fs::create_directory(CONFIG_DIR);
+
+    if (!fs::exists(SERVER_CONF_PATH))
+        fs::copy_file(DEFAULT_SERVER_CONF_PATH, SERVER_CONF_PATH);
+
+    config_f.open(SERVER_CONF_PATH, std::ios::in);
+    banlist_f.open(BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
 
     if (!config_f)
     {

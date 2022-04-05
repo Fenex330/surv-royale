@@ -5,21 +5,31 @@
 #ifdef _WIN32
     #define GAMEDATA_PATH "GameData.tar"
     #define SERVER_CONF_PATH "server.conf"
+    #define BANLIST_PATH "banlist.txt"
+    #define ID_PATH "ID"
 #elif defined (APPIMAGE)
     #define GAMEDATA_PATH "share/SurvRoyale/GameData.tar"
-    #define SERVER_CONF_PATH "share/SurvRoyale/server.conf"
+    #define DEFAULT_SERVER_CONF_PATH "share/SurvRoyale/server.conf"
+    #define SERVER_CONF_PATH "~/.config/SurvRoyale/server.conf"
+    #define BANLIST_PATH "~/.config/SurvRoyale/banlist.txt"
+    #define ID_PATH "/tmp/ID"
 #else
     #define GAMEDATA_PATH "/usr/local/share/SurvRoyale/GameData.tar"
-    #define SERVER_CONF_PATH "/usr/local/share/SurvRoyale/server.conf"
+    #define DEFAULT_SERVER_CONF_PATH "/usr/local/share/SurvRoyale/server.conf"
+    #define SERVER_CONF_PATH "~/.config/SurvRoyale/server.conf"
+    #define BANLIST_PATH "~/.config/SurvRoyale/banlist.txt"
+    #define ID_PATH "/tmp/ID"
 #endif
 
-namespace fs = std::filesystem;
+#define CONFIG_DIR "~/.config/SurvRoyale"
 
 using std::cin;
 using std::cout;
 using std::clog;
 using std::cerr;
 using std::endl;
+
+namespace fs = std::filesystem;
 
 namespace surv
 {

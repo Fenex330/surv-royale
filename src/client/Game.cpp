@@ -47,10 +47,10 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
-    if (fs::exists("ID"))
+    if (fs::exists(ID_PATH))
     {
         unsigned short local_port;
-        std::ifstream id("ID");
+        std::ifstream id (ID_PATH);
         id >> ID >> local_port;
 
         if (UDPsocket.bind(local_port) != sf::Socket::Done)
@@ -173,7 +173,7 @@ void Game::generateID()
     for (int i = 0; i < 20; i++)
         ID.append(std::to_string(dist(rng)));
 
-    std::ofstream id("ID");
+    std::ofstream id("/tmp/surv-royale-ID");
     id << ID << " " << UDPsocket.getLocalPort() << endl;
 }
 
@@ -396,7 +396,7 @@ void Game::cleanup()
     ImGui::SFML::Shutdown();
 
     if (!isGameRunning)
-        fs::remove("ID");
+        fs::remove(ID_PATH);
 
     isCleaned = true;
 }
