@@ -56,13 +56,10 @@ clean:
 install:
 	mkdir $(SHARE_PATH)
 	cp server.conf $(SHARE_PATH)
-	cp banlist.txt $(SHARE_PATH)
 	cp LICENSE.txt $(SHARE_PATH)
 	cp CHANGELOG.txt $(SHARE_PATH)
 	cp surv-royale-client $(BIN_PATH)
 	cp surv-royale-server $(BIN_PATH)
-	chmod 777 $(SHARE_PATH)/server.conf
-	chmod 777 $(SHARE_PATH)/banlist.txt
 	tar -cf $(SHARE_PATH)/GameData.tar GameData
 
 uninstall:
