@@ -10,18 +10,18 @@
 #elif defined (APPIMAGE)
     #define GAMEDATA_PATH "share/SurvRoyale/GameData.tar"
     #define DEFAULT_SERVER_CONF_PATH "share/SurvRoyale/server.conf"
-    #define SERVER_CONF_PATH "~/.config/SurvRoyale/server.conf"
-    #define BANLIST_PATH "~/.config/SurvRoyale/banlist.txt"
+    #define SERVER_CONF_PATH "/.config/SurvRoyale/server.conf"
+    #define BANLIST_PATH "/.config/SurvRoyale/banlist.txt"
     #define ID_PATH "/tmp/ID"
 #else
     #define GAMEDATA_PATH "/usr/local/share/SurvRoyale/GameData.tar"
     #define DEFAULT_SERVER_CONF_PATH "/usr/local/share/SurvRoyale/server.conf"
-    #define SERVER_CONF_PATH "~/.config/SurvRoyale/server.conf"
-    #define BANLIST_PATH "~/.config/SurvRoyale/banlist.txt"
+    #define SERVER_CONF_PATH "/.config/SurvRoyale/server.conf"
+    #define BANLIST_PATH "/.config/SurvRoyale/banlist.txt"
     #define ID_PATH "/tmp/ID"
 #endif
 
-#define CONFIG_DIR "~/.config/SurvRoyale"
+#define CONFIG_DIR "/.config/SurvRoyale"
 
 using std::cin;
 using std::cout;

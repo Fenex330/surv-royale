@@ -9,14 +9,21 @@ Game::Game() : rng (dev()),
     user_input.detach();
     clog << "SurvRoyale version " << surv::VERSION << endl;
 
-    if (!fs::exists(CONFIG_DIR))
-        fs::create_directory(CONFIG_DIR);
+    //char buf [100];
+    //std::system("cd ~ && pwd > /tmp/curdir");
+    //std::ifstream("/tmp/curdir").getline();
+    //fs::remove("/tmp/curdir");
 
-    if (!fs::exists(SERVER_CONF_PATH))
-        fs::copy_file(DEFAULT_SERVER_CONF_PATH, SERVER_CONF_PATH);
+    const std::string HOME = std::getenv("HOME");
 
-    config_f.open(SERVER_CONF_PATH, std::ios::in);
-    banlist_f.open(BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
+    if (!fs::exists(HOME + CONFIG_DIR))
+        fs::create_directory(HOME + CONFIG_DIR);
+
+    if (!fs::exists(HOME + SERVER_CONF_PATH))
+        fs::copy_file(DEFAULT_SERVER_CONF_PATH, HOME + SERVER_CONF_PATH);
+
+    config_f.open(HOME + SERVER_CONF_PATH, std::ios::in);
+    banlist_f.open(HOME + BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
 
     if (!config_f)
     {
