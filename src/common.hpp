@@ -45,7 +45,6 @@ namespace surv
     inline const unsigned int MAX_BULLETS = 1000;
     inline const double PI = std::acos(-1);
     inline const float CROSS_CLAMP = getDistance(VIEW_DIM_X, 0, VIEW_DIM_Y, 0);
-    inline const std::string VERSION = "0.0.1";
 }
 
 /*

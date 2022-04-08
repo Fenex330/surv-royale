@@ -6,7 +6,7 @@ bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
-Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "SurvRoyale version " + surv::VERSION, sf::Style::Close),
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "SurvRoyale version " + std::string(GAME_VERSION), sf::Style::Close),
                crosshair_distance (0.0),
                slot (1),
                rng (dev()),
@@ -211,7 +211,7 @@ void Game::send()
 
 void Game::sendJoinRequest()
 {
-    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password << surv::VERSION;
+    packet << static_cast<sf::Uint8>(NetCodes::JoinRequest) << nickname << ID << password << std::string(GAME_VERSION);
     send();
 }
 
@@ -287,7 +287,7 @@ void Game::receiveJoinError()
 
         case ErrorCodes::InvalidVersion:
             packet >> version;
-            join_error = "versions do not match\nplease upgrade or downgrade your client\nserver version is " + version;
+            join_error = "versions do not match\nplease upgrade or downgrade your client\nserver version is " + std::string(GAME_VERSION);
             break;
 
         case ErrorCodes::InvalidPassword:

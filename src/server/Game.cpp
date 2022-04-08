@@ -7,7 +7,7 @@ Game::Game() : rng (dev()),
                user_input (&Game::scan, this)
 {
     user_input.detach();
-    clog << "SurvRoyale version " << surv::VERSION << endl;
+    clog << "SurvRoyale version " << GAME_VERSION << endl;
 
     #ifdef _WIN32
         config_f.open(SERVER_CONF_PATH, std::ios::in);
@@ -166,10 +166,10 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 
     packet >> nickname >> ID >> password >> version;
 
-    if (version != surv::VERSION)
+    if (version != GAME_VERSION)
     {
         packet.clear();
-        packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(ErrorCodes::InvalidVersion) << surv::VERSION;
+        packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(ErrorCodes::InvalidVersion) << std::string(GAME_VERSION);
         UDPsocket.send(packet, address, port);
         return;
     }
