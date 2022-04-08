@@ -23,7 +23,7 @@ At the moment, only Linux and Windows platforms are officially supported. Macos 
 
 2. Clone the repository:
 ```
-    git clone <url from one of the mirrors below>
+    git clone <mirror url>
 ```
 
 3. Build and install the game
