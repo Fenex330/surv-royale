@@ -9,7 +9,6 @@ g++ -std=c++17 -pedantic-errors -O3 -DNDEBUG -pthread -DGAME_VERSION=\"%VAR%\" s
 7z a build\GameData.tar GameData
 
 copy server.conf build
-copy banlist.txt build
 copy LICENSE.txt build
 copy CHANGELOG.txt build
 copy win\lib\*.dll build
