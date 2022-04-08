@@ -30,11 +30,11 @@ release-max:
 	$(eval CXXFLAGS += $(RELEASE_MAX_FLAGS))
 
 client:
-	parallel $(CXX) $(CXXFLAGS) $(GAME_VERSION) -pipe -c {} -o {}.o ::: src/client/*.cpp src/client/imgui/*.cpp
+	parallel -q $(CXX) $(CXXFLAGS) $(GAME_VERSION) -pipe -c {} -o {}.o ::: src/client/*.cpp src/client/imgui/*.cpp
 	$(CXX) src/client/*.o src/client/imgui/*.o $(LIBS_CLIENT) -o surv-royale-client
 
 server:
-	parallel $(CXX) $(CXXFLAGS) $(GAME_VERSION) -pipe -c {} -o {}.o ::: src/server/*.cpp
+	parallel -q $(CXX) $(CXXFLAGS) $(GAME_VERSION) -pipe -c {} -o {}.o ::: src/server/*.cpp
 	$(CXX) src/server/*.o $(LIBS_SERVER) -o surv-royale-server
 
 client-serial:
