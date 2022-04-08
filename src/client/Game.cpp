@@ -287,7 +287,7 @@ void Game::receiveJoinError()
 
         case ErrorCodes::InvalidVersion:
             packet >> version;
-            join_error = "versions do not match\nplease upgrade or downgrade your client\nserver version is " + std::string(GAME_VERSION);
+            join_error = "versions do not match\nplease upgrade or downgrade your client\nserver version is " + version;
             break;
 
         case ErrorCodes::InvalidPassword:
