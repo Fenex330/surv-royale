@@ -70,12 +70,9 @@ uninstall:
 package:
 	mkdir -p build
 	rm -rf build
-	mkdir build
-	mkdir build/AppDir
-	mkdir build/AppDir/usr
-	mkdir build/AppDir/usr/bin
-	mkdir build/AppDir/usr/lib
-	mkdir build/AppDir/usr/share
+	mkdir -p build/AppDir/usr/bin
+	mkdir -p build/AppDir/usr/lib
+	mkdir -p build/AppDir/usr/share
 	$(MAKE) install PREFIX=build/AppDir/usr
 	cp /usr/lib/libsfml-* build/AppDir/usr/lib
 	cp appimage/SurvRoyale.sh build/AppDir/usr/bin/SurvRoyale
