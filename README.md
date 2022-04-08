@@ -19,7 +19,7 @@ At the moment, only Linux and Windows platforms are officially supported. Macos 
 
 ### Building
 
-1. Dependencies: GNU make, GNU parallel (optional), git, C++17 capable compiler, 7zip/tar, SFML>=2.5
+1. Dependencies: GNU parallel (optional), GNU make, git, C++17 capable compiler, 7zip/tar, SFML>=2.5
 
 2. Clone the repository:
 ```
@@ -40,8 +40,8 @@ At the moment, only Linux and Windows platforms are officially supported. Macos 
 On Windows, SFML is bundled locally with the project. On Linux and other platforms however, nothing is bundled,
 the dependencies are assumed to be installed globally system-wide.
 
-On Windows, the only compiler supported is MinGW (tested winlibs-x86_64-posix-seh-gcc-11.2.0-llvm-14.0.0-mingw-w64msvcrt-9.0.0-r7.7z)
-and is assumed that directories for compiler and 7zip executables exist inside PATH variable.
+On Windows, the only compiler supported is MinGW (tested on winlibs-x86_64-posix-seh-gcc-11.2.0-llvm-14.0.0-mingw-w64msvcrt-9.0.0-r7.7z)
+and it is assumed that directories for compiler and 7zip executables exist inside PATH variable.
 Also, universal C runtime comes pre-installed on Windows 10, but needs to be manually installed on earlier Windows versions.
 
 Windows and Linux builds are provided for download in "Releases" section as self-contained zip archive
@@ -52,9 +52,9 @@ By default, launching AppImage will run the client, to run the server pass --ser
 
 ### Mirrors
 
-Primary https://github.com/Fenex330/surv-royale.git
+- https://github.com/Fenex330/surv-royale.git
 
-Secondary https://notabug.org/Fenex33/surv-royale.git
+- https://notabug.org/Fenex33/surv-royale.git
 
 
 
