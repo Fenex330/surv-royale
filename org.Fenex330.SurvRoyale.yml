@@ -7,7 +7,8 @@ modules:
   - name: SurvRoyale
     buildsystem: make
     build-commands:
-      - mkdir -p app
+      - make appimage release client-serial server-serial package
+        mkdir -p app
         cp -r build/AppDir/* app
     sources:
       - type: directory
