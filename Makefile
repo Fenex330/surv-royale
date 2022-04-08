@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -pedantic-errors
 APPIMAGE_FLAGS = -DAPPIMAGE
-GAME_VERSION := -DGAME_VERSION="$(shell git describe --abbrev=100)"
+GAME_VERSION := -DGAME_VERSION='"$(shell git describe --abbrev=100)"'
 DEBUG_FLAGS = -O0 -g -Wall -Wextra -Wno-reorder -ftrapv
 RELEASE_FLAGS = -O3 -DNDEBUG
 RELEASE_MAX_FLAGS = -Ofast -march=native -DNDEBUG
