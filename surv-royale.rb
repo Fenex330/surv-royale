@@ -6,3 +6,9 @@ class SurvRoyale < Formula
   license "MIT"
   head "https://github.com/Fenex330/surv-royale.git", branch: "master"
   depends_on "sfml"
+
+  def install
+    system "make"
+    system "make", "install"
+  end
+end
