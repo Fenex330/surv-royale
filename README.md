@@ -22,21 +22,25 @@ on voluntary basis only.
 
 1. Satisfy dependencies: Homebrew (MacOS only), GNU parallel (optional), GNU make, git, C++17 capable compiler, 7zip/tar, SFML>=2.5
 
-2. Clone the repository
+2. Clone the repository and select desired version
 ```
     git clone <mirror url>
+    git checkout <version tag>
 ```
 
 3. Build and install the game
 ```
-    make && make install
+    make
+    make install
 ```
 
 4. On Windows, execute build-windows.bat instead - the built game will be placed inside "build" directory
 
-5. On MacOS, ignore steps 2, 3, 4 and just run the command below
+5. On MacOS, ignore steps 2, 3, 4 and just run the commands below
 ```
-    brew tap fenex33/surv <mirror url> && brew update && brew install --HEAD surv-royale
+    brew tap fenex33/surv <mirror url>
+    brew update
+    brew install --HEAD surv-royale
 ```
 
 
