@@ -34,7 +34,7 @@ on voluntary basis only.
 
 4. On Windows, execute build-windows.bat instead - the built game will be placed inside "build" directory
 
-5. On MacOS, run the following
+5. On MacOS, ignore steps 2, 3, 4 and just run the command below
 ```
     brew tap fenex33/surv <mirror url> && brew install --HEAD surv-royale
 ```
