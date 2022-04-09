@@ -17,7 +17,7 @@ class Player
         int map_size;
         int speed;
 
-        Player();
+        Player(int m_size);
 
         void interact();
         void fire();

@@ -1,6 +1,7 @@
 #include "headers.hpp"
 
-Player::Player() : active (true),
+Player::Player(int m_size) : active (true),
+                   map_size (m_size),
                    slot (1),
                    crosshair_distance (0.0),
                    rotation (0.0),

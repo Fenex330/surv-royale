@@ -133,7 +133,7 @@ void Game::imguiMapUI()
     static char buf4[64] = "";
 
     ImGui::Begin("Main Menu");
-    ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), join_error.c_str());
+    ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "%s", join_error.c_str());
     ImGui::InputText("nickname", buf1, 64);
     ImGui::InputText("address", buf2, 64);
     ImGui::InputText("port", buf3, 64);

@@ -198,8 +198,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    players.insert(std::make_pair(nickname, Player()));
-    players.at(nickname).map_size = std::stoi(config.at("map_size"));
+    players.insert(std::make_pair(nickname, Player(std::stoi(config.at("map_size")))));
     players.at(nickname).speed = std::stoi(config.at("player_speed"));
     players.at(nickname).ID = ID;
     players.at(nickname).address = address;
