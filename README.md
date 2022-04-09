@@ -36,7 +36,7 @@ on voluntary basis only.
 
 5. On MacOS, run the following
 ```
-    curl https://raw.githubusercontent.com/Fenex330/surv-royale/master/surv-royale.rb > /tmp/surv-royale.rb && brew install --build-from-source --HEAD /tmp/surv-royale.rb
+    brew tap fenex33/surv <mirror url> && brew install --HEAD surv-royale
 ```
 
 

@@ -4,7 +4,7 @@ class SurvRoyale < Formula
   url "https://github.com/Fenex330/surv-royale/archive/refs/tags/v0.0.1.tar.gz"
   sha256 "e2977edff3e1b855845230695839f16a055c6a952de2fbd9d7d9b733ca8629b6"
   license "MIT"
-  head "https://github.com/Fenex330/surv-royale.git", tag: "v0.0.1"
+  head "https://github.com/Fenex330/surv-royale.git", branch: "master"
 
   depends_on "sfml"
   #depends_on "parallel" => :build
@@ -13,6 +13,5 @@ class SurvRoyale < Formula
     #system "make", "release", "client", "server"
     system "make"
     system "make", "install"
-    system "git", "describe"
   end
 end
