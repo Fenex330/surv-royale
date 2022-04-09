@@ -36,7 +36,7 @@ on voluntary basis only.
 
 5. On MacOS, ignore steps 2, 3, 4 and just run the command below
 ```
-    brew tap fenex33/surv <mirror url> && brew install --HEAD surv-royale
+    brew tap fenex33/surv <mirror url> && brew update && brew install --HEAD surv-royale
 ```
 
 
