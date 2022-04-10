@@ -21,5 +21,5 @@ class Player
 
         void interact();
         void fire();
-        void move(sf::Int16 x, sf::Int16 y);
+        void move(sf::Int16 x_, sf::Int16 y_);
 };
