@@ -36,7 +36,7 @@
 
 12) use of global variables should be minimized
 
-13) a use of constants is prefered over magic numbers
+13) a use of constants is prefered over literals
 
 14) math and logical operators should have spaces in between (a * b instead of a*b)
 
@@ -46,8 +46,8 @@
 
 17) an empty line should be put at the end of the file
 
-18) any violation to this guide is allowed only if it enhances readability
+18) template declaration should be place above the line of function/class declaration
 
-19) template declaration should be place above the line of function/class declaration
+19) if your class has only attributes and no methods use "struct" keyword
 
-20) if your class has only attributes and no methods use "struct" keyword
+20) any violation to this guide is allowed only if it enhances readability
