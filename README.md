@@ -22,10 +22,9 @@ on voluntary basis only.
 
 1. Satisfy dependencies: Homebrew (MacOS only), GNU parallel (optional), GNU make, git, C++17 capable compiler, 7zip/tar, SFML>=2.5
 
-2. Clone the repository and select desired version
+2. Clone the repository
 ```
     git clone <mirror url>
-    git checkout <version tag>
 ```
 
 3. Build and install the game
