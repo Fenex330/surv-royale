@@ -51,6 +51,7 @@ jobs:
           #TAG=$(git rev-list --tags --max-count=1)
           #git checkout $TAG
           sudo apt install libsfml-dev
+          sed -i 's#usr/lib#usr/lib/x86_64-linux-gnu#g' Makefile
           make appimage release client server package
           mv *.AppImage SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-linux.AppImage
 
