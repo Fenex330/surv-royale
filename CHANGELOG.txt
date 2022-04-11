@@ -11,5 +11,3 @@ Features that were implemented:
 - parsing server config file
 - checking git generated version string
 - ability to restore game session if client crashes
-- ported to MacOS via Homebrew
-- added automatic builds via Github Actions
