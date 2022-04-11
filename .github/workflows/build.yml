@@ -47,9 +47,9 @@ jobs:
       - name: Run Linux Build
         if: matrix.os == 'ubuntu-latest'
         run: |
-          git fetch --tags
-          TAG=$(git rev-list --tags --max-count=1)
-          git checkout $TAG
+          #git fetch --tags
+          #TAG=$(git rev-list --tags --max-count=1)
+          #git checkout $TAG
           sudo apt install libsfml-dev
           make appimage release client server package
           mv *.AppImage SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-linux.AppImage
@@ -57,9 +57,9 @@ jobs:
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
         run: |
-          git fetch --tags
-          TAG=$(git rev-list --tags --max-count=1)
-          git checkout $TAG
+          #git fetch --tags
+          #TAG=$(git rev-list --tags --max-count=1)
+          #git checkout $TAG
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           brew install --build-bottle surv-royale.rb
           brew bottle surv-royale
@@ -68,9 +68,9 @@ jobs:
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
         run: |
-          git fetch --tags
-          FOR /F %%j IN ('git rev-list --tags --max-count^=1') DO set TAG=%%j
-          git checkout %TAG%
+          #git fetch --tags
+          #FOR /F %%j IN ('git rev-list --tags --max-count^=1') DO set TAG=%%j
+          #git checkout %TAG%
           build-windows.bat
           7z a -tzip SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-windows.zip build
 
