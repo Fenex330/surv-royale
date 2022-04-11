@@ -8,7 +8,6 @@ on:
 jobs:
   build_release:
     name: Build Release
-    needs: create_release
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
