@@ -6,8 +6,22 @@ on:
       - 'v*'
 
 jobs:
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+
   build_release:
     name: Build Release
+    needs: create_release
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -34,3 +48,9 @@ jobs:
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
         run: echo "Windows Latest" > release_windows
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.create_release.outputs.tag-name }}
+          files: release_${{ matrix.release_suffix }}
