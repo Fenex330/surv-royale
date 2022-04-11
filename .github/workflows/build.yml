@@ -34,11 +34,11 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            release_suffix: ubuntu
+            release_suffix: linux.AppImage
           - os: macos-latest
-            release_suffix: mac
+            release_suffix: mac.tar.gz
           - os: windows-latest
-            release_suffix: windows
+            release_suffix: windows.zip
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -46,18 +46,26 @@ jobs:
 
       - name: Run Linux Build
         if: matrix.os == 'ubuntu-latest'
-        run: echo "Ubuntu Latest" > release_ubuntu
+        run: |
+          apt install libsfml-dev
+          make appimage release client server package
+          mv *.AppImage SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-linux.AppImage
 
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
-        run: echo "MacOS Latest" > release_mac
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          brew install --build-bottle surv-royale.rb
+          brew bottle surv-royale
+          mv *.tar.gz SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-mac.tar.gz
 
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
-        run: echo "Windows Latest" > release_windows
+        run: build-windows.bat
+        7z a -tzip SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-windows.zip build
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.create_release.outputs.tag-name }}
-          files: release_${{ matrix.release_suffix }}
+          files: SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-${{ matrix.release_suffix }}
