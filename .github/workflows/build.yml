@@ -61,7 +61,7 @@ jobs:
           #git fetch --tags
           #FOR /F %%j IN ('git rev-list --tags --max-count^=1') DO set TAG=%%j
           #git checkout %TAG%
-          build-windows.bat
+          .\build-windows.bat
           7z a -tzip SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-windows.zip build
 
       - name: Run Mac Build
