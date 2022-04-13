@@ -10,6 +10,6 @@ class SurvRoyale < Formula
 
   def install
     system "make", "release", "client", "server"
-    system "sudo", "make", "install"
+    system "make", "install"
   end
 end
