@@ -63,7 +63,7 @@ jobs:
           #git checkout %TAG%
           C:\msys64\usr\bin\wget.exe https://github.com/brechtsanders/winlibs_mingw/releases/download/11.2.0-10.0.0-msvcrt-r1/winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64msvcrt-10.0.0-r1.7z
           7z x winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64msvcrt-10.0.0-r1.7z
-          "C:\Program Files\Git\usr\bin\sed" -i 's#g++#.\mingw64\bin\g++#g' build-windows.bat
+          "C:\Program Files\Git\usr\bin\sed" -i 's#g++#.\\mingw64\\bin\\g++#g' build-windows.bat
           .\build-windows.bat
           7z a -tzip SurvRoyale-${{ github.ref_name }}-x86_64-windows.zip build
         shell: cmd
