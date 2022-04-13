@@ -55,17 +55,6 @@ jobs:
           make appimage release client server package
           mv *.AppImage SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-linux.AppImage
 
-      - name: Run Mac Build
-        if: matrix.os == 'macos-latest'
-        run: |
-          #git fetch --tags
-          #TAG=$(git rev-list --tags --max-count=1)
-          #git checkout $TAG
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          brew install --build-bottle surv-royale.rb
-          brew bottle surv-royale
-          mv *.tar.gz SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-mac.tar.gz
-
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
         run: |
@@ -74,6 +63,17 @@ jobs:
           #git checkout %TAG%
           build-windows.bat
           7z a -tzip SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-windows.zip build
+
+      - name: Run Mac Build
+        if: matrix.os == 'macos-latest'
+        run: |
+          #git fetch --tags
+          #TAG=$(git rev-list --tags --max-count=1)
+          #git checkout $TAG
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          brew install --HEAD --build-bottle surv-royale.rb
+          brew bottle surv-royale
+          mv *.tar.gz SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-mac.tar.gz
 
       - name: Release
         uses: softprops/action-gh-release@v1
