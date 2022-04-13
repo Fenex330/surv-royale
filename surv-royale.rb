@@ -9,6 +9,7 @@ class SurvRoyale < Formula
   depends_on "parallel" => :build
 
   def install
-    system "make", "release", "client", "server", "install"
+    system "make", "release", "client", "server"
+    system "install", "PREFIX=usr/local"
   end
 end
