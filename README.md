@@ -39,7 +39,7 @@ on voluntary basis only.
 ```
     brew tap fenex33/surv <mirror url>
     brew update
-    brew install --HEAD surv-royale
+    brew install surv-royale
 ```
 
 
