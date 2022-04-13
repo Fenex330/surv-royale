@@ -10,6 +10,6 @@ class SurvRoyale < Formula
 
   def install
     system "make", "release", "client", "server"
-    system "make", "install", "PREFIX=usr"
+    system "make", "install", "PREFIX=/usr"
   end
 end
