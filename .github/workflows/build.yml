@@ -75,7 +75,7 @@ jobs:
           brew tap fenex33/surv https://github.com/Fenex330/surv-royale.git
           brew update
           brew install --HEAD --build-bottle surv-royale
-          brew bottle --HEAD surv-royale
+          brew bottle --force-core-tap surv-royale
           mv *.tar.gz SurvRoyale-${{ github.ref_name }}-x86_64-mac.tar.gz
 
       - name: Release
