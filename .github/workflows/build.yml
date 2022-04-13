@@ -47,9 +47,6 @@ jobs:
       - name: Run Linux Build
         if: matrix.os == 'ubuntu-latest'
         run: |
-          #git fetch --tags
-          #TAG=$(git rev-list --tags --max-count=1)
-          #git checkout $TAG
           sudo apt install libsfml-dev
           sed -i 's#usr/lib#usr/lib/x86_64-linux-gnu#g' Makefile
           make appimage release client server package
@@ -58,12 +55,9 @@ jobs:
       - name: Run Windows Build
         if: matrix.os == 'windows-latest'
         run: |
-          #git fetch --tags
-          #FOR /F %%j IN ('git rev-list --tags --max-count^=1') DO set TAG=%%j
-          #git checkout %TAG%
           C:\msys64\usr\bin\wget.exe https://github.com/brechtsanders/winlibs_mingw/releases/download/11.2.0-10.0.0-msvcrt-r1/winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64msvcrt-10.0.0-r1.7z
           7z x winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64msvcrt-10.0.0-r1.7z
-          "C:\Program Files\Git\usr\bin\sed" -i 's#g++#.\\mingw64\\bin\\g++#g' build-windows.bat
+          "C:\Program Files\Git\usr\bin\sed" -i "s/g++/.\\mingw64\\bin\\g++/g" build-windows.bat
           .\build-windows.bat
           7z a -tzip SurvRoyale-${{ github.ref_name }}-x86_64-windows.zip build
         shell: cmd
@@ -71,9 +65,6 @@ jobs:
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
         run: |
-          #git fetch --tags
-          #TAG=$(git rev-list --tags --max-count=1)
-          #git checkout $TAG
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           sudo chown -R $(whoami) $(brew --prefix)/*
           brew tap fenex33/surv https://github.com/Fenex330/surv-royale.git
