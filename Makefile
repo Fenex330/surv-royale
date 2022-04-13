@@ -55,7 +55,7 @@ clean:
 	rm -rf build &
 
 install:
-	mkdir $(SHARE_PATH)
+	mkdir -p $(SHARE_PATH)
 	cp server.conf $(SHARE_PATH)
 	cp LICENSE.txt $(SHARE_PATH)
 	cp CHANGELOG.txt $(SHARE_PATH)
