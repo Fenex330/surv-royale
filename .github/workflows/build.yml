@@ -72,7 +72,9 @@ jobs:
           #git checkout $TAG
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
           sudo chown -R $(whoami) $(brew --prefix)/*
-          brew install --HEAD --build-bottle surv-royale.rb
+          brew tap fenex33/surv https://github.com/Fenex330/surv-royale.git
+          brew update
+          brew install --HEAD --build-bottle surv-royale
           brew bottle surv-royale
           mv *.tar.gz SurvRoyale-${{ github.ref_name }}-x86_64-mac.tar.gz
 
