@@ -66,6 +66,7 @@ jobs:
           "C:\Program Files\Git\usr\bin\sed" -i 's#g++#.\mingw64\bin\g++#g' build-windows.bat
           .\build-windows.bat
           7z a -tzip SurvRoyale-${{ github.ref_name }}-x86_64-windows.zip build
+        shell: cmd
 
       - name: Run Mac Build
         if: matrix.os == 'macos-latest'
