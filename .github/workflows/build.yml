@@ -71,6 +71,7 @@ jobs:
           #TAG=$(git rev-list --tags --max-count=1)
           #git checkout $TAG
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          sudo chown -R $(whoami) $(brew --prefix)/*
           brew install --HEAD --build-bottle surv-royale.rb
           brew bottle surv-royale
           mv *.tar.gz SurvRoyale-${{ needs.create_release.outputs.tag-name }}-x86_64-mac.tar.gz
