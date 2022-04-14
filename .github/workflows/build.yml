@@ -57,9 +57,8 @@ jobs:
         run: |
           C:\msys64\usr\bin\wget.exe https://github.com/brechtsanders/winlibs_mingw/releases/download/11.2.0-10.0.0-msvcrt-r1/winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64msvcrt-10.0.0-r1.7z
           7z x winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64msvcrt-10.0.0-r1.7z
-          .\build-windows.bat workflow
+          call build-windows.bat workflow
           7z a -tzip SurvRoyale-${{ github.ref_name }}-x86_64-windows.zip build
-          dir
         shell: cmd
 
       - name: Run Mac Build
