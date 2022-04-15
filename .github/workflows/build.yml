@@ -31,12 +31,10 @@ jobs:
     needs: create_release
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         include:
           - os: ubuntu-latest
             release_suffix: linux.AppImage
-          - os: macos-latest
-            release_suffix: mac.tar.gz
           - os: windows-latest
             release_suffix: windows.zip
     runs-on: ${{ matrix.os }}
@@ -60,17 +58,6 @@ jobs:
           call build-windows.bat workflow
           7z a -tzip SurvRoyale-${{ github.ref_name }}-x86_64-windows.zip build
         shell: cmd
-
-      - name: Run Mac Build
-        if: matrix.os == 'macos-latest'
-        run: |
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          sudo chown -R $(whoami) $(brew --prefix)/*
-          brew tap fenex33/surv https://github.com/Fenex330/surv-royale.git
-          brew update
-          brew install --build-bottle surv-royale
-          brew bottle surv-royale
-          mv *.tar.gz SurvRoyale-${{ github.ref_name }}-x86_64-mac.tar.gz
 
       - name: Release
         uses: softprops/action-gh-release@v1

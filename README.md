@@ -20,7 +20,7 @@ on voluntary basis only.
 
 ### Building
 
-1. Satisfy dependencies: Homebrew (MacOS only), GNU parallel (optional), GNU make, git, C++17 capable compiler, 7zip/tar, SFML>=2.5
+1. Satisfy dependencies: GNU parallel (optional), GNU make, git, C++17 capable compiler, 7zip/tar, SFML>=2.5
 
 2. Clone the repository
 ```
@@ -34,13 +34,6 @@ on voluntary basis only.
 ```
 
 4. On Windows, execute build-windows.bat instead - the built game will be placed inside "build" directory
-
-5. On MacOS, ignore steps 2, 3, 4 and just run the commands below
-```
-    brew tap fenex33/surv <mirror url>
-    brew update
-    brew install surv-royale
-```
 
 
 
@@ -56,6 +49,18 @@ but needs to be manually installed on earlier Windows versions, if used.
 Windows and Linux builds are provided for download in "Releases" section as self-contained zip archive
 and AppImage respectively. For other operating systems, the game needs to be built from source.
 By default, launching AppImage will run the client, to run the server pass --server option.
+
+On MacOS, you can install the game using Homebrew, optionally passing --HEAD flag
+to the install command for unstable (bleeding edge) version.
+```
+    xcode-select --install
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    sudo chown -R $(whoami) $(brew --prefix)/*
+
+    brew tap fenex33/surv <mirror url>
+    brew update
+    brew install surv-royale
+```
 
 
 
