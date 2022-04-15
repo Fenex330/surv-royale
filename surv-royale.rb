@@ -3,6 +3,7 @@ class SurvRoyale < Formula
   homepage "https://github.com/Fenex330/surv-royale"
   url "https://github.com/Fenex330/surv-royale.git", :using => :git, :tag => 'v0.1.0'
   license "MIT"
+  head "https://github.com/Fenex330/surv-royale.git", :branch "master"
 
   depends_on "sfml"
   depends_on "parallel" => :build
