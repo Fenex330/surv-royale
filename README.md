@@ -50,8 +50,7 @@ Windows and Linux builds are provided for download in "Releases" section as self
 and AppImage respectively. For other operating systems, the game needs to be built from source.
 By default, launching AppImage will run the client, to run the server pass --server option.
 
-On MacOS, you can install the game using Homebrew, optionally passing --HEAD flag
-to the install command for unstable (bleeding edge) version.
+On MacOS, you can install the game using Homebrew
 ```
     xcode-select --install
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
