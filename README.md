@@ -43,8 +43,8 @@ On Windows, SFML is bundled locally with the project. On other platforms however
 the dependencies are assumed to be installed globally system-wide.
 
 On Windows, the only compiler supported is [MinGW](https://winlibs.com) and it is assumed that directories for
-compiler, git and 7zip executables exist inside PATH variable. Also, universal C runtime comes pre-installed on Windows 10,
-but needs to be manually installed on earlier Windows versions, if used.
+compiler, git and 7zip executables exist inside PATH variable. Also, universal C runtime comes pre-installed on Windows 10
+and later, but needs to be manually installed on earlier Windows versions, if used.
 
 Windows and Linux builds are provided for download in "Releases" section as self-contained zip archive
 and AppImage respectively. For other operating systems, the game needs to be built from source.
