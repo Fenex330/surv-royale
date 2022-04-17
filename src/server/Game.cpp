@@ -174,7 +174,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    if (players.find(nickname) != players.end())
+    if (players.find(nickname) != players.end() || nickname.find(' ') != std::string::npos || nickname.empty())
     {
         sendJoinError(ErrorCodes::NicknameExists, address, port);
         return;
