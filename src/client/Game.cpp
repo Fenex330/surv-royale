@@ -23,15 +23,16 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
     window.setMouseCursorVisible(true);
 
     ImGui::SFML::Init(window);
-    FILE *f = fopen(GAMEDATA_PATH, "rb");
+    FILE *f = std::fopen(GAMEDATA_PATH, "rb");
 
-    fseek(f, 0, SEEK_END);
-    tar_size = ftell(f);
-    fseek(f, 0, SEEK_SET);
+    std::fseek(f, 0, SEEK_END);
+    tar_size = std::ftell(f);
+    std::fseek(f, 0, SEEK_SET);
 
-    tarFile = (char*)malloc(tar_size + 1);
-    fread(tarFile, 1, tar_size, f);
-    fclose(f);
+    tarFile = (char*)std::malloc(tar_size + 1);
+    std::size_t temp = std::fread(tarFile, 1, tar_size, f);
+    temp++; // to remove warnings
+    std::fclose(f);
 
     Game::loadAsset(font, "GameData/fonts/RobotoCondensed-Regular.ttf");
     text.setFont(font);
