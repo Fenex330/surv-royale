@@ -69,6 +69,8 @@ On MacOS, you can install the game using Homebrew
 
 - https://notabug.org/Fenex33/surv-royale.git
 
+- https://codeberg.org/fenex33/surv-royale.git
+
 
 
 ### License
