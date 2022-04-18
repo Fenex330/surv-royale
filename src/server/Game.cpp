@@ -67,8 +67,8 @@ Game::~Game()
     packet.clear();
     packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(ErrorCodes::Kick);
 
-    for (const auto& n : players)
-        UDPsocket.send(packet, n.second.address, n.second.port);
+    for (const auto& [nickname, player] : players)
+        UDPsocket.send(packet, player.address, player.port);
 }
 
 void Game::run()
@@ -244,8 +244,8 @@ void Game::broadcast()
     udpClock.restart();
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
 
-    for (const auto& n : players)
-        if (UDPsocket.send(packet, n.second.address, n.second.port) != sf::Socket::Done) {}
+    for (const auto& [nickname, player] : players)
+        if (UDPsocket.send(packet, player.address, player.port) != sf::Socket::Done) {}
 
     packet.clear();
 }
@@ -269,8 +269,8 @@ void Game::sendPlayersList()
 {
     packet << static_cast<sf::Uint8>(NetCodes::PlayersList);
 
-    for (const auto& n : players)
-        packet << n.first << n.second.x << n.second.y << n.second.rotation;
+    for (const auto& [nickname, player] : players)
+        packet << nickname << player.x << player.y << player.rotation;
 
     broadcast();
 }
