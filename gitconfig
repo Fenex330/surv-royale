@@ -6,12 +6,12 @@
 [remote "github"]
 	url = git@github.com:Fenex330/surv-royale.git
 	fetch = +refs/heads/*:refs/remotes/github/*
-[remote "notabug"]
-	url = git@notabug.org:Fenex33/surv-royale.git
-	fetch = +refs/heads/*:refs/remotes/notabug/*
+[remote "codeberg"]
+	url = git@codeberg.org:fenex33/surv-royale.git
+	fetch = +refs/heads/*:refs/remotes/codeberg/*
 [remote "origin"]
 	url = git@github.com:Fenex330/surv-royale.git
-	url = git@notabug.org:Fenex33/surv-royale.git
+	url = git@codeberg.org:fenex33/surv-royale.git
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
