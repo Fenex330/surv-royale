@@ -6,7 +6,7 @@ bool Game::quit = false;
 long Game::tar_size = 0;
 char *Game::tarFile = nullptr;
 
-Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "SurvRoyale version " + std::string(GAME_VERSION), sf::Style::Close),
+Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "SurvRoyale " + std::string(GAME_VERSION), sf::Style::Close),
                crosshair_distance (0.0),
                slot (1),
                rng (dev()),
@@ -296,7 +296,7 @@ void Game::receiveJoinError()
             break;
 
         case ErrorCodes::NicknameExists:
-            join_error = "nickname already exists";
+            join_error = "nickname is invalid or already exists";
             break;
 
         case ErrorCodes::Kick:
