@@ -31,6 +31,9 @@ public:
 
     std::unordered_map<std::string, Player> players;
 
+    std::vector<Bullet> onBullets;
+    std::vector<Bullet> offBullets;
+
     std::string ID;
     std::string password;
     std::string join_error;

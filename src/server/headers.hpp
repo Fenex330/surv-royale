@@ -23,5 +23,6 @@
 #include "../common.hpp"
 
 #include "Bullet.hpp"
+#include "actions.hpp"
 #include "Player.hpp"
 #include "Game.hpp"

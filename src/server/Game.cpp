@@ -89,7 +89,7 @@ void Game::scan()
         std::string buffer2;
         cin >> buffer1 >> buffer2;
 
-        std::lock_guard<std::mutex> lock(m);
+        std::lock_guard<std::mutex> lock (m);
         command1 = buffer1;
         command2 = buffer2;
     }
@@ -97,7 +97,7 @@ void Game::scan()
 
 void Game::parse()
 {
-    std::lock_guard<std::mutex> lock(m);
+    std::lock_guard<std::mutex> lock (m);
 
     if (command1.empty())
         return;

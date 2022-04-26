@@ -15,7 +15,10 @@ public:
 
     std::unordered_map<std::string, Player> players;
     std::unordered_map<std::string, std::string> config;
+
     std::vector<std::string> banlist;
+    std::vector<Bullet> onBullets;
+    std::vector<Bullet> offBullets;
 
     std::string password;
     std::string command1;
