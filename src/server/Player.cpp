@@ -1,10 +1,18 @@
 #include "headers.hpp"
 
-Player::Player(int m_size) : active (true),
-                   map_size (m_size),
-                   slot (1),
-                   crosshair_distance (0.0),
-                   rotation (0.0)
+Player::Player(int map_size,
+               int speed,
+               std::string ID,
+               sf::IpAddress address,
+               unsigned short port) : active (true),
+                                      slot (1),
+                                      crosshair_distance (0.0),
+                                      rotation (0.0),
+                                      map_size (map_size),
+                                      speed (speed),
+                                      ID (ID),
+                                      address (address),
+                                      port (port)
 {
     x = map_size / 2;
     y = map_size / 2;

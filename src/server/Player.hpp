@@ -17,7 +17,7 @@ class Player
         int speed;
         const int map_size;
 
-        Player(int m_size);
+        Player(int map_size, int speed, std::string ID, sf::IpAddress address, unsigned short port);
 
         void interact();
         void fire();
