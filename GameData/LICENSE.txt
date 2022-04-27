@@ -1,2 +1,2 @@
-images and audio are licensed under the Creative Commons Attribution-Share Alike License 3.0 (Unported) (CC BY-SA) [https://creativecommons.org/licenses/by-sa/3.0/legalcode]
+graphics and audio are licensed under the Creative Commons Attribution-Share Alike License 3.0 (Unported) (CC BY-SA) [https://creativecommons.org/licenses/by-sa/3.0/legalcode]
 fonts are licensed under the Apache License, Version 2.0 [https://www.apache.org/licenses/LICENSE-2.0]
