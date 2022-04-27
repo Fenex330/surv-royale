@@ -28,8 +28,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
     std::fseek(f, 0, SEEK_SET);
 
     tarFile = (char*)std::malloc(tar_size + 1);
-    std::size_t temp = std::fread(tarFile, 1, tar_size, f);
-    temp++; // to remove warnings
+    [[maybe_unused]] std::size_t temp = std::fread(tarFile, 1, tar_size, f);
     std::fclose(f);
 
     Game::loadAsset(font, "GameData/fonts/RobotoCondensed-Regular.ttf");

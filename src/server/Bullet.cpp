@@ -8,12 +8,12 @@ Bullet::Bullet(std::string nickname,
                int range,
                int speed,
                double falloff,
-               double headshot_multiplier;
-               double obstacle_multiplier;
-               double tracer_width;
-               double tracer_length;
-               bool is_suppressed;
-               bool potato_swap;
+               double headshot_multiplier,
+               double obstacle_multiplier,
+               double tracer_width,
+               double tracer_length,
+               bool is_suppressed,
+               bool potato_swap,
                std::function<void(Bullet*)> action) : active (true),
                                                       count (0),
                                                       nickname (nickname),

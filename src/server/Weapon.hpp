@@ -34,5 +34,5 @@ class Weapon : public Item
                int move_spread, int switch_delay, int player_damage, int unit_range, int bullet_speed, double bullet_falloff, double headshot_multiplier, double obstacle_multiplier, double passive_slowdown,
                double shooting_slowdown, double tracer_width, double tracer_length, bool is_suppressed, bool potato_swap);
 
-        inline static void basic(Bullet* bullet) {}
+        inline static void basic ([[maybe_unused]] Bullet* bullet) {}
 };
