@@ -6,6 +6,7 @@ Bullet::Bullet(std::string nickname,
                double rotation,
                int damage,
                int speed,
+               double falloff,
                std::function<void(Bullet*)> action) : active (true),
                                                       count (0),
                                                       nickname (nickname),
@@ -14,6 +15,7 @@ Bullet::Bullet(std::string nickname,
                                                       rotation (rotation),
                                                       damage (damage),
                                                       speed (speed),
+                                                      falloff (falloff),
                                                       action (action)
 {
     //
@@ -21,6 +23,7 @@ Bullet::Bullet(std::string nickname,
 
 void Bullet::move()
 {
+    // damage = damage * (falloff ^ (count/1000))
     count++;
     x += speed * std::cos(rotation);
     y += speed * std::sin(rotation);

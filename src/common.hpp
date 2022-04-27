@@ -52,6 +52,7 @@ namespace surv
     inline const unsigned int VIEW_DIM_Y = 800;
     inline const unsigned int SEND_DELAY = 50;
     inline const unsigned int PLAYER_RADIUS = 100;
+    inline const double HEADSHOT_CHANCE = 0.15;
     inline const double PI = std::acos(-1);
     inline const float CROSS_CLAMP = getDistance(VIEW_DIM_X, 0, VIEW_DIM_Y, 0);
 }
