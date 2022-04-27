@@ -13,7 +13,7 @@
 
 **SurvRoyale** is a desktop clone of the popular browser battle royale shooter - [surviv.io](https://surviv.io/), written in C++.
 The project is currently in the stage of an early alpha development, so any contribution via pull request or issue is welcome.
-At the moment, only Linux & Windows platforms are fully supported. MacOS support is unofficial and will be tested for issues
+At the moment, only Linux & Windows platforms are officially supported. MacOS support is unofficial and will be tested for issues
 on voluntary basis only.
 
 
