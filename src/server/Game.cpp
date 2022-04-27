@@ -2,9 +2,7 @@
 
 std::atomic<bool> Game::quit (false);
 
-Game::Game() : rng (dev()),
-               dist (0, 9),
-               user_input (&Game::scan, this)
+Game::Game() : user_input (&Game::scan, this)
 {
     user_input.detach();
     clog << "SurvRoyale version " << GAME_VERSION << endl;

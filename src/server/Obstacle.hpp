@@ -9,6 +9,7 @@ class Obstacle
         int radius;
         sf::Int16 x;
         sf::Int16 y;
+        const int map_size;
 
-        Obstacle();
+        Obstacle(int map_size, int radius);
 };

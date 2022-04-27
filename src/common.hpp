@@ -39,10 +39,19 @@ namespace surv
         return std::sqrt(std::pow((x1 - x2), 2) + std::pow((y1 - y2), 2));
     }
 
+    inline static
+    int getRandom(int lowest, int highest)
+    {
+        thread_local std::random_device dev;
+        thread_local std::mt19937 rng (dev());
+        thread_local std::uniform_int_distribution<std::mt19937::result_type> dist (lowest, highest);
+        return dist(rng);
+    }
+
     inline const unsigned int VIEW_DIM_X = 800;
     inline const unsigned int VIEW_DIM_Y = 800;
     inline const unsigned int SEND_DELAY = 50;
-    inline const unsigned int MAX_BULLETS = 1000;
+    inline const unsigned int PLAYER_RADIUS = 100;
     inline const double PI = std::acos(-1);
     inline const float CROSS_CLAMP = getDistance(VIEW_DIM_X, 0, VIEW_DIM_Y, 0);
 }

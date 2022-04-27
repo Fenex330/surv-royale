@@ -9,8 +9,6 @@ char *Game::tarFile = nullptr;
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "SurvRoyale " + std::string(GAME_VERSION), sf::Style::Close),
                crosshair_distance (0.0),
                slot (1),
-               rng (dev()),
-               dist (0, 9),
                fps (0),
                ping (0),
                ping_avg (0),
@@ -172,7 +170,7 @@ void Game::generateID()
     ID = "";
 
     for (int i = 0; i < 20; i++)
-        ID.append(std::to_string(dist(rng)));
+        ID.append(std::to_string(surv::getRandom(0, 9)));
 
     std::ofstream id (ID_PATH);
     id << ID << " " << UDPsocket.getLocalPort() << endl;

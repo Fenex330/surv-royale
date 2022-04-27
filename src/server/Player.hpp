@@ -12,7 +12,6 @@ class Player : public Obstacle
         unsigned short slot;
         float crosshair_distance;
         int speed;
-        const int map_size;
         std::array<Item, 6> items;
 
         Player(int map_size, int speed, std::string ID, sf::IpAddress address, unsigned short port);

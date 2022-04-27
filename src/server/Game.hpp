@@ -30,11 +30,6 @@ public:
     std::fstream config_f;
     std::fstream banlist_f;
 
-    std::random_device dev;
-    std::mt19937 rng;
-    std::uniform_int_distribution<std::mt19937::result_type> dist;
-
-    // any static property in this class must be declared either atomic or const
     static std::atomic<bool> quit;
     static const std::array<Weapon, 112> weapons;
 

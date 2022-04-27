@@ -1,7 +1,8 @@
 #include "headers.hpp"
 
-Obstacle::Obstacle() : rotation (0.0), radius (0)
+Obstacle::Obstacle(int map_size, int radius) : map_size (map_size), radius (radius)
 {
-    x = map_size / 2;
-    y = map_size / 2;
+    rotation = double(surv::getRandom(0, 360));
+    x = surv::getRandom(1, map_size);
+    y = surv::getRandom(1, map_size);
 }
