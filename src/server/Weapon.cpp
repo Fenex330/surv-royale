@@ -1,0 +1,36 @@
+#include "headers.hpp"
+
+Weapon::Weapon(std::string name,
+               short rarity,
+               short firing_mode,
+               short ammo_type,
+               sf::Int16 magazine_capacity,
+               int reload_time,
+               int burst_count,
+               int firing_rate,
+               int still_spread,
+               int move_spread,
+               int switch_delay,
+               int player_damage,
+               int obstacle_damage,
+               int unit_range,
+               int bullet_speed,
+               double slowdown_ratio) : name (name),
+                                        rarity (rarity),
+                                        firing_mode (firing_mode),
+                                        ammo_type (ammo_type),
+                                        magazine_capacity (magazine_capacity),
+                                        reload_time (reload_time),
+                                        burst_count (burst_count),
+                                        firing_rate (firing_rate),
+                                        still_spread (still_spread),
+                                        move_spread (move_spread),
+                                        switch_delay (switch_delay),
+                                        player_damage (player_damage),
+                                        obstacle_damage (obstacle_damage),
+                                        unit_range (unit_range),
+                                        bullet_speed (bullet_speed),
+                                        slowdown_ratio (slowdown_ratio)
+{
+    //
+}

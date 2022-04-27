@@ -5,22 +5,25 @@
 class Weapon : public Item
 {
     public:
-        weapon_name;
-        firing_mode;
-        ammo_type;
-        magazine_capacity;
-        reload_time;
-        bullet_count;
-        firing_rate;
-        still_spread;
-        move_spread;
-        switch_delay;
-        player_damage;
-        obstacle_damage;
-        unit_range;
-        bullet_speed;
-        slowdown_ratio;
+        std::string name;
+        short rarity;
+        short firing_mode;
+        short ammo_type;
+        sf::Int16 magazine_capacity;
+        int reload_time;
+        int burst_count;
+        int firing_rate;
+        int still_spread;
+        int move_spread;
+        int switch_delay;
+        int player_damage;
+        int obstacle_damage;
+        int unit_range;
+        int bullet_speed;
+        double slowdown_ratio;
 
-        Weapon(weapon_name, firing_mode, ammo_type, magazine_capacity, reload_time, bullet_count, firing_rate, still_spread, move_spread, switch_delay, player_damage, obstacle_damage, unit_range, bullet_speed, slowdown_ratio);
+        Weapon(std::string name, short rarity, short firing_mode, short ammo_type, sf::Int16 magazine_capacity, int reload_time, int burst_count, int firing_rate, int still_spread,
+               int move_spread, int switch_delay, int player_damage, int obstacle_damage, int unit_range, int bullet_speed, double slowdown_ratio);
+
         inline static void basic(Bullet* bullet) {}
 };
