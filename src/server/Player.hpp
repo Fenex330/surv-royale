@@ -2,7 +2,7 @@
 
 #include "headers.hpp"
 
-class Player
+class Player : public Obstacle
 {
     public:
         bool active;
@@ -10,12 +10,10 @@ class Player
         sf::IpAddress address;
         unsigned short port;
         unsigned short slot;
-        double rotation;
         float crosshair_distance;
-        sf::Int16 x;
-        sf::Int16 y;
         int speed;
         const int map_size;
+        std::array<Item, 6> items;
 
         Player(int map_size, int speed, std::string ID, sf::IpAddress address, unsigned short port);
 

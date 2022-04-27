@@ -25,7 +25,7 @@ void Player::interact()
 
 void Player::fire()
 {
-    //
+    items.at(slot - 1).act();
 }
 
 void Player::move(sf::Int16 x_, sf::Int16 y_)

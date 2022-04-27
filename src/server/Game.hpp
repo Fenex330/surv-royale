@@ -35,6 +35,7 @@ public:
     std::uniform_int_distribution<std::mt19937::result_type> dist;
 
     static std::atomic<bool> quit;
+    static std::array<Weapon, 112> weapons;
 
     Game();
     ~Game();
