@@ -9,4 +9,6 @@ class Obstacle
         int radius;
         sf::Int16 x;
         sf::Int16 y;
+
+        Obstacle();
 };

@@ -7,15 +7,13 @@ Player::Player(int map_size,
                unsigned short port) : active (true),
                                       slot (1),
                                       crosshair_distance (0.0),
-                                      rotation (0.0),
                                       map_size (map_size),
                                       speed (speed),
                                       ID (ID),
                                       address (address),
                                       port (port)
 {
-    x = map_size / 2;
-    y = map_size / 2;
+    //
 }
 
 void Player::interact()

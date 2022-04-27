@@ -5,5 +5,5 @@
 class Item
 {
     public:
-        void act();
-}
+        void act() {}
+};
