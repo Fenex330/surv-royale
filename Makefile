@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -pedantic-errors
+CXXFLAGS = -std=c++17 -pedantic-errors -fdiagnostics-color=always
 APPIMAGE_FLAGS = -DAPPIMAGE
 GAME_VERSION := -DGAME_VERSION='"$(shell git describe --tags)"'
 DEBUG_FLAGS = -O0 -g -Wall -Wextra -Wno-reorder -ftrapv
@@ -31,11 +31,11 @@ release-max:
 
 client:
 	parallel -q $(CXX) $(CXXFLAGS) $(GAME_VERSION) -pipe -c {} -o {}.o ::: src/client/*.cpp src/client/imgui/*.cpp
-	$(CXX) src/client/*.o src/client/imgui/*.o $(LIBS_CLIENT) -o surv-royale-client
+	$(CXX) $(CXXFLAGS) src/client/*.o src/client/imgui/*.o $(LIBS_CLIENT) -o surv-royale-client
 
 server:
 	parallel -q $(CXX) $(CXXFLAGS) $(GAME_VERSION) -pipe -c {} -o {}.o ::: src/server/*.cpp
-	$(CXX) src/server/*.o $(LIBS_SERVER) -o surv-royale-server
+	$(CXX) $(CXXFLAGS) src/server/*.o $(LIBS_SERVER) -o surv-royale-server
 
 client-serial:
 	$(CXX) $(CXXFLAGS) $(GAME_VERSION) $(LIBS_CLIENT) src/client/*.cpp src/client/imgui/*.cpp -o surv-royale-client
