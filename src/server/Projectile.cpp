@@ -5,15 +5,14 @@ Projectile::Projectile(std::string nickname,
                sf::Int16 x,
                sf::Int16 y,
                double rotation,
-               int damage,
-               int range,
-               int speed,
+               double damage,
+               double range,
+               double speed,
                double falloff,
                double headshot_multiplier,
                double obstacle_multiplier,
                bool potato_swap,
                std::function<void(Projectile*)> action) : active (true),
-                                                          count (0),
                                                           nickname (nickname),
                                                           gunname (gunname),
                                                           x (x),
@@ -33,8 +32,7 @@ Projectile::Projectile(std::string nickname,
 
 void Projectile::move()
 {
-    // damage = damage * (falloff ^ (count/1000))
-    count++;
+    // damage = damage * (falloff ^ (distance/100))
     x += speed * std::cos(rotation);
     y += speed * std::sin(rotation);
     action(this);
