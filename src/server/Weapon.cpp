@@ -1,9 +1,9 @@
 #include "headers.hpp"
 
 Weapon::Weapon(std::string name,
-               short rarity,
-               short firing_mode,
-               short ammo_type,
+               Rarity rarity,
+               FiringMode firing_mode,
+               AmmoType ammo_type,
                sf::Int16 magazine_capacity,
                int reload_time,
                int burst_count,
