@@ -6,6 +6,7 @@ class Projectile
 {
     public:
         bool active;
+        bool potato_swap;
         sf::Int16 x;
         sf::Int16 y;
         double damage;
@@ -15,13 +16,11 @@ class Projectile
         double falloff;
         double headshot_multiplier;
         double obstacle_multiplier;
-        const bool potato_swap;
-        const std::string nickname;
-        const std::string gunname;
-        const std::function<void(Projectile*)> action;
-
-        Projectile(std::string nickname, std::string gunname, sf::Int16 x, sf::Int16 y, double rotation, double damage, double range, double speed, double falloff,
-                   double headshot_multiplier, double obstacle_multiplier, bool potato_swap, std::function<void(Projectile*)> action);
+        std::string nickname;
+        std::string gunname;
+        std::function<void(Projectile*)> action;
 
         void move();
+        void init(std::string nickname, std::string gunname, sf::Int16 x, sf::Int16 y, double rotation, double damage, double range, double speed, double falloff,
+                   double headshot_multiplier, double obstacle_multiplier, bool potato_swap, std::function<void(Projectile*)> action);
 };
