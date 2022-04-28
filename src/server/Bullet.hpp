@@ -2,7 +2,7 @@
 
 #include "headers.hpp"
 
-class Bullet
+class Projectile
 {
     public:
         bool active;
@@ -19,10 +19,10 @@ class Bullet
         const bool potato_swap;
         const std::string nickname;
         const std::string gunname;
-        const std::function<void(Bullet*)> action;
+        const std::function<void(Projectile*)> action;
 
-        Bullet(std::string nickname, std::string gunname, sf::Int16 x, sf::Int16 y, double rotation, int damage, int range, int speed, double falloff,
-               double headshot_multiplier, double obstacle_multiplier, bool potato_swap, std::function<void(Bullet*)> action);
+        Projectile(std::string nickname, std::string gunname, sf::Int16 x, sf::Int16 y, double rotation, int damage, int range, int speed, double falloff,
+               double headshot_multiplier, double obstacle_multiplier, bool potato_swap, std::function<void(Projectile*)> action);
 
         void move();
 };

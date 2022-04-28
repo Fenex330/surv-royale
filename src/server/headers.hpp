@@ -25,7 +25,7 @@
 
 #include "Item.hpp"
 #include "Obstacle.hpp"
-#include "Bullet.hpp"
+#include "Projectile.hpp"
 #include "Weapon.hpp"
 #include "Player.hpp"
 #include "Game.hpp"

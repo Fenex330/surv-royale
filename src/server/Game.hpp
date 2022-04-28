@@ -17,8 +17,8 @@ public:
     std::unordered_map<std::string, std::string> config;
 
     std::vector<std::string> banlist;
-    std::vector<Bullet> onBullets;
-    std::vector<Bullet> offBullets;
+    std::vector<Projectile> onProjectiles;
+    std::vector<Projectile> offProjectiles;
 
     std::string password;
     std::string command1;
@@ -31,7 +31,7 @@ public:
     std::fstream banlist_f;
 
     static std::atomic<bool> quit;
-    static const std::array<Weapon, 112> weapons;
+    static const std::array<Weapon, 100> weapons;
 
     Game();
     ~Game();

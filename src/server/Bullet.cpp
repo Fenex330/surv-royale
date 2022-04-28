@@ -1,6 +1,6 @@
 #include "headers.hpp"
 
-Bullet::Bullet(std::string nickname,
+Projectile::Projectile(std::string nickname,
                std::string gunname,
                sf::Int16 x,
                sf::Int16 y,
@@ -12,7 +12,7 @@ Bullet::Bullet(std::string nickname,
                double headshot_multiplier,
                double obstacle_multiplier,
                bool potato_swap,
-               std::function<void(Bullet*)> action) : active (true),
+               std::function<void(Projectile*)> action) : active (true),
                                                       count (0),
                                                       nickname (nickname),
                                                       gunname (gunname),
@@ -31,7 +31,7 @@ Bullet::Bullet(std::string nickname,
     //
 }
 
-void Bullet::move()
+void Projectile::move()
 {
     // damage = damage * (falloff ^ (count/1000))
     count++;
