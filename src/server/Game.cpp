@@ -1,6 +1,10 @@
 #include "headers.hpp"
 
 std::atomic<bool> Game::quit (false);
+const std::array<Weapon, 100> Game::weapons
+{
+    {"AK-47", Weapon::Rarity::Common, Weapon::FiringMode::Auto, Weapon::AmmoType::Blue, 30}
+};
 
 Game::Game() : user_input (&Game::scan, this)
 {
