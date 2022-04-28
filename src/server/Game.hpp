@@ -31,7 +31,7 @@ public:
     std::fstream banlist_f;
 
     static std::atomic<bool> quit;
-    static const std::array<Weapon, 100> weapons;
+    static const std::array<Weapon, 2> weapons;
 
     Game();
     ~Game();
