@@ -1,18 +1,18 @@
 #include "headers.hpp"
 
 void Projectile::init(std::string nickname,
-                 std::string gunname,
-                 sf::Int16 x,
-                 sf::Int16 y,
-                 double rotation,
-                 double damage,
-                 double range,
-                 double speed,
-                 double falloff,
-                 double headshot_multiplier,
-                 double obstacle_multiplier,
-                 bool potato_swap,
-                 std::function<void(Projectile*)> action)
+                      std::string gunname,
+                      sf::Int16 x,
+                      sf::Int16 y,
+                      double rotation,
+                      double damage,
+                      double range,
+                      double speed,
+                      double falloff,
+                      double headshot_multiplier,
+                      double obstacle_multiplier,
+                      bool potato_swap,
+                      std::function<void(Projectile*)> action)
 {
     active = true;
     this->nickname = nickname;
