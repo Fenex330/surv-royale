@@ -1,6 +1,6 @@
 #include "headers.hpp"
 
-/* any static property of any server class must be declared either atomic or const for thread safety reasons */
+/* any static var must be declared either atomic or const for thread safety reasons. Prefer thread_local instead */
 
 int main()
 {
