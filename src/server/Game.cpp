@@ -120,6 +120,11 @@ void Game::parse()
         banlist_f.flush();
         players.erase(nick);
     }
+    else if (command1 == "unban")
+    {
+        std::string ip = command2;
+        // ...
+    }
     else if (command1 == "exit" || command1 == "quit")
     {
         quit = true;
