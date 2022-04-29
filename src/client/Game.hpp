@@ -30,9 +30,7 @@ public:
     unsigned short server_port;
 
     std::unordered_map<std::string, Player> players;
-
-    std::vector<Bullet> onBullets;
-    std::vector<Bullet> offBullets;
+    std::stack<Projectile> projectiles;
 
     std::string ID;
     std::string password;

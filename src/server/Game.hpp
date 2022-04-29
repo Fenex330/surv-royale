@@ -17,8 +17,8 @@ public:
     std::unordered_map<std::string, std::string> config;
     std::unordered_set<std::string> banlist;
 
-    std::vector<Projectile> onProjectiles;
-    std::vector<Projectile> offProjectiles;
+    std::list<Projectile> onProjectiles;
+    std::list<Projectile> offProjectiles;
 
     std::string password;
     std::string command1;

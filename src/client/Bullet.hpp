@@ -2,7 +2,7 @@
 
 #include "headers.hpp"
 
-struct Bullet
+struct Projectile
 {
     sf::Texture texture;
     sf::Sprite sprite;

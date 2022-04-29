@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
+#include <stack>
 #include <unordered_map>
 #include <random>
 #include <filesystem>
@@ -23,6 +23,6 @@
 #include "dxTarRead.h"
 #include "../common.hpp"
 
-#include "Bullet.hpp"
+#include "Projectile.hpp"
 #include "Player.hpp"
 #include "Game.hpp"
