@@ -73,7 +73,7 @@ Game::~Game()
         UDPsocket.send(packet, player.address, player.port);
 }
 
-void Game::run()
+void Game::operator()()
 {
     while (!quit)
     {
