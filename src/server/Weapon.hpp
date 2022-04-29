@@ -9,29 +9,29 @@ class Weapon : public Item
         enum class FiringMode {Manual, Auto, Burst, Shotgun};
         enum class AmmoType {Yellow, Red, Blue, Green};
 
-        std::string name;
-        Rarity rarity;
-        FiringMode firing_mode;
-        AmmoType ammo_type;
-        sf::Int16 magazine_capacity;
-        int burst_count;
-        double unit_range;
-        double stand_spread;
-        double move_spread;
-        double player_damage;
-        double projectile_speed;
-        double firing_rate;
-        double recoil_delay;
-        double switch_delay;
-        double reload_time;
-        double projectile_falloff;
-        double headshot_multiplier;
-        double obstacle_multiplier;
-        double passive_slowdown;
-        double shooting_slowdown;
-        bool potato_swap;
-        bool is_throwable;
-        std::function<void(Projectile*)> action;
+        const std::string name;
+        const Rarity rarity;
+        const FiringMode firing_mode;
+        const AmmoType ammo_type;
+        const sf::Int16 magazine_capacity;
+        const int burst_count;
+        const double unit_range;
+        const double stand_spread;
+        const double move_spread;
+        const double player_damage;
+        const double projectile_speed;
+        const double firing_rate;
+        const double recoil_delay;
+        const double switch_delay;
+        const double reload_time;
+        const double projectile_falloff;
+        const double headshot_multiplier;
+        const double obstacle_multiplier;
+        const double passive_slowdown;
+        const double shooting_slowdown;
+        const bool potato_swap;
+        const bool is_throwable;
+        const std::function<void(Projectile*)> action;
 
         Weapon(std::string name,
                Rarity rarity,
