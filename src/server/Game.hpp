@@ -15,8 +15,8 @@ public:
 
     std::unordered_map<std::string, Player> players;
     std::unordered_map<std::string, std::string> config;
+    std::unordered_set<std::string> banlist;
 
-    std::vector<std::string> banlist;
     std::vector<Projectile> onProjectiles;
     std::vector<Projectile> offProjectiles;
 

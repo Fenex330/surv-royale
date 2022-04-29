@@ -51,7 +51,7 @@ Game::Game() : user_input (&Game::scan, this)
     {
         std::string line;
         std::getline(banlist_f, line);
-        banlist.push_back(line);
+        banlist.insert(line);
     }
 
     password = config.at("password") == "-" ? "" : config.at("password");
@@ -114,7 +114,7 @@ void Game::parse()
     {
         std::string nick = command2;
         sendJoinError(ErrorCodes::IpBan, players.at(nick).address, players.at(nick).port);
-        banlist.push_back(players.at(nick).address.toString());
+        banlist.insert(players.at(nick).address.toString());
         banlist_f.clear();
         banlist_f << players.at(nick).address.toString() << endl;
         banlist_f.flush();
