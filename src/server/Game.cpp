@@ -3,7 +3,7 @@
 std::atomic<bool> Game::quit (false);
 const std::array<Weapon, 1> Game::weapons
 {
-    Weapon("AK-47", Weapon::Rarity::Common, Weapon::FiringMode::Auto, Weapon::AmmoType::Blue, 30, 1, 200.0, 2.5, 10.0, 13.5, 100.0, 0.1, 0.0, 0.75, 2.5, 0.9, 2.0, 1.0, 0.0, 0.0)
+    Weapon("AK-47", Weapon::Rarity::Common, Weapon::FiringMode::Auto, Weapon::AmmoType::Blue, 30, 1, 200.0, 2.5, 10.0, 13.5, 100.0, 0.1, 0.0, 0.75, 2.5, 0.9, 2.0, 1.0, 1.0, 1.0)
 };
 
 Game::Game() : user_input (&Game::scan, this)
@@ -55,6 +55,7 @@ Game::Game() : user_input (&Game::scan, this)
     }
 
     password = config.at("password") == "-" ? "" : config.at("password");
+    offProjectiles.resize(std::stoi(config.at("max_bullets")));
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
@@ -234,10 +235,10 @@ void Game::receivePlayerInput()
     players.at(nickname).move(x, y);
     players.at(nickname).rotation = std::clamp(rotation, 0.0, surv::PI * 2.0);
     players.at(nickname).slot = std::clamp(slot, sf::Int8(1), sf::Int8(6));
-    players.at(nickname).crosshair_distance = std::clamp(crosshair_distance, 0.0f, surv::CROSS_CLAMP);
+    players.at(nickname).crosshair_distance = std::clamp(crosshair_distance, 0.0f, surv::FOV);
 }
 
-void Game::broadcast()
+void Game::send()
 {
     sf::Time elapsed = udpClock.getElapsedTime();
 
@@ -245,20 +246,11 @@ void Game::broadcast()
         return;
 
     udpClock.restart();
-    assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
 
-    for (const auto& [nickname, player] : players)
-        if (UDPsocket.send(packet, player.address, player.port) != sf::Socket::Done) {}
-
-    packet.clear();
-}
-
-void Game::send()
-{
     sendPlayersList();
-    //sendProjectilesList();
-    //sendObjectsList();
-    //sendGameState();
+    sendProjectilesList();
+    sendObjectsList();
+    sendGameState();
 }
 
 void Game::sendJoinError(ErrorCodes code, sf::IpAddress address, unsigned short port)
@@ -270,25 +262,33 @@ void Game::sendJoinError(ErrorCodes code, sf::IpAddress address, unsigned short 
 
 void Game::sendPlayersList()
 {
-    packet << static_cast<sf::Uint8>(NetCodes::PlayersList);
+    for (const auto& [nickname, player] : players) // for each destination address
+    {
+        packet.clear();
+        packet << static_cast<sf::Uint8>(NetCodes::PlayersList);
 
-    for (const auto& [nickname, player] : players)
-        packet << nickname << player.x << player.y << player.rotation;
+        for (const auto& [nickname_, player_] : players) // for each object to place in packet
+        {
+            if (surv::getDistance(player.x, player_.x, player.y, player_.y) < surv::FOV * 1.5f)
+                packet << nickname_ << player_.x << player_.y << player_.rotation;
+        }
 
-    broadcast();
+        assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+        if (UDPsocket.send(packet, player.address, player.port) != sf::Socket::Done) {}
+    }
 }
 
 void Game::sendProjectilesList()
 {
-    broadcast();
+    //
 }
 
 void Game::sendObjectsList()
 {
-    broadcast();
+    //
 }
 
 void Game::sendGameState()
 {
-    broadcast();
+    //
 }
