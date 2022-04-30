@@ -36,8 +36,7 @@ public:
     Game();
     ~Game();
 
-    void operator()();
-
+    void run();
     void scan();
     void parse();
 

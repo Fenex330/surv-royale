@@ -9,7 +9,6 @@ const std::array<Weapon, 1> Game::weapons
 Game::Game() : user_input (&Game::scan, this)
 {
     user_input.detach();
-    clog << "SurvRoyale version " << GAME_VERSION << endl;
 
     #ifdef _WIN32
         config_f.open(SERVER_CONF_PATH, std::ios::in);
@@ -59,9 +58,11 @@ Game::Game() : user_input (&Game::scan, this)
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
-    int i = 0;
 
+    int i = 0;
     while (UDPsocket.bind(std::stoi(config.at("port")) + i) != sf::Socket::Done) i++;
+
+    clog << "SurvRoyale version " << GAME_VERSION << endl;
     clog << "binded to port " << UDPsocket.getLocalPort() << endl;
 }
 
@@ -74,7 +75,7 @@ Game::~Game()
         UDPsocket.send(packet, player.address, player.port);
 }
 
-void Game::operator()()
+void Game::run()
 {
     while (!quit)
     {

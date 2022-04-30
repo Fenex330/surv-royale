@@ -281,6 +281,8 @@ void Game::receiveJoinError()
     {
         case ErrorCodes::MapFull:
             join_error = "game is full";
+            server_port++;
+            sendJoinRequest();
             break;
 
         case ErrorCodes::InvalidVersion:
