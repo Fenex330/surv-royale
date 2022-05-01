@@ -35,7 +35,10 @@ void Game::run()
         parse();
 
         if (!isGameRunning)
+        {
             std::this_thread::sleep_for(std::chrono::milliseconds(surv::SEND_DELAY));
+            sessionClock.restart();
+        }
     }
 }
 
@@ -134,6 +137,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 
     players.insert(std::make_pair(nickname, Player(std::stoi(Manager::config.at("map_size")), std::stoi(Manager::config.at("player_speed")), ID, address, port)));
     clog << "player " << nickname << " joined the game" << endl;
+    isGameRunning = true;
 }
 
 void Game::receivePlayerInput()

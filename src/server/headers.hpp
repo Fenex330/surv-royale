@@ -17,6 +17,7 @@
 #include <atomic>
 #include <mutex>
 #include <thread>
+#include <chrono>
 
 #include <cstdlib>
 #include <cassert>
