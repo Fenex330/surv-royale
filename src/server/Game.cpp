@@ -5,16 +5,16 @@ const std::array<Weapon, 1> Game::weapons
     Weapon("AK-47", Weapon::Rarity::Common, Weapon::FiringMode::Auto, Weapon::AmmoType::Blue, 30, 1, 200.0, 2.5, 10.0, 13.5, 100.0, 0.1, 0.0, 0.75, 2.5, 0.9, 2.0, 1.0, 1.0, 1.0)
 };
 
-Game::Game(int id) : isGameRunning (false), id (id)
+Game::Game(int id, std::unordered_map<std::string, std::string> config) : isGameRunning (false), id (id), config (config)
 {
-    password = Manager::config.at("password") == "-" ? "" : Manager::config.at("password");
-    offProjectiles.resize(std::stoi(Manager::config.at("max_bullets")));
+    password = config.at("password") == "-" ? "" : config.at("password");
+    offProjectiles.resize(std::stoi(config.at("max_bullets")));
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
     int i = 0;
-    while (UDPsocket.bind(std::stoi(Manager::config.at("port")) + i) != sf::Socket::Done) i++;
+    while (UDPsocket.bind(std::stoi(config.at("port")) + i) != sf::Socket::Done) i++;
 }
 
 Game::~Game()
@@ -44,7 +44,33 @@ void Game::run()
 
 void Game::parse()
 {
-    //
+    if (Manager::id != id)
+        return;
+
+    std::lock_guard<std::mutex> lock (Manager::m);
+
+    if (Manager::command1 == "kick")
+    {
+        std::string nick = Manager::command2;
+        sendJoinError(ErrorCodes::Kick, players.at(nick).address, players.at(nick).port);
+        players.erase(nick);
+    }
+    else if (Manager::command1 == "ban")
+    {
+        std::string nick = Manager::command2;
+        sendJoinError(ErrorCodes::IpBan, players.at(nick).address, players.at(nick).port);
+        Manager::banlist.insert(players.at(nick).address.toString());
+        Manager::banlist_f.clear();
+        Manager::banlist_f << players.at(nick).address.toString() << endl;
+        Manager::banlist_f.flush();
+        players.erase(nick);
+    }
+    else
+    {
+        cerr << "unknown command" << endl;
+    }
+
+    Manager::id = 0;
 }
 
 void Game::listen()
@@ -80,6 +106,12 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 {
     std::string nickname, ID, password, version;
     sf::Time elapsed = sessionClock.getElapsedTime();
+    std::unordered_set<std::string> banlist;
+
+    {
+        std::lock_guard<std::mutex> lock (Manager::m);
+        banlist = Manager::banlist;
+    }
 
     packet >> nickname >> ID >> password >> version;
 
@@ -91,7 +123,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    if (std::find(Manager::banlist.begin(), Manager::banlist.end(), address.toString()) != Manager::banlist.end())
+    if (std::find(banlist.begin(), banlist.end(), address.toString()) != banlist.end())
     {
         sendJoinError(ErrorCodes::IpBan, address, port);
         return;
@@ -103,7 +135,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    if (players.size() >= std::stoul(Manager::config.at("max_players")) || elapsed > sf::seconds(std::stoi(Manager::config.at("join_time"))))
+    if (players.size() >= std::stoul(config.at("max_players")) || elapsed > sf::seconds(std::stoi(config.at("join_time"))))
     {
         sendJoinError(ErrorCodes::MapFull, address, port);
         return;
@@ -115,7 +147,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    players.insert(std::make_pair(nickname, Player(std::stoi(Manager::config.at("map_size")), std::stoi(Manager::config.at("player_speed")), ID, address, port)));
+    players.insert(std::make_pair(nickname, Player(std::stoi(config.at("map_size")), std::stoi(config.at("player_speed")), ID, address, port)));
     clog << "player " << nickname << " joined the game" << endl;
     isGameRunning = true;
 }

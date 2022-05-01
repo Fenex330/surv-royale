@@ -2,9 +2,14 @@
 
 std::unordered_map<std::string, std::string> Manager::config;
 std::unordered_set<std::string> Manager::banlist;
+
 std::string Manager::command1;
 std::string Manager::command2;
+
+std::fstream Manager::banlist_f;
 std::atomic<bool> Manager::quit (false);
+std::atomic<int> Manager::id (0);
+std::mutex Manager::m;
 
 Manager::Manager()
 {
@@ -55,32 +60,37 @@ Manager::Manager()
 
     for (int i = 1; i <= std::stoi(config.at("max_matches")); i++)
     {
-        pool.push_back(std::thread([](int id){Game game (id); game.run();}, i));
+        pool.push_back(std::thread([](int id, auto config){Game game (id, config); game.run();}, i, config));
         pool.back().detach();
     }
+
+    config_f.close();
 }
 
 void Manager::run()
 {
     while (!quit)
-    {
         scan();
-        parse();
-    }
 }
 
 void Manager::scan()
 {
-    std::string buffer1;
-    std::string buffer2;
-    cin >> buffer1 >> buffer2;
+    std::string buffer1, buffer2, buffer3;
+
+    cin >> buffer1;
+
+    if (buffer1 == "exit" || buffer1 == "quit")
+    {
+        quit = true;
+        return;
+    }
+
+    cin >> buffer2;
+    cin >> buffer3;
 
     std::lock_guard<std::mutex> lock (m);
+
     command1 = buffer1;
     command2 = buffer2;
-}
-
-void Manager::parse()
-{
-    //
+    id = std::stoi(buffer3);
 }

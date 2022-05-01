@@ -17,15 +17,15 @@ public:
     std::list<Projectile> offProjectiles;
 
     std::unordered_map<std::string, Player> players;
+    std::unordered_map<std::string, std::string> config;
     std::string password;
-    std::mutex m;
 
     bool isGameRunning;
     const int id;
 
     static const std::array<Weapon, 1> weapons;
 
-    Game(int id);
+    Game(int id, std::unordered_map<std::string, std::string> config);
     ~Game();
 
     void run();
