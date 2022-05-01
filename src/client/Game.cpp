@@ -194,8 +194,6 @@ void Game::countFpsAndPing()
 
 void Game::send()
 {
-    //std::this_thread::sleep_for(std::chrono::milliseconds(surv::SEND_DELAY));
-
     sf::Time elapsed = udpClock.getElapsedTime();
 
     if (elapsed < sf::milliseconds(surv::SEND_DELAY))

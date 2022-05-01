@@ -18,6 +18,7 @@ public:
 
     std::unordered_map<std::string, Player> players;
     std::string password;
+    bool isGameRunning;
 
     static const std::array<Weapon, 1> weapons;
 

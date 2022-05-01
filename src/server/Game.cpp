@@ -5,7 +5,7 @@ const std::array<Weapon, 1> Game::weapons
     Weapon("AK-47", Weapon::Rarity::Common, Weapon::FiringMode::Auto, Weapon::AmmoType::Blue, 30, 1, 200.0, 2.5, 10.0, 13.5, 100.0, 0.1, 0.0, 0.75, 2.5, 0.9, 2.0, 1.0, 1.0, 1.0)
 };
 
-Game::Game()
+Game::Game() : isGameRunning (false)
 {
     password = Manager::config.at("password") == "-" ? "" : Manager::config.at("password");
     offProjectiles.resize(std::stoi(Manager::config.at("max_bullets")));
@@ -33,6 +33,9 @@ void Game::run()
         send();
         listen();
         parse();
+
+        if (!isGameRunning)
+            std::this_thread::sleep_for(std::chrono::milliseconds(surv::SEND_DELAY));
     }
 }
 
