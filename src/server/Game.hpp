@@ -18,11 +18,14 @@ public:
 
     std::unordered_map<std::string, Player> players;
     std::string password;
+    std::mutex m;
+
     bool isGameRunning;
+    const int id;
 
     static const std::array<Weapon, 1> weapons;
 
-    Game();
+    Game(int id);
     ~Game();
 
     void run();
@@ -32,7 +35,6 @@ public:
     void receiveJoinRequest(sf::IpAddress address, unsigned short port);
     void receivePlayerInput();
 
-    void broadcast();
     void send();
     void sendJoinError(ErrorCodes code, sf::IpAddress address, unsigned short port);
     void sendPlayersList();

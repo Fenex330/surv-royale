@@ -278,7 +278,7 @@ void Game::receiveJoinError()
     switch (errorcode)
     {
         case ErrorCodes::MapFull:
-            join_error = "game is full";
+            join_error = "game is full\ntry again later";
             server_port++;
             sendJoinRequest();
             break;
