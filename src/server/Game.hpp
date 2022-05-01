@@ -17,7 +17,7 @@ public:
     std::list<Projectile> offProjectiles;
 
     std::unordered_map<std::string, Player> players;
-    std::unordered_map<std::string, std::string> config;
+    const std::unordered_map<std::string, std::string> config;
     std::string password;
 
     bool isGameRunning;
