@@ -82,17 +82,5 @@ void Manager::scan()
 
 void Manager::parse()
 {
-    if (command1.empty())
-        return;
-
-    if (command1 == "exit" || command1 == "quit")
-    {
-        quit = true;
-    }
-    else
-    {
-        cerr << "unknown command" << endl;
-    }
-
-    command1.clear();
+    //
 }

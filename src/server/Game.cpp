@@ -44,27 +44,7 @@ void Game::run()
 
 void Game::parse()
 {
-    /*if (command1 == "kick")
-    {
-        std::string nick = command2;
-        sendJoinError(ErrorCodes::Kick, players.at(nick).address, players.at(nick).port);
-        players.erase(nick);
-    }
-    else if (command1 == "ban")
-    {
-        std::string nick = command2;
-        sendJoinError(ErrorCodes::IpBan, players.at(nick).address, players.at(nick).port);
-        banlist.insert(players.at(nick).address.toString());
-        banlist_f.clear();
-        banlist_f << players.at(nick).address.toString() << endl;
-        banlist_f.flush();
-        players.erase(nick);
-    }
-    else if (command1 == "unban")
-    {
-        std::string ip = command2;
-        // ...
-    }*/
+    //
 }
 
 void Game::listen()
