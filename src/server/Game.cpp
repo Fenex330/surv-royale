@@ -1,69 +1,20 @@
 #include "headers.hpp"
 
-std::atomic<bool> Game::quit (false);
 const std::array<Weapon, 1> Game::weapons
 {
     Weapon("AK-47", Weapon::Rarity::Common, Weapon::FiringMode::Auto, Weapon::AmmoType::Blue, 30, 1, 200.0, 2.5, 10.0, 13.5, 100.0, 0.1, 0.0, 0.75, 2.5, 0.9, 2.0, 1.0, 1.0, 1.0)
 };
 
-Game::Game() : user_input (&Game::scan, this)
+Game::Game()
 {
-    user_input.detach();
-
-    #ifdef _WIN32
-        config_f.open(SERVER_CONF_PATH, std::ios::in);
-        banlist_f.open(BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
-    #else
-        const std::string HOME = std::getenv("HOME");
-
-        if (!fs::exists(HOME + CONFIG_DIR))
-            fs::create_directory(HOME + CONFIG_DIR);
-
-        if (!fs::exists(HOME + SERVER_CONF_PATH))
-            fs::copy_file(DEFAULT_SERVER_CONF_PATH, HOME + SERVER_CONF_PATH);
-
-        config_f.open(HOME + SERVER_CONF_PATH, std::ios::in);
-        banlist_f.open(HOME + BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
-    #endif
-
-    if (!config_f)
-    {
-        cerr << "server.conf open error" << endl;
-        std::exit(1);
-    }
-
-    if (!banlist_f)
-    {
-        cerr << "banlist.txt open error" << endl;
-        std::exit(1);
-    }
-
-    while (!config_f.eof())
-    {
-        std::string param;
-        std::string value;
-        config_f >> param >> value;
-        config[param] = value;
-    }
-
-    while (!banlist_f.eof())
-    {
-        std::string line;
-        std::getline(banlist_f, line);
-        banlist.insert(line);
-    }
-
-    password = config.at("password") == "-" ? "" : config.at("password");
-    offProjectiles.resize(std::stoi(config.at("max_bullets")));
+    password = Manager::config.at("password") == "-" ? "" : Manager::config.at("password");
+    offProjectiles.resize(std::stoi(Manager::config.at("max_bullets")));
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
     int i = 0;
-    while (UDPsocket.bind(std::stoi(config.at("port")) + i) != sf::Socket::Done) i++;
-
-    clog << "SurvRoyale version " << GAME_VERSION << endl;
-    clog << "binded to port " << UDPsocket.getLocalPort() << endl;
+    while (UDPsocket.bind(std::stoi(Manager::config.at("port")) + i) != sf::Socket::Done) i++;
 }
 
 Game::~Game()
@@ -77,7 +28,7 @@ Game::~Game()
 
 void Game::run()
 {
-    while (!quit)
+    while (!Manager::quit)
     {
         send();
         listen();
@@ -85,28 +36,9 @@ void Game::run()
     }
 }
 
-void Game::scan()
-{
-    while (!quit)
-    {
-        std::string buffer1;
-        std::string buffer2;
-        cin >> buffer1 >> buffer2;
-
-        std::lock_guard<std::mutex> lock (m);
-        command1 = buffer1;
-        command2 = buffer2;
-    }
-}
-
 void Game::parse()
 {
-    std::lock_guard<std::mutex> lock (m);
-
-    if (command1.empty())
-        return;
-
-    if (command1 == "kick")
+    /*if (command1 == "kick")
     {
         std::string nick = command2;
         sendJoinError(ErrorCodes::Kick, players.at(nick).address, players.at(nick).port);
@@ -126,17 +58,7 @@ void Game::parse()
     {
         std::string ip = command2;
         // ...
-    }
-    else if (command1 == "exit" || command1 == "quit")
-    {
-        quit = true;
-    }
-    else
-    {
-        cerr << "unknown command" << endl;
-    }
-
-    command1.clear();
+    }*/
 }
 
 void Game::listen()
@@ -183,15 +105,9 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    if (players.find(nickname) != players.end() || nickname.find(' ') != std::string::npos || nickname.empty())
+    if (std::find(Manager::banlist.begin(), Manager::banlist.end(), address.toString()) != Manager::banlist.end())
     {
-        sendJoinError(ErrorCodes::NicknameExists, address, port);
-        return;
-    }
-
-    if (players.size() >= std::stoul(config.at("max_players")) || elapsed > sf::seconds(std::stoi(config.at("join_time"))))
-    {
-        sendJoinError(ErrorCodes::MapFull, address, port);
+        sendJoinError(ErrorCodes::IpBan, address, port);
         return;
     }
 
@@ -201,13 +117,19 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    if (std::find(banlist.begin(), banlist.end(), address.toString()) != banlist.end())
+    if (players.size() >= std::stoul(Manager::config.at("max_players")) || elapsed > sf::seconds(std::stoi(Manager::config.at("join_time"))))
     {
-        sendJoinError(ErrorCodes::IpBan, address, port);
+        sendJoinError(ErrorCodes::MapFull, address, port);
         return;
     }
 
-    players.insert(std::make_pair(nickname, Player(std::stoi(config.at("map_size")), std::stoi(config.at("player_speed")), ID, address, port)));
+    if (players.find(nickname) != players.end() || nickname.find(' ') != std::string::npos || nickname.empty())
+    {
+        sendJoinError(ErrorCodes::NicknameExists, address, port);
+        return;
+    }
+
+    players.insert(std::make_pair(nickname, Player(std::stoi(Manager::config.at("map_size")), std::stoi(Manager::config.at("player_speed")), ID, address, port)));
     clog << "player " << nickname << " joined the game" << endl;
 }
 

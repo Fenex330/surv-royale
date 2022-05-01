@@ -13,31 +13,18 @@ public:
     sf::Clock udpClock;
     sf::Clock sessionClock;
 
-    std::unordered_map<std::string, Player> players;
-    std::unordered_map<std::string, std::string> config;
-    std::unordered_set<std::string> banlist;
-
     std::list<Projectile> onProjectiles;
     std::list<Projectile> offProjectiles;
 
+    std::unordered_map<std::string, Player> players;
     std::string password;
-    std::string command1;
-    std::string command2;
 
-    std::thread user_input;
-    std::mutex m;
-
-    std::fstream config_f;
-    std::fstream banlist_f;
-
-    static std::atomic<bool> quit;
     static const std::array<Weapon, 1> weapons;
 
     Game();
     ~Game();
 
     void run();
-    void scan();
     void parse();
 
     void listen();

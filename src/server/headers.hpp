@@ -6,6 +6,7 @@
 #include <string>
 #include <list>
 #include <array>
+#include <vector>
 #include <unordered_map>
 #include <unordered_set>
 #include <random>
@@ -30,3 +31,4 @@
 #include "Weapon.hpp"
 #include "Player.hpp"
 #include "Game.hpp"
+#include "Manager.hpp"

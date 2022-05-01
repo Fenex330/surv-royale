@@ -4,7 +4,7 @@
 
 int main()
 {
-    Game game;
-    game.run();
+    Manager manager;
+    manager.run();
     return 0;
 }
