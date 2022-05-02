@@ -49,7 +49,12 @@ void Game::parse()
 
     std::lock_guard<std::mutex> lock (Manager::m);
 
-    if (Manager::command1 == "kick")
+    if (Manager::command1 == "list")
+    {
+        for (const auto& [nickname, player] : players)
+            cout << player.ID << " " << player.address << " " << player.port << " " << nickname << endl;
+    }
+    else if (Manager::command1 == "kick")
     {
         std::string nick = Manager::command2;
         sendJoinError(ErrorCodes::Kick, players.at(nick).address, players.at(nick).port);
@@ -64,6 +69,10 @@ void Game::parse()
         Manager::banlist_f << players.at(nick).address.toString() << endl;
         Manager::banlist_f.flush();
         players.erase(nick);
+    }
+    else if (Manager::command1 == "unban")
+    {
+        //
     }
     else
     {
