@@ -148,7 +148,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
     }
 
     players.insert(std::make_pair(nickname, Player(std::stoi(config.at("map_size")), std::stoi(config.at("player_speed")), ID, address, port)));
-    clog << "player " << nickname << " joined the game" << endl;
+    clog << nickname << " joined at slot " << id << endl;
     isGameRunning = true;
 }
 

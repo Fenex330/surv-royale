@@ -45,7 +45,7 @@ namespace surv
     {
         thread_local std::random_device dev;
         thread_local std::mt19937 rng (dev());
-        thread_local std::uniform_int_distribution<std::mt19937::result_type> dist (lowest, highest);
+        std::uniform_int_distribution<std::mt19937::result_type> dist (lowest, highest);
         return dist(rng);
     }
 
