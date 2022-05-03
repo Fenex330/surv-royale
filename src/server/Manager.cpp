@@ -15,10 +15,9 @@ std::mutex Manager::m;
 Manager::Manager()
 {
     clog << "SurvRoyale version " << GAME_VERSION << endl;
-    std::fstream config_f;
 
     #ifdef _WIN32
-        config_f.open(SERVER_CONF_PATH, std::ios::in);
+        std::fstream config_f (SERVER_CONF_PATH, std::ios::in);
         banlist_f.open(BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
     #else
         const std::string HOME = std::getenv("HOME");
@@ -29,7 +28,7 @@ Manager::Manager()
         if (!fs::exists(HOME + SERVER_CONF_PATH))
             fs::copy_file(DEFAULT_SERVER_CONF_PATH, HOME + SERVER_CONF_PATH);
 
-        config_f.open(HOME + SERVER_CONF_PATH, std::ios::in);
+        std::fstream config_f (HOME + SERVER_CONF_PATH, std::ios::in);
         banlist_f.open(HOME + BANLIST_PATH, std::ios::in | std::ios::out | std::ios::app);
     #endif
 
