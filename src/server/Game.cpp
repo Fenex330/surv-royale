@@ -5,7 +5,7 @@ const std::array<Weapon, 1> Game::weapons
     Weapon("AK-47", Weapon::Rarity::Common, Weapon::FiringMode::Auto, Weapon::AmmoType::Blue, 30, 1, 200.0, 2.5, 10.0, 13.5, 100.0, 0.1, 0.0, 0.75, 2.5, 0.9, 2.0, 1.0, 1.0, 1.0)
 };
 
-Game::Game(int id, std::unordered_map<std::string, std::string> config) : isGameRunning (false), id (id), config (config)
+Game::Game(int id, unsigned short port, std::unordered_map<std::string, std::string> config) : isGameRunning (false), id (id), config (config)
 {
     password = config.at("password") == "-" ? "" : config.at("password");
     offProjectiles.resize(std::stoi(config.at("max_bullets")));
@@ -13,8 +13,8 @@ Game::Game(int id, std::unordered_map<std::string, std::string> config) : isGame
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
-    int i = 0;
-    while (UDPsocket.bind(std::stoi(config.at("port")) + i) != sf::Socket::Done) i++;
+    if (UDPsocket.bind(port) != sf::Socket::Done)
+        std::exit(1);
 }
 
 Game::~Game()

@@ -25,7 +25,7 @@ public:
 
     static const std::array<Weapon, 1> weapons;
 
-    Game(int id, std::unordered_map<std::string, std::string> config);
+    Game(int id, unsigned short port, std::unordered_map<std::string, std::string> config);
     ~Game();
 
     void run();

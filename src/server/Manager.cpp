@@ -6,14 +6,16 @@ std::unordered_set<std::string> Manager::banlist;
 std::string Manager::command1;
 std::string Manager::command2;
 
-std::fstream Manager::banlist_f;
 std::atomic<bool> Manager::quit (false);
 std::atomic<int> Manager::id (0);
+
+std::fstream Manager::banlist_f;
 std::mutex Manager::m;
 
 Manager::Manager()
 {
     clog << "SurvRoyale version " << GAME_VERSION << endl;
+    std::fstream config_f;
 
     #ifdef _WIN32
         config_f.open(SERVER_CONF_PATH, std::ios::in);
@@ -60,11 +62,9 @@ Manager::Manager()
 
     for (int i = 1; i <= std::stoi(config.at("max_matches")); i++)
     {
-        pool.push_back(std::thread([](int id, auto config){Game game (id, config); game.run();}, i, config));
+        pool.push_back(std::thread([](int id, unsigned short port, auto config){Game game (id, port, config); game.run();}, i, std::stoi(config.at("port")) + i - 1, config));
         pool.back().detach();
     }
-
-    config_f.close();
 }
 
 void Manager::run()
