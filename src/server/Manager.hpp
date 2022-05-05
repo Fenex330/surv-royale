@@ -21,6 +21,7 @@ public:
     static std::mutex m;
 
     Manager();
+    ~Manager();
 
     void run();
     void scan();

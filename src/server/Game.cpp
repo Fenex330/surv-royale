@@ -14,7 +14,7 @@ Game::Game(int id) : isGameRunning (false), id (id), config (Manager::config)
     TCPsocket.setBlocking(false);
 
     if (UDPsocket.bind(std::stoi(config.at("port")) + id - 1) != sf::Socket::Done)
-        std::exit(1);
+        Manager::quit = true;
 }
 
 Game::~Game()

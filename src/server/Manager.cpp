@@ -60,10 +60,13 @@ Manager::Manager()
     }
 
     for (int i = 1; i <= std::stoi(config.at("max_matches")); i++)
-    {
         pool.push_back(std::thread([](int id){Game game (id); game.run();}, i));
-        pool.back().detach();
-    }
+}
+
+Manager::~Manager()
+{
+    for (auto& t : pool)
+        t.join();
 }
 
 void Manager::run()
