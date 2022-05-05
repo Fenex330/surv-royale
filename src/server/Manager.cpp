@@ -61,7 +61,7 @@ Manager::Manager()
 
     for (int i = 1; i <= std::stoi(config.at("max_matches")); i++)
     {
-        pool.push_back(std::thread([](int id, unsigned short port, auto config){Game game (id, port, config); game.run();}, i, std::stoi(config.at("port")) + i - 1, config));
+        pool.push_back(std::thread([](int id){Game game (id); game.run();}, i));
         pool.back().detach();
     }
 }

@@ -5,7 +5,7 @@ const std::array<Weapon, 1> Game::weapons
     Weapon("AK-47", Weapon::Rarity::Common, Weapon::FiringMode::Auto, Weapon::AmmoType::Blue, 30, 1, 200.0, 2.5, 10.0, 13.5, 100.0, 0.1, 0.0, 0.75, 2.5, 0.9, 2.0, 1.0, 1.0, 1.0)
 };
 
-Game::Game(int id, unsigned short port, std::unordered_map<std::string, std::string> config) : isGameRunning (false), id (id), config (config)
+Game::Game(int id) : isGameRunning (false), id (id), config (Manager::config)
 {
     password = config.at("password") == "-" ? "" : config.at("password");
     offProjectiles.resize(std::stoi(config.at("max_bullets")));
@@ -13,7 +13,7 @@ Game::Game(int id, unsigned short port, std::unordered_map<std::string, std::str
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
-    if (UDPsocket.bind(port) != sf::Socket::Done)
+    if (UDPsocket.bind(std::stoi(config.at("port")) + id - 1) != sf::Socket::Done)
         std::exit(1);
 }
 
@@ -157,7 +157,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
     }
 
     players.insert(std::make_pair(nickname, Player(std::stoi(config.at("map_size")), std::stoi(config.at("player_speed")), ID, address, port)));
-    clog << nickname << " joined at slot " << id << endl;
+    clog << nickname << " joined slot " << id << endl;
     isGameRunning = true;
 }
 

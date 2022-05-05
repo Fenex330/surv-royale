@@ -139,6 +139,7 @@ void Game::imguiMapUI()
 
     if (ImGui::Button("PLAY!"))
     {
+        join_error = "";
         nickname = std::string(buf1);
         server_address = std::string(buf2);
         server_port = std::stoi(std::string(buf3));
