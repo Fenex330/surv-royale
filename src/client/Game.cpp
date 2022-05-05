@@ -14,8 +14,6 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
                ping_avg (0),
                ping_count (0)
 {
-    std::atexit(Game::cleanup);
-
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
     window.setMouseCursorVisible(true);
@@ -52,12 +50,12 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
         id >> ID >> local_port;
 
         if (UDPsocket.bind(local_port) != sf::Socket::Done)
-            std::exit(1);
+            quit = true;
     }
     else
     {
         if (UDPsocket.bind(sf::Socket::AnyPort) != sf::Socket::Done)
-            std::exit(1);
+            quit = true;
 
         generateID();
     }
@@ -65,7 +63,11 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
 
 Game::~Game()
 {
-    Game::cleanup();
+    free(tarFile);
+    ImGui::SFML::Shutdown();
+
+    if (!isGameRunning)
+        fs::remove(ID_PATH);
 }
 
 void Game::play()
@@ -382,20 +384,4 @@ void Game::mainPlayerInputSlot()
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) slot = 4;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) slot = 5;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) slot = 6;
-}
-
-void Game::cleanup()
-{
-    static bool isCleaned = false;
-
-    if (isCleaned) // to make sure cleanup happens only once
-        return;
-
-    free(tarFile);
-    ImGui::SFML::Shutdown();
-
-    if (!isGameRunning)
-        fs::remove(ID_PATH);
-
-    isCleaned = true;
 }
