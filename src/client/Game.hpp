@@ -80,6 +80,6 @@ public:
         assert(file_size % 512 > 0);
 
         if (!asset.loadFromMemory(asset_file, tar_size))
-            std::exit(1);
+            Game::quit = true;
     }
 };

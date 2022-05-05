@@ -35,13 +35,13 @@ Manager::Manager()
     if (!config_f)
     {
         cerr << "server.conf open error" << endl;
-        std::exit(1);
+        quit = true;
     }
 
     if (!banlist_f)
     {
         cerr << "banlist.txt open error" << endl;
-        std::exit(1);
+        quit = true;
     }
 
     while (!config_f.eof())
