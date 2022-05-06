@@ -14,6 +14,11 @@ void Player::init(std::string nickname)
     active = true;
     this->nickname = nickname;
 
+    nick.setFont(Game::font);
+    nick.setString(nickname);
+    nick.setCharacterSize(10);
+    nick.setFillColor(sf::Color::White);
+
     if (nickname == Game::nickname)
     {
         view.setSize(surv::VIEW_DIM_X, surv::VIEW_DIM_Y);
@@ -24,6 +29,7 @@ void Player::init(std::string nickname)
 void Player::setPosition(int x, int y)
 {
     sprite.setPosition(x, y);
+    nick.setPosition(x, y + surv::PLAYER_RADIUS * 2);
 
     if (nickname == Game::nickname)
         view.setCenter(x, y);

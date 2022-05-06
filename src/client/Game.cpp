@@ -1,5 +1,6 @@
 #include "headers.hpp"
 
+sf::Font Game::font;
 std::string Game::nickname = "";
 bool Game::isGameRunning = false;
 bool Game::quit = false;
@@ -160,11 +161,14 @@ void Game::draw()
     if (!isGameRunning)
         return;
 
+    for (const auto& n : players)
+    {
+        window.draw(n.second.sprite);
+        window.draw(n.second.nick);
+    }
+
     window.draw(crosshair);
     window.draw(text);
-
-    for (const auto& n : players)
-        window.draw(n.second.sprite);
 }
 
 void Game::generateID()

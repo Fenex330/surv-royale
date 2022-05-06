@@ -6,7 +6,6 @@ class Game
 {
 public:
 
-    sf::Font font;
     sf::Text text;
     sf::RenderWindow window;
     sf::Texture crosshair_texture;
@@ -36,6 +35,7 @@ public:
     std::string password;
     std::string join_error;
 
+    static sf::Font font;
     static std::string nickname;
     static bool isGameRunning;
     static bool quit;
