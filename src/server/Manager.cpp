@@ -101,5 +101,5 @@ void Manager::scan()
 void Manager::signalHandler(int signal)
 {
     if (signal == SIGINT)
-        Manager::quit = true;
+        cout << "\nto shutdown the server, enter \"exit\" or \"quit\"" << endl;
 }
