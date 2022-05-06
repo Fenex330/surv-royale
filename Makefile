@@ -30,15 +30,15 @@ release-max:
 	$(eval CXXFLAGS += $(RELEASE_MAX_FLAGS))
 
 client:
-	parallel -q $(CXX) $(CXXFLAGS) $(GAME_VERSION) -pipe -c {} -o {}.o ::: src/client/*.cpp src/client/imgui/*.cpp
-	$(CXX) $(CXXFLAGS) src/client/*.o src/client/imgui/*.o $(LIBS_CLIENT) -o surv-royale-client
+	parallel -q $(CXX) $(CXXFLAGS) $(GAME_VERSION) -pipe -c {} -o {}.o ::: src/client/*.cpp src/imgui/*.cpp
+	$(CXX) $(CXXFLAGS) src/client/*.o src/imgui/*.o $(LIBS_CLIENT) -o surv-royale-client
 
 server:
 	parallel -q $(CXX) $(CXXFLAGS) $(GAME_VERSION) -pipe -c {} -o {}.o ::: src/server/*.cpp
 	$(CXX) $(CXXFLAGS) src/server/*.o $(LIBS_SERVER) -o surv-royale-server
 
 client-serial:
-	$(CXX) $(CXXFLAGS) $(GAME_VERSION) $(LIBS_CLIENT) src/client/*.cpp src/client/imgui/*.cpp -o surv-royale-client
+	$(CXX) $(CXXFLAGS) $(GAME_VERSION) $(LIBS_CLIENT) src/client/*.cpp src/imgui/*.cpp -o surv-royale-client
 
 server-serial:
 	$(CXX) $(CXXFLAGS) $(GAME_VERSION) $(LIBS_SERVER) src/server/*.cpp -o surv-royale-server
@@ -47,7 +47,7 @@ clean:
 	rm surv-royale-client &
 	rm surv-royale-server &
 	rm src/client/*.o &
-	rm src/client/imgui/*.o &
+	rm src/imgui/*.o &
 	rm src/server/*.o &
 	rm imgui.ini &
 	rm ID &
