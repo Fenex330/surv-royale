@@ -25,6 +25,4 @@ public:
 
     void run();
     void scan();
-
-    static void signalHandler(int signal);
 };
