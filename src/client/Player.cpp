@@ -29,7 +29,7 @@ void Player::init(std::string nickname)
 void Player::setPosition(int x, int y)
 {
     sprite.setPosition(x, y);
-    nick.setPosition(x, y + surv::PLAYER_RADIUS * 2);
+    nick.setPosition(x, y - surv::PLAYER_RADIUS * 2);
 
     if (nickname == Game::nickname)
         view.setCenter(x, y);

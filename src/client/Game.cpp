@@ -167,8 +167,8 @@ void Game::draw()
         window.draw(n.second.nick);
     }
 
-    window.draw(crosshair);
     window.draw(text);
+    window.draw(crosshair);
 }
 
 void Game::generateID()
