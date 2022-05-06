@@ -15,6 +15,7 @@ std::mutex Manager::m;
 Manager::Manager()
 {
     clog << "SurvRoyale version " << GAME_VERSION << endl;
+    std::signal(SIGINT, signalHandler);
 
     #ifdef _WIN32
         std::fstream config_f (SERVER_CONF_PATH, std::ios::in);
@@ -95,4 +96,10 @@ void Manager::scan()
     command1 = buffer1;
     command2 = buffer2;
     id = std::stoi(buffer3);
+}
+
+void Manager::signalHandler(int signal)
+{
+    if (signal == SIGINT)
+        Manager::quit = true;
 }

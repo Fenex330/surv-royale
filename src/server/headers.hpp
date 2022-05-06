@@ -19,6 +19,7 @@
 #include <thread>
 #include <chrono>
 
+#include <csignal>
 #include <cstdlib>
 #include <cassert>
 #include <cmath>

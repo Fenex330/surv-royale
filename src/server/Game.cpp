@@ -24,6 +24,9 @@ Game::~Game()
 
     for (const auto& [nickname, player] : players)
         UDPsocket.send(packet, player.address, player.port);
+
+    std::lock_guard<std::mutex> lock (Manager::m);
+    clog << "shutdown room " << id << endl;
 }
 
 void Game::run()
@@ -157,7 +160,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
     }
 
     players.insert(std::make_pair(nickname, Player(std::stoi(config.at("map_size")), std::stoi(config.at("player_speed")), ID, address, port)));
-    clog << nickname << " joined slot " << id << endl;
+    clog << nickname << " joined room " << id << endl;
     isGameRunning = true;
 }
 
