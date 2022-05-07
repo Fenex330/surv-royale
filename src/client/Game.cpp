@@ -40,6 +40,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
     crosshair.setTexture(crosshair_texture);
     crosshair.setOrigin(crosshair.getLocalBounds().width * 0.5, crosshair.getLocalBounds().height * 0.5);
     crosshair.setScale(0.5, 0.5);
+    crosshair.setColor(sf::Color::Red);
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
@@ -368,9 +369,7 @@ void Game::receiveGameState()
         int total = map_size * surv::SQUARE_SIZE * surv::PLAYER_RADIUS;
 
         map.setFillColor(sf::Color::Green);
-        map.setRadius(total / 2.0);
-        map.setPointCount(4);
-        map.rotate(45);
+        map.setSize(sf::Vector2f(total, total));
 
         for (int i = 0; i <= total; i++)
         {

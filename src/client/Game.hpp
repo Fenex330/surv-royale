@@ -8,7 +8,7 @@ public:
 
     sf::Text text;
     sf::RenderWindow window;
-    sf::CircleShape map;
+    sf::RectangleShape map;
     sf::Texture crosshair_texture;
     sf::Sprite crosshair;
     sf::UdpSocket UDPsocket;
