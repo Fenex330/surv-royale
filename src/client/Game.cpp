@@ -103,7 +103,7 @@ void Game::run()
 
         ImGui::SFML::Update(window, imguiClock.restart());
         imguiMapUI();
-        window.clear(isGameRunning == true ? sf::Color::Blue : sf::Color::Black);
+        window.clear(isGameRunning == true ? sf::Color(50, 130, 171) : sf::Color::Black);
         draw();
         ImGui::SFML::Render(window);
         window.display();
@@ -368,7 +368,7 @@ void Game::receiveGameState()
         is_init = true;
         int total = map_size * surv::SQUARE_SIZE * surv::PLAYER_RADIUS;
 
-        map.setFillColor(sf::Color::Green);
+        map.setFillColor(sf::Color(128, 175, 73));
         map.setSize(sf::Vector2f(total, total));
 
         for (int i = 0; i <= total; i++)
