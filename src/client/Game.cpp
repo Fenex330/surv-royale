@@ -102,7 +102,7 @@ void Game::run()
 
         ImGui::SFML::Update(window, imguiClock.restart());
         imguiMapUI();
-        window.clear();
+        window.clear(sf::Color::Blue);
         draw();
         ImGui::SFML::Render(window);
         window.display();
@@ -377,6 +377,9 @@ void Game::receiveGameState()
 
             sf::RectangleShape h_line (sf::Vector2f(total, 4));
             sf::RectangleShape v_line (sf::Vector2f(total, 4));
+
+            h_line.setFillColor(sf::Color(128, 128, 128));
+            v_line.setFillColor(sf::Color(128, 128, 128));
 
             h_line.setPosition(0, i);
             v_line.setPosition(i, 0);
