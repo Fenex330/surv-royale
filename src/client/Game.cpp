@@ -340,7 +340,7 @@ void Game::receivePlayersList()
             players.at(nick).init(nick);
         }
 
-        players.at(nick).setPosition(x, -y);
+        players.at(nick).setPosition(x, y);
         players.at(nick).setRotation(rotation + surv::PI / 2.0);
     }
 }
@@ -370,6 +370,7 @@ void Game::receiveGameState()
         map.setFillColor(sf::Color::Green);
         map.setRadius(total / 2.0);
         map.setPointCount(4);
+        map.rotate(45);
 
         for (int i = 0; i <= total; i++)
         {
@@ -397,9 +398,9 @@ std::pair<sf::Int8, sf::Int8> Game::mainPlayerInputMovement()
     sf::Int8 x = 0;
     sf::Int8 y = 0;
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) y++;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) y--;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) x--;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) y--;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) y++;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) x++;
 
     return std::make_pair(x, y);
