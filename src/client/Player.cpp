@@ -9,14 +9,14 @@ void Player::init(std::string nickname)
     sprite.setTexture(texture);
 
     sprite.setOrigin(sprite.getLocalBounds().width * 0.5, sprite.getLocalBounds().height * 0.5);
-    sprite.setScale(0.25, 0.25);
+    sprite.setScale(0.2, 0.2);
 
     active = true;
     this->nickname = nickname;
 
     nick.setFont(Game::font);
     nick.setString(nickname);
-    nick.setCharacterSize(15);
+    nick.setCharacterSize(20);
     nick.setFillColor(sf::Color::White);
     nick.setStyle(sf::Text::Bold);
 

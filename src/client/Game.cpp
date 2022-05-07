@@ -32,14 +32,14 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
 
     Game::loadAsset(font, "GameData/fonts/RobotoCondensed-Regular.ttf");
     text.setFont(font);
-    text.setCharacterSize(15);
-    text.setFillColor(sf::Color::Red);
+    text.setCharacterSize(20);
+    text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);
 
     Game::loadAsset(crosshair_texture, "GameData/graphics/crosshairs/11.png");
     crosshair.setTexture(crosshair_texture);
     crosshair.setOrigin(crosshair.getLocalBounds().width * 0.5, crosshair.getLocalBounds().height * 0.5);
-    crosshair.setScale(0.5, 0.5);
+    crosshair.setScale(0.75, 0.75);
     crosshair.setColor(sf::Color::Red);
 
     UDPsocket.setBlocking(false);
