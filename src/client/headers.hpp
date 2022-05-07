@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <stack>
+#include <vector>
 #include <unordered_map>
 #include <random>
 #include <filesystem>

@@ -161,6 +161,11 @@ void Game::draw()
     if (!isGameRunning)
         return;
 
+    window.draw(map);
+
+    for (const auto& n : lines)
+        window.draw(n);
+
     for (const auto& n : players)
     {
         window.draw(n.second.sprite);
@@ -352,7 +357,35 @@ void Game::receiveObjectsList()
 
 void Game::receiveGameState()
 {
-    //
+    sf::Uint16 map_size;
+    packet >> map_size;
+
+    static bool is_init = false;
+
+    if (!is_init)
+    {
+        is_init = true;
+        int total = map_size * surv::SQUARE_SIZE * surv::PLAYER_RADIUS;
+        map.setFillColor(sf::Color::Green);
+        map.setRadius(total / 2.0);
+        map.setPointCount(4);
+
+        for (int i = 0; i <= total; i++)
+        {
+            if (i % (surv::SQUARE_SIZE * surv::PLAYER_RADIUS) != 0)
+                continue;
+
+            sf::RectangleShape h_line (sf::Vector2f(total, 4));
+            sf::RectangleShape v_line (sf::Vector2f(total, 4));
+
+            h_line.setPosition(0, i);
+            v_line.setPosition(i, 0);
+            v_line.rotate(90);
+
+            lines.push_back(h_line);
+            lines.push_back(v_line);
+        }
+    }
 }
 
 std::pair<sf::Int8, sf::Int8> Game::mainPlayerInputMovement()

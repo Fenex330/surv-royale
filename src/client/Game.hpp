@@ -8,6 +8,7 @@ public:
 
     sf::Text text;
     sf::RenderWindow window;
+    sf::CircleShape map;
     sf::Texture crosshair_texture;
     sf::Sprite crosshair;
     sf::UdpSocket UDPsocket;
@@ -30,6 +31,7 @@ public:
 
     std::unordered_map<std::string, Player> players;
     std::stack<Projectile> projectiles;
+    std::vector<sf::RectangleShape> lines;
 
     std::string ID;
     std::string password;
@@ -67,8 +69,6 @@ public:
     std::pair<bool, bool> mainPlayerInputMouse();
     double mainPlayerInputRotation();
     void mainPlayerInputSlot();
-
-    static void cleanup();
 
     template <class T> static
     void loadAsset(T &asset, const char *path)

@@ -244,5 +244,9 @@ void Game::sendObjectsList()
 
 void Game::sendGameState()
 {
-    //
+    packet.clear();
+    packet << static_cast<sf::Uint8>(NetCodes::GameState) << static_cast<sf::Uint16>(std::stoi(config.at("map_size")));
+
+    for (const auto& [nickname, player] : players)
+        UDPsocket.send(packet, player.address, player.port);
 }
