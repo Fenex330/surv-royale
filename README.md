@@ -36,7 +36,7 @@ MacOS support is unofficial and will be tested for issues on voluntary basis onl
 - no phone-home
 - no account needed
 - no cheats possible (all processing is done on the server, client only sends user input and renders graphics)
-- no restrictions on usage (user-made modifications allowed)
+- no restrictions on usage (user modifications allowed)
 
 
 
