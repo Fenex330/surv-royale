@@ -21,7 +21,7 @@ MacOS support is unofficial and will be tested for issues on voluntary basis onl
 
 ### Comparison
 
-***Benefits compared to the original game***
+*Benefits compared to the original game*
 - open-sourced under free & permissive license
 - original game resources used
 - highly optimized for memory & cpu performnce (written in raw c++ instead of javascript)
