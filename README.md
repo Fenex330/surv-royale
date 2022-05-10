@@ -1,6 +1,7 @@
 # Table of contents
 
 * [About](#About)
+* [Comparison](#Comparison)
 * [Building](#Building)
 * [Notice](#Notice)
 * [Mirrors](#Mirrors)
@@ -13,8 +14,29 @@
 
 **SurvRoyale** is a desktop clone of the popular browser battle royale shooter - [surviv.io](https://surviv.io/), written in C++.
 The project is currently in the stage of an early alpha development, so any contribution via pull request or issue is welcome.
-At the moment, only Linux & Windows platforms are officially supported. MacOS support is unofficial and will be tested for issues
-on voluntary basis only.
+At the moment, only Linux & Windows platforms are officially supported, porting to other platforms is trivial.
+MacOS support is unofficial and will be tested for issues on voluntary basis only.
+
+
+
+### Comparison
+
+***Benefits compared to the original game***
+- open-sourced under free & permissive license
+- original game resources used
+- highly optimized for memory & cpu performnce (written in raw c++ instead of javascript)
+- very little lag or network delays (udp sockets used instead of tcp)
+- self-hostable independent server
+- native gpu acceleration
+- more weapons available
+- joystick support (coming soon)
+- in-game chat (coming soon)
+- no ads
+- no tracking & spying on user data
+- no phone-home
+- no account needed
+- no cheats possible (all processing is done on the server, client only sends user input and renders graphics)
+- no restrictions on usage (user-made modifications allowed)
 
 
 
