@@ -13,17 +13,16 @@ public:
     sf::Clock udpClock;
     sf::Clock sessionClock;
 
-    std::list<Projectile> onProjectiles;
-    std::list<Projectile> offProjectiles;
-
-    std::unordered_map<std::string, Player> players;
+          std::unordered_map<std::string, Player> players;
     const std::unordered_map<std::string, std::string> config;
-    std::string password;
+          std::string password;
 
     bool isGameRunning;
     const int id;
 
     static const std::array<Weapon, 1> weapons;
+    static thread_local std::list<Projectile> onProjectiles;
+    static thread_local std::list<Projectile> offProjectiles;
 
     Game(int id);
     ~Game();
