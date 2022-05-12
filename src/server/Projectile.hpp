@@ -17,12 +17,10 @@ class Projectile
         double headshot_multiplier;
         double obstacle_multiplier;
         std::string nickname;
-        std::string gunname;
         std::function<void(Projectile*)> action;
 
         void move();
         void init(const std::string &nickname,
-                  const std::string &gunname,
                   const sf::Int16 &x,
                   const sf::Int16 &y,
                   const double &rotation,
@@ -37,7 +35,6 @@ class Projectile
         {
             active = true;
             this->nickname = nickname;
-            this->gunname = gunname;
             this->x = x;
             this->y = y;
             this->rotation = rotation;

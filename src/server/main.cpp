@@ -1,6 +1,6 @@
 #include "headers.hpp"
 
-/* any static var must be declared either atomic or const or protected by mutex for thread safety reasons. Prefer thread_local instead */
+/* for thread safety reasons, any static variable must be declared either atomic, const, thread_local or protected by mutex */
 
 int main()
 {

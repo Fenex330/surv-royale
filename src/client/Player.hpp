@@ -14,7 +14,7 @@ class Player
         sf::View view;
         sf::Text nick;
 
-        void init(std::string nickname); // is used instead of constructor to solve missing texture bug
+        void init(std::string nickname); // used instead of constructor to solve missing texture bug
         void setPosition(int x, int y);
         void setRotation(double rotation);
 };

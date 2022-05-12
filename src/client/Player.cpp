@@ -6,8 +6,8 @@ void Player::init(std::string nickname)
 
     texture.setSmooth(true);
     texture.setRepeated(false);
-    sprite.setTexture(texture);
 
+    sprite.setTexture(texture);
     sprite.setOrigin(sprite.getLocalBounds().width * 0.5, sprite.getLocalBounds().height * 0.5);
     sprite.setScale(0.2, 0.2);
 
