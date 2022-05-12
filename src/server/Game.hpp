@@ -24,7 +24,7 @@ public:
     static thread_local std::list<Projectile> onProjectiles;
     static thread_local std::list<Projectile> offProjectiles;
 
-    Game(int id);
+    Game(int id, std::unordered_map<std::string, std::string> config);
     ~Game();
 
     void run();

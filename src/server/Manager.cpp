@@ -1,20 +1,19 @@
 #include "headers.hpp"
 
-std::unordered_map<std::string, std::string> Manager::config;
-std::unordered_set<std::string> Manager::banlist;
-
 std::string Manager::command1;
 std::string Manager::command2;
 
 std::atomic<bool> Manager::quit (false);
 std::atomic<int> Manager::id (0);
 
+std::unordered_set<std::string> Manager::banlist;
 std::fstream Manager::banlist_f;
 std::mutex Manager::m;
 
 Manager::Manager()
 {
     clog << "SurvRoyale version " << GAME_VERSION << endl;
+    std::unordered_map<std::string, std::string> config;
     std::signal(SIGINT, []([[maybe_unused]] int sig){cout << "\nto shutdown the server, enter \"exit\" or \"quit\"" << endl;});
 
     #ifdef _WIN32
@@ -61,7 +60,7 @@ Manager::Manager()
     }
 
     for (int i = 1; i <= std::stoi(config.at("max_matches")); i++)
-        pool.push_back(std::thread([](int id){Game game (id); game.run();}, i));
+        pool.push_back(std::thread([](int id, auto config){Game game (id, config); game.run();}, i, config));
 }
 
 Manager::~Manager()

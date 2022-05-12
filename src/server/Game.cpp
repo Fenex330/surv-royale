@@ -8,7 +8,7 @@ const std::array<Weapon, 1> Game::weapons
 thread_local std::list<Projectile> Game::onProjectiles;
 thread_local std::list<Projectile> Game::offProjectiles;
 
-Game::Game(int id) : isGameRunning (false), id (id), config (Manager::config)
+Game::Game(int id, std::unordered_map<std::string, std::string> config) : isGameRunning (false), id (id), config (config)
 {
     password = config.at("password") == "-" ? "" : config.at("password");
     offProjectiles.resize(std::stoi(config.at("max_bullets")));
