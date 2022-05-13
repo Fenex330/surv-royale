@@ -14,7 +14,7 @@ Manager::Manager()
 {
     clog << "SurvRoyale version " << GAME_VERSION << endl;
     std::unordered_map<std::string, std::string> config;
-    std::signal(SIGINT, []([[maybe_unused]] int sig){cout << "\nto shutdown the server, enter \"exit\" or \"quit\"" << endl;});
+    std::signal(SIGINT, []([[maybe_unused]] int sig){cout << "\nto shutdown the server, enter \"exit\" or \"quit\"" << endl;}); // CTRL + C handler
 
     #ifdef _WIN32
         std::fstream config_f (SERVER_CONF_PATH, std::ios::in);
