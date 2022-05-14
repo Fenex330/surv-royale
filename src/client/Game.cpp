@@ -275,7 +275,7 @@ void Game::listen()
             break;
 
         default:
-            break;
+            std::unreachable();
     }
 
     packet.clear();
@@ -320,7 +320,7 @@ void Game::receiveJoinError()
             break;
 
         default:
-            break;
+            std::unreachable();
     }
 }
 

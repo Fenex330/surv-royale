@@ -111,7 +111,7 @@ void Game::listen()
             break;
 
         default:
-            break;
+            std::unreachable();
     }
 
     packet.clear();
