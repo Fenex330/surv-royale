@@ -5,9 +5,10 @@
 class Projectile
 {
     public:
+        sf::RectangleShape sprite;
         sf::Int16 x;
         sf::Int16 y;
         double rotation;
 
-        static sf::RectangleShape sprite;
+        Projectile(sf::Int16 x, sf::Int16 y, double rotation);
 };

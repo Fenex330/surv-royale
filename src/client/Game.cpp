@@ -42,9 +42,6 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
     crosshair.setScale(0.75, 0.75);
     crosshair.setColor(sf::Color::Red);
 
-    Projectile::sprite.setFillColor(sf::Color::White);
-    Projectile::sprite.setSize(sf::Vector2f(surv::PLAYER_RADIUS, 5));
-
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
@@ -364,10 +361,7 @@ void Game::receiveProjectilesList()
 
     while (packet >> x >> y >> rotation)
     {
-        Projectile p;
-        p.x = x;
-        p.y = y;
-        p.rotation = rotation;
+        Projectile p (x, y, rotation);
         projectiles.push(std::move(p));
     }
 }
