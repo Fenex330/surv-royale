@@ -22,8 +22,8 @@ Manager::Manager()
     #else
         const std::string HOME = std::getenv("HOME");
 
-        if (!fs::exists(HOME + CONFIG_DIR))
-            fs::create_directory(HOME + CONFIG_DIR);
+        if (!fs::exists(HOME + CONFIG_DIR_PATH))
+            fs::create_directory(HOME + CONFIG_DIR_PATH);
 
         if (!fs::exists(HOME + SERVER_CONF_PATH))
             fs::copy_file(DEFAULT_SERVER_CONF_PATH, HOME + SERVER_CONF_PATH);

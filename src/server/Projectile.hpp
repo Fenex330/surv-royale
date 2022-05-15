@@ -17,7 +17,7 @@ class Projectile
         double headshot_multiplier;
         double obstacle_multiplier;
         std::string nickname;
-        std::function<void(Projectile*)> action;
+        Delegate action;
 
         void move();
         void init(const std::string &nickname,
@@ -31,7 +31,7 @@ class Projectile
                   const double &headshot_multiplier,
                   const double &obstacle_multiplier,
                   const bool &potato_swap,
-                  const std::function<void(Projectile*)> &action)
+                  const Delegate &action)
         {
             active = true;
             this->nickname = nickname;

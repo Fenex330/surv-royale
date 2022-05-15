@@ -7,21 +7,23 @@
     #define SERVER_CONF_PATH "server.conf"
     #define BANLIST_PATH "banlist.txt"
     #define ID_PATH "ID"
-#elif defined (APPIMAGE)
-    #define GAMEDATA_PATH "share/SurvRoyale/GameData.tar"
-    #define DEFAULT_SERVER_CONF_PATH "share/SurvRoyale/server.conf"
-    #define SERVER_CONF_PATH "/.config/SurvRoyale/server.conf"
-    #define BANLIST_PATH "/.config/SurvRoyale/banlist.txt"
-    #define ID_PATH "/tmp/ID"
 #else
     #define GAMEDATA_PATH "/usr/local/share/SurvRoyale/GameData.tar"
     #define DEFAULT_SERVER_CONF_PATH "/usr/local/share/SurvRoyale/server.conf"
     #define SERVER_CONF_PATH "/.config/SurvRoyale/server.conf"
+    #define CONFIG_DIR_PATH "/.config/SurvRoyale"
     #define BANLIST_PATH "/.config/SurvRoyale/banlist.txt"
     #define ID_PATH "/tmp/ID"
 #endif
 
-#define CONFIG_DIR "/.config/SurvRoyale"
+#ifdef APPIMAGE
+    #undef GAMEDATA_PATH
+    #undef DEFAULT_SERVER_CONF_PATH
+    #define GAMEDATA_PATH "share/SurvRoyale/GameData.tar"
+    #define DEFAULT_SERVER_CONF_PATH "share/SurvRoyale/server.conf"
+#endif
+
+class Projectile;
 
 using std::cin;
 using std::cout;
@@ -29,10 +31,10 @@ using std::clog;
 using std::cerr;
 using std::endl;
 
+using Delegate = void(*)(Projectile*);
 using namespace std::literals::chrono_literals;
 
 namespace fs = std::filesystem;
-
 namespace surv
 {
     inline static

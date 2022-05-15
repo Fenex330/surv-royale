@@ -31,7 +31,7 @@ class Weapon : public Item
         const double shooting_slowdown;
         const bool potato_swap;
         const bool is_throwable;
-        const std::function<void(Projectile*)> action;
+        const Delegate action;
 
         Weapon(std::string name,
                Rarity rarity,
@@ -53,9 +53,9 @@ class Weapon : public Item
                double obstacle_multiplier,
                double passive_slowdown,
                double shooting_slowdown,
-               bool potato_swap = true,
-               bool is_throwable = false,
-               const std::function<void(Projectile*)> action = [](Projectile*){}) : name (name),
+               bool potato_swap,
+               bool is_throwable,
+               Delegate action) : name (name),
                                                                                     rarity (rarity),
                                                                                     firing_mode (firing_mode),
                                                                                     ammo_type (ammo_type),

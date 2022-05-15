@@ -11,7 +11,6 @@
 #include <random>
 #include <filesystem>
 #include <algorithm>
-#include <functional>
 
 #include <atomic>
 #include <mutex>
