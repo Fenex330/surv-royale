@@ -2,11 +2,12 @@
 
 #include "headers.hpp"
 
-struct Projectile
+class Projectile
 {
-    sf::Texture texture;
-    sf::Sprite sprite;
-    sf::Int16 x;
-    sf::Int16 y;
-    double rotation;
+    public:
+        sf::Texture texture;
+        sf::Sprite sprite;
+        sf::Int16 x;
+        sf::Int16 y;
+        double rotation;
 };
