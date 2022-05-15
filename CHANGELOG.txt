@@ -1,3 +1,13 @@
+v2
+- replaced semantic versioning by numeric
+- implemented multi-threaded game rooms
+- implemented basic weapon & bullets support
+- implemented basic map with borders
+- implemented players' nicknames display
+- game objects sent over network now respect each player's view scope
+- rewrote random number generator
+- added signal handler
+
 v0.1.0
 This is first alpha release.
 Features that were implemented:
