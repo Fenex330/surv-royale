@@ -5,13 +5,15 @@ const std::array<Weapon, 1> Game::weapons
     Weapon("AK-47", Weapon::Rarity::Common, Weapon::FiringMode::Auto, Weapon::AmmoType::Blue, 30, 1, 200.0, 2.5, 10.0, 13.5, 100.0, 0.1, 0.0, 0.75, 2.5, 0.9, 2.0, 1.0, 1.0, 1.0, true, false, [](Projectile*){})
 };
 
-thread_local std::list<Projectile> Game::onProjectiles;
-thread_local std::list<Projectile> Game::offProjectiles;
+thread_local std::list<Projectile*> Game::onProjectiles;
+thread_local std::list<Projectile*> Game::offProjectiles;
 
 Game::Game(int id, std::unordered_map<std::string, std::string> config) : isGameRunning (false), id (id), config (config)
 {
     password = config.at("password") == "-" ? "" : config.at("password");
-    offProjectiles.resize(std::stoi(config.at("max_bullets")));
+
+    for (int i = 1; i <= std::stoi(config.at("max_bullets")); i++)
+        offProjectiles.push_back(new Projectile);
 
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
@@ -27,6 +29,9 @@ Game::~Game()
 
     for (const auto& [nickname, player] : players)
         UDPsocket.send(packet, player.address, player.port);
+
+    for (auto& n : onProjectiles) delete n;
+    for (auto& n : offProjectiles) delete n;
 
     std::lock_guard<std::mutex> lock (Manager::m);
     clog << "shutdown room " << id << endl;

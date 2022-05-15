@@ -21,8 +21,8 @@ public:
     const int id;
 
     static const std::array<Weapon, 1> weapons;
-    static thread_local std::list<Projectile> onProjectiles;
-    static thread_local std::list<Projectile> offProjectiles;
+    static thread_local std::list<Projectile*> onProjectiles;
+    static thread_local std::list<Projectile*> offProjectiles;
 
     Game(int id, std::unordered_map<std::string, std::string> config);
     ~Game();
