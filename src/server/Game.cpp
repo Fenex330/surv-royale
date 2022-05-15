@@ -24,11 +24,8 @@ Game::Game(int id, std::unordered_map<std::string, std::string> config) : isGame
 
 Game::~Game()
 {
-    packet.clear();
-    packet << static_cast<sf::Uint8>(NetCodes::JoinError) << static_cast<sf::Uint8>(ErrorCodes::Kick);
-
     for (const auto& [nickname, player] : players)
-        UDPsocket.send(packet, player.address, player.port);
+        sendJoinError(ErrorCodes::Kick, player.address, player.port);
 
     for (auto& n : onProjectiles) delete n;
     for (auto& n : offProjectiles) delete n;
