@@ -23,15 +23,15 @@ class Projectile
         void init(const std::string &nickname,
                   const sf::Int16 &x,
                   const sf::Int16 &y,
-                  const double &rotation,
-                  const double &damage,
-                  const double &range,
-                  const double &speed,
-                  const double &falloff,
-                  const double &headshot_multiplier,
-                  const double &obstacle_multiplier,
-                  const bool &potato_swap,
-                  const Delegate &action)
+                  double rotation,
+                  double damage,
+                  double range,
+                  double speed,
+                  double falloff,
+                  double headshot_multiplier,
+                  double obstacle_multiplier,
+                  bool potato_swap,
+                  Delegate action)
         {
             active = true;
             this->nickname = nickname;
