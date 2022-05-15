@@ -5,11 +5,11 @@
 class Player
 {
     private:
-        std::string nickname;
         sf::Texture texture;
 
     public:
         bool active;
+        std::string nickname;
         sf::Sprite sprite;
         sf::View view;
         sf::Text nick;
