@@ -2,15 +2,12 @@
 
 #include "headers.hpp"
 
-class Projectile
+class Projectile : public Obstacle
 {
     public:
         bool active;
         bool potato_swap;
         std::string nickname;
-        sf::Int16 x;
-        sf::Int16 y;
-        double rotation;
         double damage;
         double range;
         double speed;

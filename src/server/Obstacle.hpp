@@ -12,4 +12,5 @@ class Obstacle
         const int map_size;
 
         Obstacle(int map_size, int radius);
+        Obstacle() : map_size (0), radius (0) {}
 };

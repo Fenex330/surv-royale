@@ -5,9 +5,9 @@
 class Projectile
 {
     public:
-        sf::Texture texture;
-        sf::Sprite sprite;
         sf::Int16 x;
         sf::Int16 y;
         double rotation;
+
+        static sf::RectangleShape sprite;
 };

@@ -228,7 +228,7 @@ void Game::sendPlayersList()
 
         for (const auto& [nickname_, player_] : players) // for each object to place in packet
         {
-            if (surv::getDistance(player.x, player_.x, player.y, player_.y) < surv::FOV * 1.5f)
+            if (surv::getDistance(player.x, player_.x, player.y, player_.y) < surv::FOV * 1.1f)
                 packet << nickname_ << player_.x << player_.y << player_.rotation;
         }
 
@@ -239,7 +239,20 @@ void Game::sendPlayersList()
 
 void Game::sendProjectilesList()
 {
-    //
+    for (const auto& [nickname, player] : players) // for each destination address
+    {
+        packet.clear();
+        packet << static_cast<sf::Uint8>(NetCodes::ProjectilesList);
+
+        for (const auto& p : onProjectiles) // for each object to place in packet
+        {
+            if (surv::getDistance(player.x, p->x, player.y, p->y) < surv::FOV * 1.1f)
+                packet << p->x << p->y << p->rotation;
+        }
+
+        assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
+        if (UDPsocket.send(packet, player.address, player.port) != sf::Socket::Done) {}
+    }
 }
 
 void Game::sendObjectsList()

@@ -1,0 +1,1 @@
+sf::RectangleShape Projectile::sprite;

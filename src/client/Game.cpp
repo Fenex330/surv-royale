@@ -42,6 +42,9 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
     crosshair.setScale(0.75, 0.75);
     crosshair.setColor(sf::Color::Red);
 
+    Projectile::sprite.setFillColor(sf::Color::White);
+    Projectile::sprite.setSize(sf::Vector2f(surv::PLAYER_RADIUS, 5));
+
     UDPsocket.setBlocking(false);
     TCPsocket.setBlocking(false);
 
@@ -166,6 +169,12 @@ void Game::draw()
 
     for (const auto& n : lines)
         window.draw(n);
+
+    while (!projectiles.empty())
+    {
+        window.draw(projectiles.top().sprite);
+        projectiles.pop();
+    }
 
     for (const auto& n : players)
     {
@@ -350,7 +359,17 @@ void Game::receivePlayersList()
 
 void Game::receiveProjectilesList()
 {
-    //
+    sf::Int16 x, y;
+    double rotation;
+
+    while (packet >> x >> y >> rotation)
+    {
+        Projectile p;
+        p.x = x;
+        p.y = y;
+        p.rotation = rotation;
+        projectiles.push(std::move(p));
+    }
 }
 
 void Game::receiveObjectsList()
