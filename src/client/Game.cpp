@@ -170,7 +170,9 @@ void Game::draw()
     for (const auto& n : players)
     {
         window.draw(n.second.sprite);
-        window.draw(n.second.nick);
+
+        if (n.second.nickname != nickname)
+            window.draw(n.second.nick);
     }
 
     window.draw(text);
