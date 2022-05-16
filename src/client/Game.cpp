@@ -65,7 +65,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
 
 Game::~Game()
 {
-    free(tarFile);
+    std::free(tarFile);
     ImGui::SFML::Shutdown();
 
     if (!isGameRunning)
@@ -75,7 +75,7 @@ Game::~Game()
 void Game::play()
 {
     isGameRunning = true;
-    window.setMouseCursorVisible(false);
+    window.setMouseCursorVisible(false); // not working, SFML bug
     players.insert({nickname, Player()});
     players.at(nickname).init(nickname);
 }

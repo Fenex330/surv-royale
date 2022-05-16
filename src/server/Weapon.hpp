@@ -14,21 +14,21 @@ class Weapon : public Item
         const FiringMode firing_mode;
         const AmmoType ammo_type;
         const sf::Int16 magazine_capacity;
-        const int burst_count;
-        const double unit_range;
-        const double stand_spread;
-        const double move_spread;
+        const int burst_count;            // bullets per burst
+        const double unit_range;          // 1 unit = surv::PLAYER_RADIUS
+        const double stand_spread;        // in degrees
+        const double move_spread;         // in degrees
         const double player_damage;
-        const double projectile_speed;
-        const double firing_rate;
-        const double recoil_delay;
+        const double projectile_speed;    // pixels per second
+        const double firing_rate;         // delay between bullets
+        const double recoil_delay;        // delay between bursts/rounds
         const double switch_delay;
-        const double reload_time;
-        const double projectile_falloff;
-        const double headshot_multiplier;
-        const double obstacle_multiplier;
-        const double passive_slowdown;
-        const double shooting_slowdown;
+        const double reload_delay;
+        const double projectile_falloff;  // coefficient
+        const double headshot_multiplier; // coefficient
+        const double obstacle_multiplier; // coefficient
+        const double passive_slowdown;    // coefficient
+        const double shooting_slowdown;   // coefficient
         const bool potato_swap;
         const bool is_throwable;
         const Delegate action;
@@ -47,7 +47,7 @@ class Weapon : public Item
                double firing_rate,
                double recoil_delay,
                double switch_delay,
-               double reload_time,
+               double reload_delay,
                double projectile_falloff,
                double headshot_multiplier,
                double obstacle_multiplier,
@@ -69,7 +69,7 @@ class Weapon : public Item
                                   firing_rate (firing_rate),
                                   recoil_delay (recoil_delay),
                                   switch_delay (switch_delay),
-                                  reload_time (reload_time),
+                                  reload_delay (reload_delay),
                                   projectile_falloff (projectile_falloff),
                                   headshot_multiplier (headshot_multiplier),
                                   obstacle_multiplier (obstacle_multiplier),
