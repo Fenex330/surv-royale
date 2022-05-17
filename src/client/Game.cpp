@@ -17,7 +17,6 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
 {
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
-    window.setMouseCursorVisible(true);
 
     ImGui::SFML::Init(window);
     FILE *f = std::fopen(GAMEDATA_PATH, "rb");
@@ -76,6 +75,7 @@ void Game::play()
 {
     isGameRunning = true;
     window.setMouseCursorVisible(false); // not working, SFML bug
+    window.setMouseCursorGrabbed(true);
     players.insert({nickname, Player()});
     players.at(nickname).init(nickname);
 }
