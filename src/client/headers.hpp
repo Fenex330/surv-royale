@@ -20,8 +20,8 @@
 
 #include "../imgui/imgui.h"
 #include "../imgui/imgui-SFML.h"
-#include "../common.hpp"
 #include "../dxTarRead.h"
+#include "../common.hpp"
 
 #include "Projectile.hpp"
 #include "Player.hpp"
