@@ -40,4 +40,6 @@ public:
     void sendProjectilesList();
     void sendObjectsList();
     void sendGameState();
+
+    void checkCollisions();
 };

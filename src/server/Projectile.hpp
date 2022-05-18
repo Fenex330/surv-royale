@@ -5,9 +5,9 @@
 class Projectile : public Obstacle
 {
     public:
-        bool active;
         bool potato_swap;
         std::string nickname;
+        double count;
         double damage;
         double range;
         double speed;
@@ -16,7 +16,9 @@ class Projectile : public Obstacle
         double obstacle_multiplier;
         Delegate action;
 
-        void move();
+        bool move();
+        bool operator + (Obstacle &obj) const;
+
         void init(bool potato_swap,
                   const std::string &nickname,
                   const sf::Int16 &x,
@@ -30,7 +32,7 @@ class Projectile : public Obstacle
                   double obstacle_multiplier,
                   Delegate action)
         {
-            active = true;
+            count = 0.0;
             this->potato_swap = potato_swap;
             this->nickname = nickname;
             this->x = x;

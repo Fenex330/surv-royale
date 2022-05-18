@@ -210,6 +210,8 @@ void Game::send()
     sendProjectilesList();
     sendObjectsList();
     sendGameState();
+
+    checkCollisions();
 }
 
 void Game::sendJoinError(ErrorCodes code, sf::IpAddress address, unsigned short port)
@@ -267,4 +269,26 @@ void Game::sendGameState()
 
     for (const auto& [nickname, player] : players)
         UDPsocket.send(packet, player.address, player.port);
+}
+
+void Game::checkCollisions()
+{
+    for (auto it = onProjectiles.begin(); it != onProjectiles.end(); it++)
+    {
+        if ((*it)->move())
+        {
+            offProjectiles.push_back(*it);
+            onProjectiles.erase(it);
+            continue;
+        }
+
+        for (auto& [nickname, player] : players)
+        {
+            if (**it + player)
+            {
+                offProjectiles.push_back(*it);
+                onProjectiles.erase(it);
+            }
+        }
+    }
 }
