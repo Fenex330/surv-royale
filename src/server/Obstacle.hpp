@@ -13,5 +13,5 @@ class Obstacle
         const int map_size;
 
         Obstacle(int map_size, int radius, sf::Int16 hp);
-        Obstacle() : map_size (0), radius (0) {}
+        Obstacle() : map_size (0), radius (0), hp (0) {}
 };

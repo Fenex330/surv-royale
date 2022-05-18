@@ -13,8 +13,8 @@ bool Projectile::operator + (Obstacle &obj) const
 {
     if (surv::getDistance(x, obj.x, y, obj.y) < obj.radius)
     {
-        int headshot = surv::getRandom(0, 100) > int(surv::HEADSHOT_CHANCE * 100) ? 1 : headshot_multiplier;
-        obj.hp -= damage * std::pow(falloff, count / 100) * headshot;
+        double headshot = surv::getRandom(0, 100) > int(surv::HEADSHOT_CHANCE * 100) ? 1.0 : headshot_multiplier;
+        obj.hp -= damage * std::pow(falloff, count / 100.0) * headshot;
         return true;
     }
 

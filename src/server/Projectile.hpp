@@ -17,7 +17,7 @@ class Projectile : public Obstacle
         Delegate action;
 
         bool move();
-        bool operator + (Obstacle &obj) const;
+        bool operator + (Obstacle &obj) const; // check for collision
 
         void init(bool potato_swap,
                   const std::string &nickname,
@@ -40,7 +40,7 @@ class Projectile : public Obstacle
             this->rotation = rotation;
             this->damage = damage;
             this->range = range;
-            this->speed = speed;
+            this->speed = speed / double(1000 / surv::SEND_DELAY); // adjusting for update period, as speed is given per second
             this->falloff = falloff;
             this->headshot_multiplier = headshot_multiplier;
             this->obstacle_multiplier = obstacle_multiplier;
