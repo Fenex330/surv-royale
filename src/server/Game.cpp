@@ -164,7 +164,7 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
         return;
     }
 
-    players.insert({nickname, Player(std::stoi(config.at("map_size")) * surv::SQUARE_SIZE * surv::PLAYER_RADIUS, std::stoi(config.at("player_speed")), ID, address, port)});
+    players.insert({nickname, Player(std::stoi(config.at("map_size")) * surv::SQUARE_SIZE * surv::PLAYER_RADIUS, std::stoi(config.at("player_speed")), ID, address, port, nickname)});
     clog << nickname << " joined room " << id << endl;
     isGameRunning = true;
 }

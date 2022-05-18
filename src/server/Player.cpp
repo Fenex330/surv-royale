@@ -4,14 +4,16 @@ Player::Player(int map_size,
                int speed,
                std::string ID,
                sf::IpAddress address,
-               unsigned short port) : Obstacle (map_size, surv::PLAYER_RADIUS, 100),
-                                      active (true),
-                                      slot (1),
-                                      crosshair_distance (0.0),
-                                      speed (speed),
-                                      ID (ID),
-                                      address (address),
-                                      port (port)
+               unsigned short port,
+               std::string nickname) : Obstacle (map_size, surv::PLAYER_RADIUS, 100),
+                                       active (true),
+                                       slot (1),
+                                       crosshair_distance (0.0),
+                                       speed (speed),
+                                       ID (ID),
+                                       address (address),
+                                       port (port),
+                                       nickname (nickname)
 {
     //
 }
@@ -23,7 +25,7 @@ void Player::interact()
 
 void Player::fire()
 {
-    items.at(slot - 1).act();
+    items.at(slot - 1)->act(this);
 }
 
 void Player::move(sf::Int16 x_, sf::Int16 y_)

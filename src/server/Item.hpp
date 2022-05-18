@@ -2,8 +2,11 @@
 
 #include "headers.hpp"
 
+class Player;
+
 class Item
 {
     public:
-        void act() {}
+        virtual void act(Player* player) = 0;
+        virtual ~Item() {}
 };

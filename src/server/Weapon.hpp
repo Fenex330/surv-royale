@@ -33,6 +33,8 @@ class Weapon : public Item
         const bool is_throwable;
         const Delegate action;
 
+        virtual void act(Player* player) override;
+
         Weapon(std::string name,
                Rarity rarity,
                FiringMode firing_mode,
