@@ -274,12 +274,12 @@ void Game::sendGameState()
 
 void Game::checkCollisions()
 {
-    for (auto it = onProjectiles.begin(); it != onProjectiles.end(); it++)
+    for (auto it = onProjectiles.begin(); it != onProjectiles.end();)
     {
         if ((*it)->move())
         {
             offProjectiles.push_back(*it);
-            onProjectiles.erase(it);
+            it = onProjectiles.erase(it);
             continue;
         }
 
@@ -288,9 +288,12 @@ void Game::checkCollisions()
             if (**it + player)
             {
                 offProjectiles.push_back(*it);
-                onProjectiles.erase(it);
-                break;
+                it = onProjectiles.erase(it);
+                goto label;
             }
         }
+
+        it++;
+        label:;
     }
 }
