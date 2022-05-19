@@ -15,7 +15,6 @@ public:
     sf::TcpSocket TCPsocket;
     sf::Packet packet;
     sf::IpAddress server_address;
-    sf::Int8 slot;
 
     sf::Clock imguiClock;
     sf::Clock udpClock;
@@ -65,10 +64,10 @@ public:
     void receiveObjectsList();
     void receiveGameState();
 
-    std::pair<sf::Int8, sf::Int8> mainPlayerInputMovement();
-    std::pair<bool, bool> mainPlayerInputMouse();
-    double mainPlayerInputRotation();
-    void mainPlayerInputSlot();
+    std::pair<sf::Int8, sf::Int8> mainPlayerInputMovement() const;
+    std::pair<bool, bool> mainPlayerInputMouse() const;
+    double mainPlayerInputRotation() const;
+    sf::Int8 mainPlayerInputSlot() const;
 
     template <class T> static
     void loadAsset(T &asset, const char *path)

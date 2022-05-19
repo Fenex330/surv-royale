@@ -9,7 +9,6 @@ char *Game::tarFile = nullptr;
 
 Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "SurvRoyale " + std::string(GAME_VERSION), sf::Style::Close),
                crosshair_distance (0.0),
-               slot (1),
                fps (0),
                ping (0),
                ping_avg (0),
@@ -236,10 +235,8 @@ void Game::sendPlayerInput()
 {
     auto [x, y] = mainPlayerInputMovement();
     auto [R, L] = mainPlayerInputMouse();
-    double rotation = mainPlayerInputRotation();
-    mainPlayerInputSlot();
 
-    packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << ID << x << y << R << L << rotation << slot << crosshair_distance;
+    packet << static_cast<sf::Uint8>(NetCodes::PlayerInput) << nickname << ID << x << y << R << L << mainPlayerInputRotation() << mainPlayerInputSlot() << crosshair_distance;
     send();
 }
 
@@ -407,7 +404,7 @@ void Game::receiveGameState()
     }
 }
 
-std::pair<sf::Int8, sf::Int8> Game::mainPlayerInputMovement()
+std::pair<sf::Int8, sf::Int8> Game::mainPlayerInputMovement() const
 {
     sf::Int8 x = 0;
     sf::Int8 y = 0;
@@ -420,24 +417,28 @@ std::pair<sf::Int8, sf::Int8> Game::mainPlayerInputMovement()
     return std::make_pair(x, y);
 }
 
-std::pair<bool, bool> Game::mainPlayerInputMouse()
+std::pair<bool, bool> Game::mainPlayerInputMouse() const
 {
     return std::make_pair(sf::Mouse::isButtonPressed(sf::Mouse::Right),
                           sf::Mouse::isButtonPressed(sf::Mouse::Left));
 }
 
-double Game::mainPlayerInputRotation()
+double Game::mainPlayerInputRotation() const
 {
     sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
     return std::atan2(mouse_position.y - surv::VIEW_DIM_Y / 2.0, mouse_position.x - surv::VIEW_DIM_X / 2.0) + surv::PI;
 }
 
-void Game::mainPlayerInputSlot()
+sf::Int8 Game::mainPlayerInputSlot() const
 {
+    static sf::Int8 slot = 1;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) slot = 1;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) slot = 2;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) slot = 3;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) slot = 4;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) slot = 5;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) slot = 6;
+
+    return slot;
 }
