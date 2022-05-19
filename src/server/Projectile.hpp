@@ -35,8 +35,8 @@ class Projectile : public Obstacle
             count = 0.0;
             this->potato_swap = potato_swap;
             this->nickname = nickname;
-            this->x = x;
-            this->y = y;
+            this->x = x + surv::PLAYER_RADIUS * std::cos(rotation) * 2;
+            this->y = y + surv::PLAYER_RADIUS * std::sin(rotation) * 2;
             this->rotation = rotation;
             this->damage = damage;
             this->range = range;
