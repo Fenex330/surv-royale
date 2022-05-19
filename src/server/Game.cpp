@@ -236,7 +236,7 @@ void Game::sendPlayersList()
         }
 
         assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-        if (UDPsocket.send(packet, player.address, player.port) != sf::Socket::Done) {}
+        UDPsocket.send(packet, player.address, player.port);
     }
 }
 
@@ -254,7 +254,7 @@ void Game::sendProjectilesList()
         }
 
         assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-        if (UDPsocket.send(packet, player.address, player.port) != sf::Socket::Done) {}
+        UDPsocket.send(packet, player.address, player.port);
     }
 }
 

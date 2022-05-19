@@ -2,6 +2,9 @@
 
 void Weapon::act(Player* player)
 {
+    if (Game::offProjectiles.empty())
+        return;
+
     Game::onProjectiles.push_back(Game::offProjectiles.back());
     Game::offProjectiles.pop_back();
     Game::onProjectiles.back()->init(potato_swap,

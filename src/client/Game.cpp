@@ -222,7 +222,7 @@ void Game::send()
 
     udpClock.restart();
     assert(packet.getDataSize() <= sf::UdpSocket::MaxDatagramSize);
-    if (UDPsocket.send(packet, server_address, server_port) != sf::Socket::Done) {}
+    UDPsocket.send(packet, server_address, server_port);
     packet.clear();
 }
 

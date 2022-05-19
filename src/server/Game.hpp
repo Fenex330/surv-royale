@@ -6,10 +6,9 @@ class Game
 {
 public:
 
+    sf::Packet packet;
     sf::UdpSocket UDPsocket;
     sf::TcpSocket TCPsocket;
-    sf::Packet packet;
-
     sf::Clock udpClock;
     sf::Clock sessionClock;
 
