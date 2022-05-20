@@ -3,7 +3,11 @@
 void Weapon::act(Player* player)
 {
     if (Game::offProjectiles.empty())
+    {
+        std::lock_guard<std::mutex> lock (Manager::m);
+        clog << "bullets reserve is empty!" << endl;
         return;
+    }
 
     Game::onProjectiles.push_back(Game::offProjectiles.back());
     Game::offProjectiles.pop_back();

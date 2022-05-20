@@ -166,7 +166,8 @@ void Game::receiveJoinRequest(sf::IpAddress address, unsigned short port)
 
     players.insert({nickname, Player(std::stoi(config.at("map_size")) * surv::SQUARE_SIZE * surv::PLAYER_RADIUS, std::stoi(config.at("player_speed")), ID, address, port, nickname)});
     players.at(nickname).items.at(0) = const_cast<Weapon*>(&weapons.at(0)); // REMOVE
-    clog << nickname << " joined room " << id << endl;
+    std::lock_guard<std::mutex> lock (Manager::m);
+    clog << "room " << id << ": join " << nickname << endl;
     isGameRunning = true;
 }
 
