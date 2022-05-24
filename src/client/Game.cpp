@@ -16,6 +16,7 @@ Game::Game() : window (sf::VideoMode (surv::VIEW_DIM_X, surv::VIEW_DIM_Y), "Surv
 {
     window.setVerticalSyncEnabled(true);
     window.setKeyRepeatEnabled(false);
+    //window.setFramerateLimit(60);
 
     ImGui::SFML::Init(window);
     FILE *f = std::fopen(GAMEDATA_PATH, "rb");
